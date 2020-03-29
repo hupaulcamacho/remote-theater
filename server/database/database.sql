@@ -88,7 +88,7 @@ VALUES
     (9, 'The Alphabet Killer', 4, ' ', 'https://www.youtube.com/watch?v=qJCYwP8W3qY'),
     (10, 'Super Size Me', 7, 'Director Morgan Spurlock''s social experiment in fast-food gastronomy sees him attempting to subsist uniquely on food from the McDonald''s menu for an entire month.','https://www.youtube.com/watch?v=zKQGAv8gtBA'),
     (11, 'Slightly Single in LA', 8, 'Moving to LA - it seemed like a good idea at the time.  Dale (Lacey Chabert) can''t seem to make things work - at work, with her friends, and definitely not with men.', 'https://www.youtube.com/watch?v=DSaP_xZnBHU&has_verified=1');
-
+     -- 2, 5, 9, 10, 11 (Movie Rooms)
 INSERT INTO users
     (users_id, name, email, password)
 VALUES
