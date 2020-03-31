@@ -1,4 +1,4 @@
-const db = require('../database');
+const db = require('../db.js');
 
 
 const createNewUser = (user) => {
