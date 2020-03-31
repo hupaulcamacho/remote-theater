@@ -71,7 +71,8 @@ VALUES
     ('Horror'),
     ('Sci-fi'),
     ('Documentary'),
-    ('Rom Com');
+    ('Rom Com'),
+    ('Family');
 
 INSERT INTO videos
     (video_id, title, genre_id, description, video_url)
@@ -87,8 +88,14 @@ VALUES
     (8, 'The Godfather', 4, 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', 'https://www.youtube.com/watch?v=sY1S34973zA' ),
     (9, 'The Alphabet Killer', 4, ' ', 'https://www.youtube.com/watch?v=qJCYwP8W3qY'),
     (10, 'Super Size Me', 7, 'Director Morgan Spurlock''s social experiment in fast-food gastronomy sees him attempting to subsist uniquely on food from the McDonald''s menu for an entire month.','https://www.youtube.com/watch?v=zKQGAv8gtBA'),
-    (11, 'Slightly Single in LA', 8, 'Moving to LA - it seemed like a good idea at the time.  Dale (Lacey Chabert) can''t seem to make things work - at work, with her friends, and definitely not with men.', 'https://www.youtube.com/watch?v=DSaP_xZnBHU&has_verified=1');
-     -- 2, 5, 9, 10, 11 (Movie Rooms)
+    (11, 'Slightly Single in LA', 8, 'Moving to LA - it seemed like a good idea at the time.  Dale (Lacey Chabert) can''t seem to make things work - at work, with her friends, and definitely not with men.', 'https://www.youtube.com/watch?v=DSaP_xZnBHU&has_verified=1'),
+    (12, 'Child''s Play', 5, 'When serial killer Charles Lee Ray is mortally wounded in a police shoot-out, he uses a voodoo spell to transfer his soul into Chucky, a "Good Guys" doll.', 'https://www.youtube.com/watch?v=hcsHPsAZkBY'),
+    (13, 'Minecraft: into the Nether', 7, 'Minecraft. The game that took the world by storm. Follow the story of how the Minecraft phenomenon has ploughed through the 21st century', 'https://www.youtube.com/watch?v=nu4Ew0xA8aw' ),
+    (14, 'The Legend of King Solomon', 9, 'Young Solomon is infatuated with the Queen of Sheeba, who has arrived to gauge his suitability for marriage. In his eagerness to impress her, he breaks his late father’s command and accidentally releases the devil Asmodeus from his prison in the belly of the earth', 'https://www.youtube.com/watch?v=tkmy6sAGTvE'),
+    (15, 'Dinosaur', 9 ,'A boy and a girl find themselves stranded in a land of wonder only to discover that throughout history things have mysteriously disappeared to this long-lost world.', 'https://www.youtube.com/watch?v=BtG1bVdNcC4');
+    
+     -- 2, 5, 9, 10, 11, 12 (Movie Rooms)
+
 INSERT INTO users
     (users_id, name, email, password)
 VALUES
