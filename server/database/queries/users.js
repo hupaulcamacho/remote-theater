@@ -1,4 +1,4 @@
-const db = require('../database');
+const db = require('../db.js');
 
 const createNewUser = (user) => {
     const insertQuery = `INSERT INTO users (username, password) VALUES ($1, $2)`;
