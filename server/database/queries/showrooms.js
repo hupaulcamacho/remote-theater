@@ -1,4 +1,4 @@
-const db = require('../database');
+const db = require('../db.js');
 
 const createNewShowroom = async (showroom) => {
     const insertQuery = `INSERT INTO showrooms (title, video_id) VALUES ($1, $2)`;

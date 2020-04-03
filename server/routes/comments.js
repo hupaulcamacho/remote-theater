@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
             err: false
         })
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         res.status(500).json({
             payload: null,
             msg: error,
@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
 //             message:"got all comments by users id"
 //         })
 //     }catch (err){
-//         console.log(err)
+        // console.log(err)
 //         res.json({
 //             error:err
 //         })
@@ -49,7 +49,7 @@ router.get('/', async (req, res) => {
                 err: false
             })
         }catch (err){
-            console.log(error)
+            // console.log(error)
             res.status(500).json({
                 payload: null,
                 msg: error,
@@ -61,7 +61,7 @@ router.get('/', async (req, res) => {
         //post a new comment
 router.post('/video/:video_id', async (req, res) => {
     const {users_id, comment_body} = req.body
-    console.log(req.body)
+    // console.log(req.body)
     try {
         const addComment = await comment.addnewComment(users_id, comment_body)
         res.json({
@@ -70,8 +70,7 @@ router.post('/video/:video_id', async (req, res) => {
             error: false
         })
     }catch(err) {
-        console.log("err", err)
-        console.log(error)
+        // console.log("err", err)
         res.status(500).json({
             payload: null,
             msg: error,
