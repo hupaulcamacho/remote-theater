@@ -1,7 +1,8 @@
 const db = require('../database');
 
-const createNewUser = async (user) => {
-    const insertQuery = `INSERT INTO users (username, password_digest) VALUES ($1, $2)`;
+const createNewUser = (user) => {
+    const insertQuery = `INSERT INTO users (username, password) VALUES ($1, $2)`;
+
     await db.none(insertQuery, [user.name, user.password]);
     return true
 };
