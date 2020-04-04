@@ -7,62 +7,63 @@ CREATE DATABASE remote;
 
 CREATE TABLE genre
 (
-    genre_id SERIAL PRIMARY KEY,
-    genre_name VARCHAR
+    id SERIAL PRIMARY KEY,
+    name VARCHAR
 );
 
 CREATE TABLE videos
 (
-    video_id Serial PRIMARY KEY,
+    id Serial PRIMARY KEY,
     title VARCHAR,
     description VARCHAR,
     rating INT,
-    video_url VARCHAR,
-    genre_id INT REFERENCES genre(genre_id) on delete cascade on update cascade
+    url VARCHAR,
+    genre_id INT REFERENCES genre(id) on delete cascade on update cascade
 );
 
 CREATE TABLE users
 (
-    users_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR,
     email VARCHAR UNIQUE,
     number VARCHAR,
     password VARCHAR,
-    video_id INT REFERENCES videos(video_id) on delete cascade on update cascade
+    video_id INT REFERENCES videos(id) on delete cascade on update cascade
 );
 
 CREATE TABLE showrooms
 (
-    showroom_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     title VARCHAR,
-    video_id INT REFERENCES videos(video_id) on delete cascade on update cascade
+    video_id INT REFERENCES videos(id) on delete cascade on update cascade
 );
 
 CREATE TABLE comments
 (
-    comment_id SERIAL PRIMARY KEY,
-    comment_body VARCHAR,
-    users_id INT REFERENCES users(users_id) on delete cascade on update cascade,
-    video_id INT REFERENCES videos(video_id) on delete cascade on update cascade,
-    showroom_id INT REFERENCES showrooms(showroom_id) on delete cascade on update cascade
+    id SERIAL PRIMARY KEY,
+    body VARCHAR,
+    users_id INT REFERENCES users(id) on delete cascade on update cascade,
+    video_id INT REFERENCES videos(id) on delete cascade on update cascade,
+    showroom_id INT REFERENCES showrooms(id) on delete cascade on update cascade
 );
 
 CREATE TABLE preferences
 (
-    pref_id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     age VARCHAR(2),
-    users_id INT REFERENCES users(users_id),
-    genre_id INT REFERENCES genre(genre_id) on delete cascade on update cascade
+    users_id INT REFERENCES users(id),
+    genre_id INT REFERENCES genre(id) on delete cascade on update cascade
 );
 
 CREATE TABLE viewer
 (
-    users_id INT REFERENCES users(users_id),
-    showroom_id INT REFERENCES showrooms(showroom_id) on delete cascade on update cascade
+    users_id INT REFERENCES users(id) on delete cascade on update cascade,
+    video_id INT REFERENCES videos(id) on delete cascade on update cascade,
+    showroom_id INT REFERENCES showrooms(id) on delete cascade on update cascade
 );
 
 INSERT INTO genre
-    (genre_name)
+    (name)
 VALUES
     ('Action'),
     ('Adventure'),
@@ -75,7 +76,7 @@ VALUES
     ('Family');
 
 INSERT INTO videos
-    (video_id, title, genre_id, description, video_url)
+    (id, title, genre_id, description, url)
 VALUES
     (1, 'The Invisible Man', 5, 'The Invisible Man is a 2020 science fiction horror film written and directed by Leigh Whannell. It follows a woman who, after the apparent suicide of her abusive and wealthy boyfriend, believes she is being stalked by him.', 'https://www.youtube.com/watch?v=Pso0Aj_cTh0'),
     (2, 'Survive The Nght', 1, '', 'https://www.youtube.com/watch?v=TfTNGqXBwHY&list=PLScC8g4bqD45-Bue4BX7U2h4IkzEV3hcL&index=1'),
@@ -97,7 +98,7 @@ VALUES
      -- 2, 5, 9, 10, 11, 12 (Movie Rooms)
 
 INSERT INTO users
-    (users_id, name, email, password)
+    (id, name, email, password)
 VALUES
     (1, 'Kadijah Wilson', 'kwilson@pursuit.org', '1234'),
     (2, 'Hupaul Camacho', 'hcamacho@pursuit.org', '1234'),
@@ -106,7 +107,7 @@ VALUES
     (5, 'Jane Smith', 'jsmith@pursuit.org', '1234');
 
 INSERT INTO showrooms
-    (showroom_id, title, video_id)
+    (id, title, video_id)
 VALUES
     (1, 'Survive The Night', 2),
     (2, 'The Invisible Man', 1),
@@ -114,7 +115,7 @@ VALUES
     (4, 'Mulan', 4);
 
 INSERT INTO comments
-    (users_id, video_id, showroom_id, comment_body)
+    (users_id, video_id, showroom_id, body)
 VALUES
     (3, 1, 2, 'Great watch'),
     (2, 3, 3, 'Wasn''t interesting'),
@@ -129,10 +130,10 @@ VALUES
     (5, 17, 2);
 
 INSERT INTO viewer
-    (users_id, showroom_id)
+    (users_id, video_id, showroom_id)
 VALUES
-    (3, 2),
-    (2, 3),
-    (4, 3),
-    (5, 2),
-    (1, 4);
+    (3, 2, 2),
+    (2, 5, 3),
+    (4, 9, 1),
+    (5, 2, 2),
+    (1, 12, 4);

@@ -60,10 +60,10 @@ router.get('/', async (req, res) => {
 
         //post a new comment
 router.post('/video/:video_id', async (req, res) => {
-    const {users_id, comment_body} = req.body
+    const {users_id, body} = req.body
     // console.log(req.body)
     try {
-        const addComment = await comment.addnewComment(users_id, comment_body)
+        const addComment = await comment.addnewComment(users_id, body)
         res.json({
             payload: addComment,
             msg: "comment added",
@@ -81,7 +81,7 @@ router.post('/video/:video_id', async (req, res) => {
 
 //Delete comment
 router.delete('/', async (req, res) => {
-    const {comment_id} = req.params
+    const {comment_id} = req.body
     console.log(req.body);
     try {
       const deleteComm = await comment.deleteCommentByID(comment_id)
@@ -91,7 +91,7 @@ router.delete('/', async (req, res) => {
         err:false
       });
     } catch (error) {
-      console.log(error);
+    //   console.log(error);
       res.status(500);
       res.json({
         message: "Error. Something went wrong"

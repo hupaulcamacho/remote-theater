@@ -20,11 +20,11 @@ getCommentsByVideoID = async (video_id) => {
     }
 }
 
-addnewComment = async (users_id, comment_body) => {
+addnewComment = async (users_id, body) => {
 try{
-    const insertQuery = `INSERT INTO comments (users_id, comment_body) 
+    const insertQuery = `INSERT INTO comments (id, comment_body) 
     VALUES($1, $2) RETURNING *`
-    let response = await db.any(insertQuery, [users_id, comment_body])
+    let response = await db.any(insertQuery, [users_id, body])
     console.log(insertQuery)
     return response;
 }catch(error){
@@ -35,7 +35,7 @@ try{
 deleteCommentByID = async (comment_id) => {
     try{
         const deleteQuery =  `DELETE FROM comments
-        WHERE comment_id = $1 RETURNING *`;
+        WHERE id = $1 RETURNING *`;
         const deleteComment = await db.one(deleteQuery, [comment_id])
         return deleteComment;
     }catch(error){
