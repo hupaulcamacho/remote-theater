@@ -45,7 +45,7 @@ router.get('/:name', async (req, res, next) => {
   try {
     let user = await userQueries.getUserByName(name);
     res.json({
-      payload: users,
+      payload: user,
       message: 'retrieved user',
       err: false
     })
