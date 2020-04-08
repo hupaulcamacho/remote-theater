@@ -58,4 +58,25 @@ router.get('/:name', async (req, res, next) => {
   }
 })
 
+router.post("/new", (req,res,next) => {
+  userInfo = {
+    email: req.body.email,
+    password: req.body.password
+  }
+  try{
+    let newUser = await userQueries.createNewUser(userInfo)
+    res.json({
+      payload: newUser,
+      msg: "Success adding users",
+      err: false
+    })
+  }catch(err){
+    res.status(500).json({
+      payload: null,
+      message: 'failed retrieving user',
+      err: true
+    })
+  }
+})
+
 module.exports = router;
