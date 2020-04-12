@@ -1,83 +1,97 @@
 var express = require ('express')
 var router = express.Router()
-const db = require ('../database/db.js')
+const comment = require('../database/queries/comment')
+
 
 //get all comments
 router.get('/', async (req, res) => {
     try {
-        let allComments = await db.any('SELECT * FROM comments;')
+        let allComments = await comment.getAllComments()
         res.json({
-            body: allComments
+            payload: allComments,
+            msg: 'success',
+            err: false
         })
     } catch (error) {
-        res.json({
-            error: error
+        // console.log(error)
+        res.status(500).json({
+            payload: null,
+            msg: error,
+            err: true
         })
     }
 })
 
 //get comments by user id
-router.get('/:users_id', async (req, res) => {
-    try {
-        let commentByUserID = await db.any(`SELECT * FROM comments WHERE users_id = '${req.params.users_id}' `)
-        res.json({
-            payload: commentByUserID,
-            message:"got all comments by users id"
-        })
-    }catch (err){
-        console.log(err)
-        res.json({
-            error:err
-        })
-    }
-})
+// router.get('/:users_id', async (req, res) => {
+//     try {
+//         let commentByUserID = await db.any(`SELECT * FROM comments WHERE users_id = '${req.params.users_id}' `)
+//         res.json({
+//             payload: commentByUserID,
+//             message:"got all comments by users id"
+//         })
+//     }catch (err){
+        // console.log(err)
+//         res.json({
+//             error:err
+//         })
+//     }
+// })
 
     // get comments by video id 
     router.get('/video/:video_id', async (req, res) => {
+        const {video_id} = req.params
         try {
-            let commentByVideoID = await db.any(`SELECT * FROM comments WHERE video_id = '${req.params.video_id}' `)
+           const commentByVideoID = await comment.getCommentsByVideoID(video_id)
             res.json({
                 payload: commentByVideoID,
-                message:"got all comments by video id"
+                message:"got all comments by video id",
+                err: false
             })
         }catch (err){
-            console.log(err)
-            res.json({
-                error:err
+            // console.log(error)
+            res.status(500).json({
+                payload: null,
+                msg: error,
+                err: true
             })
         }
     });
 
         //post a new comment
 router.post('/video/:video_id', async (req, res) => {
+    const {users_id, body} = req.body
+    // console.log(req.body)
     try {
-        await db.none(`INSERT INTO comments(users_id, comment_body) VALUES(${req.body.users_id}, ${req.body.comment_body})`)
-        res.json({ message: "comment added"})
+        const addComment = await comment.addnewComment(users_id, body)
+        res.json({
+            payload: addComment,
+            msg: "comment added",
+            error: false
+        })
     }catch(err) {
-        console.log("err", err)
-        res.json({error: err})
+        // console.log("err", err)
+        res.status(500).json({
+            payload: null,
+            msg: error,
+            err: true
+        })
     }
 });
 
 //Delete comment
 router.delete('/', async (req, res) => {
+    const {comment_id} = req.body
     console.log(req.body);
     try {
-      let comment_id = req.body.comment_id;
-      let comment_body = req.body.comment_body;
-  
-      let insertQuery = `
-        DELETE FROM comments
-        WHERE comment_id= $1 AND comment_body = $2`;
-      await db.none(insertQuery, [comment_id, comment_body]);
-      console.log(req.body);
+      const deleteComm = await comment.deleteCommentByID(comment_id)
       res.json({
-        status: "success",
-        message: `Delete Success`,
-        body: req.body
+        payload: deleteComm,
+        message: `Deleted Comment`,
+        err:false
       });
     } catch (error) {
-      console.log(error);
+    //   console.log(error);
       res.status(500);
       res.json({
         message: "Error. Something went wrong"

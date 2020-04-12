@@ -1,8 +1,8 @@
 const db = require('../db');
 
-
 const createNewUser = async (user) => {
     const insertQuery = `INSERT INTO users (username, password) VALUES ($1, $2)`;
+
     await db.none(insertQuery, [user.name, user.password]);
     return true
 };
@@ -12,7 +12,8 @@ const getAllUsers = async () => {
     return users
 };
 
-const getUserByName =async (username) => {
+
+const getUserByName = async (username) => {
     const user = await db.any("SELECT FROM users WHERE username = $1", [username])
     return user
 };
@@ -27,4 +28,4 @@ module.exports = {
     getAllUsers,
     getUserByName,
     getUserById
-}
+};

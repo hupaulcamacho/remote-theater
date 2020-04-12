@@ -49,7 +49,7 @@ router.get('/title/:title', async (req, res) => {
 
 router.get('/genre/:genre', async (req, res) => {
 	try {
-		let videoQuery = 'SELECT * FROM videos JOIN genres ON genres.id = videos.genre_id WHERE genre_name = $1';
+		let videoQuery = 'SELECT * FROM videos JOIN genres ON genres.id = videos.genre_id WHERE name = $1';
 
 		let video = await db.any((videoQuery), [req.params.genre]);
 		res.status(200).json({

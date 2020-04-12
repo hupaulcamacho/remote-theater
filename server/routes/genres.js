@@ -4,7 +4,6 @@ const db = require('../database/db');
 
 /* GET all genres */
 router.get('/', async (req, res) => {
-    console.log('hi there');
     try {
         let genreQuery = 'SELECT * FROM genres';
         let allGenres = await db.any(genreQuery);

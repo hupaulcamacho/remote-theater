@@ -8,7 +8,7 @@ CREATE DATABASE remote;
 CREATE TABLE genres
 (
     id SERIAL PRIMARY KEY,
-    genre_name VARCHAR
+    name VARCHAR
 );
 
 CREATE TABLE videos
@@ -115,7 +115,7 @@ VALUES
     ( 'Mulan', 4);
 
 INSERT INTO comments
-    (users_id, video_id, showroom_id, comment_body)
+    (users_id, video_id, showroom_id, body)
 VALUES
     (3, 1, 2, 'Great watch'),
     (2, 3, 3, 'Wasn''t interesting'),
@@ -130,10 +130,10 @@ VALUES
     (5, 17, 2);
 
 INSERT INTO viewer
-    (users_id, showroom_id)
+    (users_id, video_id, showroom_id)
 VALUES
-    (3, 2),
-    (2, 3),
-    (4, 3),
-    (5, 2),
-    (1, 4);
+    (3, 2, 2),
+    (2, 5, 3),
+    (4, 9, 1),
+    (5, 2, 2),
+    (1, 12, 4);
