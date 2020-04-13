@@ -25,9 +25,9 @@ CREATE TABLE users
 (
     id SERIAL PRIMARY KEY,
     name VARCHAR,
-    email VARCHAR UNIQUE,
+    email VARCHAR NOT NULL UNIQUE,
     number VARCHAR,
-    password VARCHAR,
+    password VARCHAR NOT NULL,
     video_id INT REFERENCES videos(id) on delete cascade on update cascade
 );
 
