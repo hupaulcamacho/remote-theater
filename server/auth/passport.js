@@ -29,7 +29,6 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (user, done) => {
-    console.log('deserialize user')
   try {
     let retrievedUser = await usersQueries.getUserByEmail(user.email)
     delete retrievedUser.password;

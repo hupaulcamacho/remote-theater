@@ -30,11 +30,9 @@ router.post("/signup", async (req,res,next) => {
     }
   })
 
-
-
   router.post('/login', passport.authenticate('local'),(req, res, next) => { 
     res.json({
-      payload: true,
+      payload: req.user,
       msg: "Successfully logged in",
       err: false
     })
