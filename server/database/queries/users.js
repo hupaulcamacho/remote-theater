@@ -1,4 +1,4 @@
-const db = require('../db.js');
+const db = require('../db');
 
 const createNewUser = async (user) => {
     const insertQuery = `INSERT INTO users (name, email, password) VALUES ($1, $2, $3)`;

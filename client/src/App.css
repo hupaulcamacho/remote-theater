@@ -1,0 +1,22 @@
+.App {
+    text-align: center;
+    background-color: rgb(98, 69, 151);
+    height: 100%;
+    color: white;
+}
+.nav-container {
+    background-color: rgb(69, 49, 105);
+    padding: 1.5em;
+}
+a {
+    color: white;
+    padding: 1.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: rgb(135, 96, 207);
+}
+
