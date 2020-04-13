@@ -1,4 +1,4 @@
-const db = require('../db.js');
+const db = require('../db');
 
 const createNewUser = async (user) => {
     const insertQuery = `INSERT INTO users (username, password) VALUES ($1, $2)`;
@@ -11,6 +11,7 @@ const getAllUsers = async () => {
     const users = await db.any("SELECT * FROM users");
     return users
 };
+
 
 const getUserByName = async (username) => {
     const user = await db.any("SELECT FROM users WHERE username = $1", [username])
