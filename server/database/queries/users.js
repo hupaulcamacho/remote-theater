@@ -1,4 +1,4 @@
-const db = require('../db.js');
+const db = require('../db');
 
 const createNewUser = async (user) => {
     const insertQuery = `INSERT INTO users (name, email, password) VALUES ($1, $2, $3)`;
@@ -11,6 +11,7 @@ const getAllUsers = async () => {
     const users = await db.any("SELECT id, name, email FROM users");
     return users
 };
+
 
 const getUserByEmail = async (email) => {
     const user = await db.oneOrNone("SELECT * FROM users WHERE email = $1", [email])

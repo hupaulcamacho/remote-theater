@@ -10,6 +10,9 @@ var usersRouter = require('./routes/users');
 var commentsRouter = require('./routes/Comments');
 var viewerRouter = require('./routes/Viewer');
 var authRouter = require('./routes/auth');
+let genresRouter =require('./routes/genres');
+let videosRouter = require('./routes/videos');
+
 
 var app = express();
 
@@ -26,11 +29,15 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/', indexRouter);
+
 app.use('/users', usersRouter);
 app.use('/comments', commentsRouter);
 app.use('/video', viewerRouter);
 app.use('/auth', authRouter);
+app.use('/genres', genresRouter);
+app.use('/videos', videosRouter);
+app.use('/', indexRouter);
+
 
 module.exports = app;
 
