@@ -20,8 +20,17 @@ const comparePasswords = async (candidatePassword, password_digest) => {
     }
 }
 
+const loginRequire = (req, res, next) => {
+    if (req.user) return next()
+    res.status(401).json({
+        payload: null,
+        msg: "Not logged in",
+        err: true
+    })
+}
 
 module.exports ={
     hashPassword,
-    comparePasswords
+    comparePasswords,
+    loginRequire
 }
