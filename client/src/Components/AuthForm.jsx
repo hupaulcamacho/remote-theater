@@ -43,9 +43,12 @@ const AuthForm = () => {
 
     const signUp = async () => {
 try{
-let res = await axios.post(`http:localhost:3001/auth/signup`, {email: email, password: password})
+let res = await axios.post(`http://localhost:3001/auth/signup`, {name: name, email: email, password: password})
 setLoggedIn(true);
-sessionStorage.userID = res.body.user.id
+let {payload} = res.data;
+sessionStorage.currentUserid = payload.id;
+window.location.href = "/main"
+window.location.href.reload();
 }catch(error){
 setMessage("User Already exists or invalid")
 }
