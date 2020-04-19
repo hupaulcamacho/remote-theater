@@ -3,7 +3,6 @@ import Navbar from './Components/Navbar'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import './App.css';
 import AuthForm from './Components/AuthForm'
-// import Signup from './Container/Signup'
 import Main from './Components/Main'
 
 function App() {
@@ -12,6 +11,8 @@ function App() {
           
 
           {sessionStorage.currentUserid ? <Navbar /> : null}
+      
+
           <Switch>
             <Route exact path={"/"}>
               <AuthForm />

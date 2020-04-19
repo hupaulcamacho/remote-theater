@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import axios from "axios"
+import './CSS/AuthForm.css'
 
 const AuthForm = () => {
     const [name, setName] = useState("")
@@ -10,7 +11,7 @@ const AuthForm = () => {
     const [message, setMessage] = useState("");
   
    
-    const handleSubmit = async (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault()
         try {     
            let res =  await axios.post(`http://localhost:3001/auth/login`, {email:email, password:password})
@@ -57,9 +58,10 @@ setMessage("User Already exists or invalid")
     if(!isSignUpForm){
     return (
         <div className= "login">
-            <form id="login" onSubmit={handleSubmit}>
+            <h1 id="rt" >Remote Theater</h1>
+            <form id="login" onSubmit={handleLogin}>
                 <input className="login" type="text" placeholder="Enter Email" required onChange={(e)=> setEmail(e.target.value)}></input>
-                <input className="login" type="text" placeholder="Enter Password" required onChange={(e) => setPassword(e.target.value)}></input>                     <br />
+                <input className="login" type="password" placeholder="Enter Password" required onChange={(e) => setPassword(e.target.value)}></input>                     <br />
                 <button className="loginBtn" >Login</button>
                 <button className="signupBtn" onClick={signupForm}>Sign Up</button>
             </form>
@@ -68,10 +70,11 @@ setMessage("User Already exists or invalid")
   } else{
       return (
           <div className= "signup">
+            <h1 id="rt">Remote Theater</h1>
               <form id="signup"> 
                 <input className="signup" type="text" placeholder="Enter Name" required onChange={(e)=> setName(e.target.value)}></input>
                 <input className="signup" type="text" placeholder="Enter Email" required onChange={(e)=> setEmail(e.target.value)}></input>
-                <input className="signup" type="text" placeholder="Enter Password" required onChange={(e)=> setPassword(e.target.value)}></input>
+                <input className="signup" type="password" placeholder="Enter Password" required onChange={(e)=> setPassword(e.target.value)}></input>
                 <button className="loginBtn" onClick={signupForm}>Login</button>
                 <button className="signupBtn" onClick={handleSignup}>Sign Up</button>
                 </form>
