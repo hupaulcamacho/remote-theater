@@ -8,11 +8,11 @@ const Nav = () => {
             console.log('logging out')
             sessionStorage.removeItem("currentUserid")
             window.location.href = "/"
-                window.location.href.reload();  
+            window.location.href.reload();  
         };
         return(
             <Link to ={"/"}>
-                <button onClick={handleLogOff}>Log Out</button>
+                <button id="logout" onClick={handleLogOff}>Log Out</button>
             </Link>
         )
     }
@@ -23,7 +23,7 @@ const Nav = () => {
                     <div className='links'>
                         <Link to='/main'>Main</Link>{" "}
                         <Link to="/Showrooms">Showrooms</Link>{" "}
-                        <Link to="/About">About</Link>{" "}
+                        <Link to="/About">About</Link>
                         <LogoutButton />
                     </div>
                 </nav>
