@@ -1,17 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Nav = (currentUserid) => {
+const Nav = () => {
 
     const LogoutButton = () => {
         const handleLogOff = () => {
             console.log('logging out')
-            sessionStorage.removeItem(currentUserid)
+            sessionStorage.removeItem("currentUserid")
+            window.location.href = "/"
+                window.location.href.reload();  
         };
         return(
             <Link to ={"/"}>
-                {" "}
-                <button onClick={handleLogOff}>Log Out</button> {" "}
+                <button onClick={handleLogOff}>Log Out</button>
             </Link>
         )
     }

@@ -17,7 +17,6 @@ const AuthForm = () => {
            let res =  await axios.post(`http://localhost:3001/auth/login`, {email:email, password:password})
             let {payload} = res.data;
                 sessionStorage.currentUserid = payload.id;
-                // console.log(body.user.id)
                 window.location.href = "/main"
                 window.location.href.reload();
                 setLoggedIn(true)

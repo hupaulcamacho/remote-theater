@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from './Components/Navbar'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch} from 'react-router-dom'
 import './App.css';
 import AuthForm from './Components/AuthForm'
 import Main from './Components/Main'
