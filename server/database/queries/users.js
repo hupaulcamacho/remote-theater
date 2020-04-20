@@ -12,7 +12,6 @@ const getAllUsers = async () => {
     return users
 };
 
-
 const getUserByEmail = async (email) => {
     const user = await db.oneOrNone("SELECT * FROM users WHERE email = $1", [email])
     return user

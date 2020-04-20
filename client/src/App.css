@@ -10,7 +10,6 @@
 }
 a {
     color: white;
-    padding: 1.5em;
     padding-left: 1em;
     padding-right: 1em;
     text-decoration: none;
@@ -20,3 +19,9 @@ a:hover {
     background-color: rgb(135, 96, 207);
 }
 
+#logout {
+background-color: rgb(69, 49, 105);
+  border: none;
+  color: white;
+  font-size: 15px;
+}

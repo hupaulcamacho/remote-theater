@@ -5,7 +5,7 @@ const {loginRequired} = require('../auth/helpers')
 
 
 // get all users
-router.get('/', loginRequired, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   // console.log(req.session)
   try {
     let users = await userQueries.getAllUsers();
@@ -43,7 +43,7 @@ router.get('/:id', async (req, res, next) => {
 })
 
 // retrieve user by email
-router.get('/email/:email', async (req, res, next) => {
+router.get('/email/:email', loginRequired, async (req, res, next) => {
   const email = req.params.email;
 
   try {

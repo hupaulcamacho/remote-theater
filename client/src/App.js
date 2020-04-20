@@ -1,19 +1,32 @@
 import React from 'react';
 import Navbar from './Components/Navbar'
-import { Route, Switch } from 'react-router-dom'
-
+import { Route, Switch} from 'react-router-dom'
 import './App.css';
+import AuthForm from './Components/AuthForm'
 import Main from './Components/Main'
 
 function App() {
-  return (
+  return(
     <div className="App">
-      <Navbar />
-      <Switch>
-        <Route path='/main' component={Main} />
-      </Switch>
-    </div>
-  );
+          
+
+          {sessionStorage.currentUserid ? <Navbar /> : null}
+      
+
+          <Switch>
+            <Route exact path={"/"}>
+              <AuthForm />
+            </Route>
+            <Route path={'/main'}> 
+            <Main /> 
+            </Route>
+          </Switch>
+        </div>
+      );
+
 }
+
+
+
 
 export default App;
