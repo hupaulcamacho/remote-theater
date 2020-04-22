@@ -9,7 +9,7 @@ var session = require('express-session');
 var passport = require('./auth/passport');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//var usersRouter = require('./routes/users');
 var commentsRouter = require('./routes/Comments');
 var viewerRouter = require('./routes/Viewer');
 var authRouter = require('./routes/auth');
@@ -24,20 +24,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-    secret: "SECRET",
-    resave: false,
-    saveUninitialized:true
-}))
-app.use(passport.initialize())
-app.use(passport.session())
+//app.use(session({
+//     secret: "SECRET",
+//     resave: false,
+//     saveUninitialized:true
+// }))
+//app.use(passport.initialize())
+//app.use(passport.session())
 
+
+
+app.use('/comments', commentsRouter);
+app.use('/video', viewerRouter);
 
 app.use('/api/users', usersRouter);
 app.use('/api/comments', commentsRouter);
 app.use('/api/genres', genresRouter);
 app.use('/api/videos', videosRouter);
 app.use('/api/showtimes', showtimeRouter);
+
 app.use('/auth', authRouter);
 app.use('/', indexRouter);
 
