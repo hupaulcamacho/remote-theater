@@ -1,21 +1,25 @@
-.popular-movies, .start-soon {
+.preferenced-movies, .top-movies {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    /* text-align: center; */
-
-    margin: 1em;
+    margin: auto;
     border: 2px solid rgb(135, 96, 207);
     border-radius: 10px;
+    width: 80%;
 }
 
 .movie {
     margin: 1em;
+    padding: .5em;
     border-radius: 10px;
+    background-color: rgb(69, 49, 105);
 }
 .movie:hover {
     background-color: rgb(135, 96, 207);
 }
 
+.movie:active {
+    background-color: rgb(162, 115, 250);
+}
 img {
     height: 20vh;
     border-radius: 10px

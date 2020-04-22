@@ -1,92 +1,133 @@
 import React, { Component } from 'react'
+
+import axios from 'axios'
+import moment from'moment'
 import './CSS/Main.css'
 
 class Main extends Component {
     state = {
         user: {
-            username: "cinemafan86"
+            username: "traplordhuey",
+            favoriteGenres: [1, 2, 4, 5]
         },
-        movies: {
-            popular: [
-                {
-                    title: "Spider-Man: Far From Home",
-                    imgUrl: "https://m.media-amazon.com/images/M/MV5BMGZlNTY1ZWUtYTMzNC00ZjUyLWE0MjQtMTMxN2E3ODYxMWVmXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
-                    watchers: "5m"
-                },
-                {
-                    title: "BloodShot",
-                    imgUrl: "https://m.media-amazon.com/images/M/MV5BYjA5YjA2YjUtMGRlNi00ZTU4LThhZmMtNDc0OTg4ZWExZjI3XkEyXkFqcGdeQXVyNjUyNjI3NzU@._V1_SY1000_SX800_AL_.jpg",
-                    watchers: "1.5m"
-                },
-                {
-                    title: "Bad Boys for Life",
-                    imgUrl: "https://m.media-amazon.com/images/M/MV5BMWU0MGYwZWQtMzcwYS00NWVhLTlkZTAtYWVjOTYwZTBhZTBiXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
-                    watchers: "3m"
-                },
-                {
-                    title: "Trolls: World Tour",
-                    imgUrl: "https://m.media-amazon.com/images/M/MV5BMjIwNjg1NmUtMGE5Yi00YmQxLTg0M2QtMGQyNDVlZWUwOGUwXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SY1000_CR0,0,631,1000_AL_.jpg",
-                    watchers: "2.5m"
-                }
-            ],
-            soonStart: [
-                {
-                    title: "Avengers Endgame",
-                    startsIn: "15 mins",
-                    imgUrl: "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SY1000_CR0,0,674,1000_AL_.jpg"
-                },
-                {
-                    title: "Black Panther",
-                    startsIn: "15 mins",
-                    imgUrl: "https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg"
-                },
-                {
-                    title: "Ready Player One",
-                    startsIn: "20 mins",
-                    imgUrl: "https://m.media-amazon.com/images/M/MV5BY2JiYTNmZTctYTQ1OC00YjU4LWEwMjYtZjkwY2Y5MDI0OTU3XkEyXkFqcGdeQXVyNTI4MzE4MDU@._V1_SY1000_CR0,0,674,1000_AL_.jpg"
-                }
-            ]
+        movies: [],
+        showtimes: [],
+        topMovies: []   
+    }
+
+    componentDidMount = async () => {
+        this.getPreferenceMovies()
+        this.getTopRatedMovies()
+    }
+
+    getPreferenceMovies = async () => {
+        const genres = this.state.user.favoriteGenres
+        // console.log(genres)
+        const preferencedVideos = []
+        // console.log(preferencedVideos)
+        for(let i = 0; i < genres.length; i++) {
+            const URL = `http://localhost:3001/api/videos/genre/id/${genres[i]}`
+            let videos = await axios.get(URL)
+            // console.log(videos.data.payload)
+            videos.data.payload.forEach(async video => {
+                let showtimes = await this.getShowTimes2(video.id)
+                preferencedVideos.push({ video: video, showtimes: showtimes })
+            })
         }
+        // console.log(preferencedVideos)
+        this.setState({
+            movies: preferencedVideos
+        })
+    }
+
+    getTopRatedMovies = async () => {
+        const topVideos = []
+        const URL = `http://localhost:3001/api/videos/ratings/${4}/${85}`
+        let videos = await axios.get(URL)
+        videos.data.payload.forEach(async video => {
+            let showtimes = await this.getShowTimes2(video.id)
+            topVideos.push({ video: video, showtimes: showtimes })
+        })
+        // console.log(videos.data.payload)
+        this.setState({
+            topMovies: topVideos
+        })
+    }
+
+
+    getShowTimes = async () => {
+        const movies = this.state.movies
+        const showtimes = {}
+        for (let i = 0; i < movies.length; i++) {
+            const URL = `http://localhost:3001/api/showtimes/id/${movies[i].id}`
+            let times = await axios.get(URL);
+            showtimes[`${movies[i].id}`] = times.data.payload
+        }
+        this.setState({
+            showtimes: showtimes
+        })
+        // console.log(showtimes)
+    }
+
+    getShowTimes2 = async (id) => {
+        const URL = `http://localhost:3001/api/showtimes/id/${id}`
+        let times = await axios.get(URL);
+        return times.data.payload
+    }
+
+    getTimeDifference = (showtime) => {
+        const format = 'h:mm:ss A';
+        const time = moment(showtime, format);
+        const v1 = moment().to(time);
+        const v2 = time.calendar();
+        return v1
     }
 
     
+    getRandomInt = (max) => {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
 
     render() {
-        const { user, movies } = this.state
-        const popMovies = []
-        const soonStart = []
-        movies.popular.forEach(movie => {
-            popMovies.push(
+        const { user, movies, topMovies, showtimes } = this.state
+        const movieComponents = []
+        const topMovieComponents = []
+        const alreadySeen = {}
+        for (let i = 0; i < 4; i++) {
+            let int = this.getRandomInt(movies.length)
+            let movie = movies[int]
+            if(alreadySeen[int] === undefined) {
+                movieComponents.push(
+                    <div className="movie">
+                        <p>{movie?.video.title}</p>
+                        <img src={movie?.video.img_url} />
+                        <p>Opens {this.getTimeDifference(movie?.showtimes[4].time)}</p>
+                    </div>
+                ) 
+                alreadySeen[int] = int
+            }
+        }
+        topMovies.forEach(movie => {
+            topMovieComponents.push(
                 <div className="movie">
-                    <p>{movie.title}</p>
-                    <img src={movie.imgUrl} />
-                    <p>{movie.watchers} watchers</p>
+                    <p>{movie?.video.title}</p>
+                    <img src={movie?.video.img_url} />
+                    <p>Rating: {movie?.video.rating}</p>
+                    <p>Opens {this.getTimeDifference(movie?.showtimes[4].time)}</p>
                 </div>
-            )
-        });
-
-        movies.soonStart.forEach(movie => {
-            soonStart.push(
-                <div className="movie">
-                    <p>{movie.title}</p>
-                    <img height="150px" src={movie.imgUrl} />
-                    <p>Starts in: {movie.startsIn}</p>
-                </div>
-            )
-        });
-
+            ) 
+        })
         return (
             <div>
+
                 <h1>Welcome back {user.username}</h1>
-
-                <h2>Popular Movies</h2>
-                <div className="popular-movies">
-                    {popMovies}
+                <h2>Top Rated Movies</h2>
+                <div className="top-movies">
+                    {topMovieComponents}
                 </div>
-
-                <h2>Movies About to Start</h2>
-                <div className="start-soon">
-                    {soonStart}
+                <h2>Suggested Movies</h2>
+                <div className="preferenced-movies">
+                    {movieComponents}
                 </div>
             </div>
         )

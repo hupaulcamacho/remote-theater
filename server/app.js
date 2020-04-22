@@ -3,6 +3,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var cors = require('cors')
 var logger = require('morgan');
+const cors = require('cors');
+
 var session = require('express-session');
 var passport = require('./auth/passport');
 
@@ -13,7 +15,7 @@ var viewerRouter = require('./routes/Viewer');
 var authRouter = require('./routes/auth');
 let genresRouter =require('./routes/genres');
 let videosRouter = require('./routes/videos');
-
+let showtimeRouter = require('./routes/showtimes')
 var app = express();
 
 app.use(cors())
@@ -31,12 +33,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use(passport.session())
 
 
-//app.use('/users', usersRouter);
+
 app.use('/comments', commentsRouter);
 app.use('/video', viewerRouter);
+
+app.use('/api/users', usersRouter);
+app.use('/api/comments', commentsRouter);
+app.use('/api/genres', genresRouter);
+app.use('/api/videos', videosRouter);
+app.use('/api/showtimes', showtimeRouter);
+
 app.use('/auth', authRouter);
-app.use('/genres', genresRouter);
-app.use('/videos', videosRouter);
 app.use('/', indexRouter);
 
 module.exports = app;
