@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import './Main.css'
+
 import axios from 'axios'
 import moment from'moment'
+import './CSS/Main.css'
 
 class Main extends Component {
     state = {

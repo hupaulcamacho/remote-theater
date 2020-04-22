@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const userQueries =  require('../database/queries/users')
+const userQueries =  require('../database/queries/users');
+const {loginRequired} = require('../auth/helpers')
+
 
 // get all users
 router.get('/', async (req, res, next) => {
+  // console.log(req.session)
   try {
     let users = await userQueries.getAllUsers();
     res.json({
@@ -39,11 +42,12 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-// retrieve user by name
-router.get('/:name', async (req, res, next) => {
-  const name = req.params.name;
+// retrieve user by email
+router.get('/email/:email', loginRequired, async (req, res, next) => {
+  const email = req.params.email;
+
   try {
-    let user = await userQueries.getUserByName(name);
+    let user = await userQueries.getUserByEmail(email);
     res.json({
       payload: user,
       message: 'retrieved user',
@@ -57,5 +61,7 @@ router.get('/:name', async (req, res, next) => {
     })
   }
 })
+
+
 
 module.exports = router;

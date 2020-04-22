@@ -26,9 +26,9 @@ CREATE TABLE users
 (
     id SERIAL PRIMARY KEY,
     name VARCHAR,
-    email VARCHAR UNIQUE,
+    email VARCHAR NOT NULL UNIQUE,
     number VARCHAR,
-    password VARCHAR,
+    password VARCHAR NOT NULL,
     video_id INT REFERENCES videos(id) on delete cascade on update cascade
 );
 
@@ -187,11 +187,11 @@ VALUES
 INSERT INTO users
     (name, email, password)
 VALUES
-    ( 'Kadijah Wilson', 'kwilson@pursuit.org', '1234'),
-    ( 'Hupaul Camacho', 'hcamacho@pursuit.org', '1234'),
-    ( 'John Doe', 'jdoe@pursuit.org', '1234'),
-    ( 'Chuck Okonkwo', 'cokonkwo@pursuit.org', '1234'),
-    ( 'Jane Smith', 'jsmith@pursuit.org', '1234');
+    ( 'Kadijah Wilson', 'kwilson@pursuit.org', 'passWord'),
+    ( 'Hupaul Camacho', 'hcamacho@pursuit.org', 'passWord'),
+    ( 'John Doe', 'jdoe@pursuit.org', 'passWord'),
+    ( 'Chuck Okonkwo', 'cokonkwo@pursuit.org', 'passWord'),
+    ( 'Jane Smith', 'jsmith@pursuit.org', 'passWord');
 
 INSERT INTO showrooms
     ( title, video_id)
@@ -217,10 +217,10 @@ VALUES
     (5, 17, 2);
 
 INSERT INTO viewer
-    (viewer_id, video_id, showroom_id)
+    (users_id, showroom_id)
 VALUES
-    (3, 2, 2),
-    (2, 5, 3),
-    (4, 9, 1),
-    (5, 2, 2),
-    (1, 12, 4);
+    (3, 2),
+    (2, 3),
+    (4, 1),
+    (5, 2),
+    (1, 4);
