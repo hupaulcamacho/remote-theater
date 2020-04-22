@@ -1,7 +1,6 @@
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var cors = require('cors')
 var logger = require('morgan');
 const cors = require('cors');
 
