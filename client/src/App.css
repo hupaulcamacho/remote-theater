@@ -1,8 +1,11 @@
 .App {
     text-align: center;
-    background-color: rgb(98, 69, 151);
+    /* background-color: rgb(98, 69, 151); */
     height: 100%;
     color: white;
+}
+body {
+    background-color: rgb(98, 69, 151);
 }
 .nav-container {
     background-color: rgb(69, 49, 105);
