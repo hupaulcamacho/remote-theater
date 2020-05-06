@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import axios from "axios"
 import './CSS/AuthForm.css'
+import {Redirect} from 'react-router-dom'
 
 const AuthForm = () => {
     const [name, setName] = useState("")
@@ -17,9 +18,14 @@ const AuthForm = () => {
            let res =  await axios.post(`http://localhost:3001/auth/login`, {email:email, password:password})
             let {payload} = res.data;
                 sessionStorage.currentUserid = payload.id;
-                window.location.href = "/main"
-                window.location.href.reload();
-                setLoggedIn(true)
+
+                if(sessionStorage.currentUserid){
+                    setLoggedIn(true)
+                    {<Redirect to="/main" />}
+                }
+
+                // window.location.href = "/main"
+                // window.location.href.reload();
             
         } catch (err) {
             console.log(err)
