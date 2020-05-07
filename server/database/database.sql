@@ -217,7 +217,7 @@ VALUES
     (5, 17, 2);
 
 INSERT INTO viewer
-    (users_id, showroom_id)
+    (viewer_id, showroom_id)
 VALUES
     (3, 2),
     (2, 3),
