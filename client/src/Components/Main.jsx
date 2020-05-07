@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import {Redirect} from 'react-router-dom'
 import axios from 'axios'
 import moment from'moment'
 import './CSS/Main.css'
@@ -12,7 +12,7 @@ class Main extends Component {
         },
         movies: [],
         showtimes: [],
-        topMovies: []   
+        topMovies: []
     }
 
     componentDidMount = async () => {
@@ -87,6 +87,8 @@ class Main extends Component {
     getRandomInt = (max) => {
         return Math.floor(Math.random() * Math.floor(max));
     }
+
+    
 
     render() {
         const { user, movies, topMovies, showtimes } = this.state
