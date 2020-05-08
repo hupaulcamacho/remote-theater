@@ -1,5 +1,5 @@
 # Remote Theater
-Our application allows users to watch different movies as if they were in a real movie theater. Every movie will have a specific showtime for when users can watch, once in the showroom users are able to leave comments and ratings. As the movie plays users can use our live chat feature with other watchers. In the chat users are able to use emoji reactions and leave comments. Users are able to select perferences on the kind of movies they enjoy.
+Our application allows users to watch different movies as if they were in a real movie theater. Every movie will have a specific showtime for when users can watch, once in the showroom users are able to leave comments and ratings. As the movie plays users can use our live chat feature with other watchers. In the chat users are able to use emoji reactions and leave comments. Users are able to select preferences on the kind of movies they enjoy.
 
 ## Database Tables: 
 - *Users*
