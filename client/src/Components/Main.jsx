@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import axios from 'axios'
 import moment from'moment'
@@ -8,7 +9,7 @@ class Main extends Component {
     state = {
         user: {
             username: "traplordhuey",
-            favoriteGenres: [1, 2, 4, 5]
+            favoriteGenres: [4, 6, 1, 3]
         },
         movies: [],
         showtimes: [],
@@ -18,6 +19,7 @@ class Main extends Component {
     componentDidMount = async () => {
         this.getPreferenceMovies()
         this.getTopRatedMovies()
+        
     }
 
     getPreferenceMovies = async () => {
@@ -48,7 +50,7 @@ class Main extends Component {
             let showtimes = await this.getShowTimes2(video.id)
             topVideos.push({ video: video, showtimes: showtimes })
         })
-        // console.log(videos.data.payload)
+        console.log(videos.data.payload)
         this.setState({
             topMovies: topVideos
         })
@@ -75,14 +77,28 @@ class Main extends Component {
         return times.data.payload
     }
 
-    getTimeDifference = (showtime) => {
-        const format = 'h:mm:ss A';
-        const time = moment(showtime, format);
-        const v1 = moment().to(time);
-        const v2 = time.calendar();
-        return v1
-    }
+    getTimeDifference = (arr) => {
+        const format = 'h:mm:ss A '
+        let nextTime = null;
 
+        for (let i = 0; i < arr?.length; i++) {
+            let showtime = moment(arr[i].time, format);
+            let difference = moment().diff(showtime, "hours");
+            // console.log(difference)
+            if (nextTime === null) {
+                nextTime = showtime
+            } 
+            // compares the current index's time difference against a time difference with the "next time"
+            if (difference < moment().diff(nextTime, "hours")) {
+                // if curr index's difference is less it changes the next time to the new time
+                nextTime = showtime
+            }
+            console.log(nextTime, 'next showtime')
+        }
+        // Calculates the time difference to be displayed
+        const next = moment().to(nextTime)
+        return next
+    }
     
     getRandomInt = (max) => {
         return Math.floor(Math.random() * Math.floor(max));
@@ -101,7 +117,7 @@ class Main extends Component {
                     <div className="movie">
                         <p>{movie?.video.title}</p>
                         <img src={movie?.video.img_url} />
-                        <p>Opens {this.getTimeDifference(movie?.showtimes[4].time)}</p>
+                        <p>Opens {this.getTimeDifference(movie?.showtimes)} </p>
                     </div>
                 ) 
                 alreadySeen[int] = int
@@ -109,13 +125,15 @@ class Main extends Component {
         }
         topMovies.forEach(movie => {
             topMovieComponents.push(
-                <div className="movie">
-                    <p>{movie?.video.title}</p>
-                    <img src={movie?.video.img_url} />
-                    <p>Rating: {movie?.video.rating}</p>
-                    <p>Opens {this.getTimeDifference(movie?.showtimes[4].time)}</p>
-                </div>
-            ) 
+                <Link to={`/showroom/${movie?.video.video_url}`}>
+                    <div className="movie">
+                        <p>{movie?.video.title}</p>
+                        <img src={movie?.video.img_url} />
+                        <p>Rating: {movie?.video.rating}</p>
+                        <p>Opens {this.getTimeDifference(movie?.showtimes)}</p>
+                    </div>
+                </Link>
+            )
         })
         return (
             <div>

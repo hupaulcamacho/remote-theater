@@ -22,7 +22,7 @@ const Nav = () => {
                 <nav>
                     <div className='links'>
                         <Link to='/main'>Main</Link>{" "}
-                        <Link to="/Showrooms">Showrooms</Link>{" "}
+                        {/* <Link to="/Showrooms">Showrooms</Link>{" "} */}
                         <Link to="/About">About</Link>
                         <LogoutButton />
                     </div>
