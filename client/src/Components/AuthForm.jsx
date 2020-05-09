@@ -10,9 +10,9 @@ const AuthForm = ({isloggedIn, isSignUpForm, setMessage, setLoggedIn, password, 
         e.preventDefault()
         try {     
            let res =  await axios.post(`http://localhost:3001/auth/login`, {email:email, password:password})
-            let {payload} = res.data;
-                    setLoggedIn(true)
-                sessionStorage.currentUserid = payload.id;
+            let { payload } = res.data;
+            setLoggedIn(true)
+            sessionStorage.currentUserid = payload.id;
 
         } catch (err) {
             console.log(err)
@@ -36,17 +36,17 @@ const AuthForm = ({isloggedIn, isSignUpForm, setMessage, setLoggedIn, password, 
             <form id="login" onSubmit={handleLogin}>
                 <input className="login" type="text" placeholder="Enter Email" required onChange={(e)=> setEmail(e.target.value)}></input>
                 <input className="login" type="password" placeholder="Enter Password" required onChange={(e) => setPassword(e.target.value)}></input>                     <br />
-                <button className="loginBtn" >Login</button>
+                <button className="button1" >Login</button>
                 <Link to={"/signup"}>
                 <button className="signupBtn">Sign Up</button>
                 </Link>
             </form>
         </div>
     )
-  } else{
-      return (
-       <Signup />
-          )
+  } else {
+    return (
+        <Signup />
+    )
   }  
 }
 
