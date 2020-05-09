@@ -14,6 +14,7 @@ var authRouter = require('./routes/auth');
 let genresRouter =require('./routes/genres');
 let videosRouter = require('./routes/videos');
 let showtimeRouter = require('./routes/showtimes')
+let preferenceRouter  =  require('./routes/preferences')
 var app = express();
 
 app.use(cors())
@@ -40,6 +41,7 @@ app.use('/api/comments', commentsRouter);
 app.use('/api/genres', genresRouter);
 app.use('/api/videos', videosRouter);
 app.use('/api/showtimes', showtimeRouter);
+app.use('/api/preferences', preferenceRouter);
 
 app.use('/auth', authRouter);
 app.use('/', indexRouter);

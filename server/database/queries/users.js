@@ -18,7 +18,7 @@ const getUserByEmail = async (email) => {
 };
 
 const getUserById = async (id) => {
-    const user = await db.any("SELECT FROM users WHERE users_id = $1", [id])
+    const user = await db.any("SELECT * FROM users WHERE id = $1", [id])
     return user
 };
 

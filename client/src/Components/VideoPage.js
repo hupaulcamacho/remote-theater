@@ -20,17 +20,20 @@ class VideoPage extends React.Component {
 	}
 
 	render(){
+		const { routeprops: { match:{ params } } } = this.props;
+		console.log(params.id)
+		
 		return (
 			<div className ='video-container'>
-				<h1>{this.state.title}</h1>
+				{/* <h1>{this.state.title}</h1> */}
 				<div className='videoScreen'>
 					<Youtube
-						videoId={'TcMBFSGVi1c'}>
-					</Youtube>
+						videoId={params.id}
+					/>
 				</div>
-				<div className ='chatBox'>
+				{/* <div className ='chatBox'>
 					<ChatBox />
-				</div>
+				</div> */}
 				<div className='nextShow'>
 				</div>
 			</div>);
