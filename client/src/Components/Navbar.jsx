@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 const Nav = () => {
 
@@ -7,13 +7,12 @@ const Nav = () => {
         const handleLogOff = () => {
             console.log('logging out')
             sessionStorage.removeItem("currentUserid")
-            window.location.href = "/"
-            window.location.href.reload();  
+           return <Redirect to='/' /> 
         };
         return(
-            <Link to ={"/"}>
+            
                 <button id="logout" onClick={handleLogOff}>Log Out</button>
-            </Link>
+          
         )
     }
 
@@ -26,7 +25,7 @@ const Nav = () => {
                         {/* <Link to="/Showrooms">Showrooms</Link>{" "} */}
                         <Link className='nav-link' to='/account'>My Account</Link>{" "}
                         <Link className='nav-link' to="/About">About</Link>
-                        <LogoutButton className='nav-link' />
+                        <Link to="/"><LogoutButton className='nav-link' /></Link>
                     </div>
                 </nav>
             </div>

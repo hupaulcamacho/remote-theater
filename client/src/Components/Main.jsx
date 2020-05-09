@@ -137,6 +137,8 @@ class Main extends Component {
         return Math.floor(Math.random() * Math.floor(max));
     }
 
+    
+
     render() {
         const { user, topMovies, movies} = this.state
         const movieComponents = []
