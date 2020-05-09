@@ -16,10 +16,11 @@ const AuthForm = () => {
         try {     
            let res =  await axios.post(`http://localhost:3001/auth/login`, {email:email, password:password})
             let {payload} = res.data;
-                sessionStorage.currentUserid = payload.id;
-                window.location.href = "/main"
-                window.location.href.reload();
-                setLoggedIn(true)
+            sessionStorage.currentUserid = payload.id;
+            // this.props.setUser(payload)
+            window.location.href = "/main"
+            window.location.href.reload();
+            setLoggedIn(true)
             
         } catch (err) {
             console.log(err)
@@ -36,22 +37,22 @@ const AuthForm = () => {
         e.preventDefault();
         if(name === "" || email === "" || password === ""){
             setMessage("Please fill out all fields")
-        }else{
+        } else {
             signUp();
         }
     }
 
     const signUp = async () => {
-try{
-let res = await axios.post(`http://localhost:3001/auth/signup`, {name: name, email: email, password: password})
-setLoggedIn(true);
-let {payload} = res.data;
-sessionStorage.currentUserid = payload.id;
-window.location.href = "/main"
-window.location.href.reload();
-}catch(error){
-setMessage("User Already exists or invalid")
-}
+        try {
+            let res = await axios.post(`http://localhost:3001/auth/signup`, {name: name, email: email, password: password})
+            setLoggedIn(true);
+            let {payload} = res.data;
+            sessionStorage.currentUserid = payload.id;
+            window.location.href = "/main"
+            window.location.href.reload();
+        } catch(error) {
+            setMessage("User Already exists or invalid")
+        }
     }
     
     if(!isSignUpForm){
@@ -61,8 +62,8 @@ setMessage("User Already exists or invalid")
             <form id="login" onSubmit={handleLogin}>
                 <input className="login" type="text" placeholder="Enter Email" required onChange={(e)=> setEmail(e.target.value)}></input>
                 <input className="login" type="password" placeholder="Enter Password" required onChange={(e) => setPassword(e.target.value)}></input>                     <br />
-                <button className="loginBtn" >Login</button>
-                <button className="signupBtn" onClick={signupForm}>Sign Up</button>
+                <button className="button1" >Login</button>
+                <button className="button1" onClick={signupForm}>Sign Up</button>
             </form>
         </div>
     )
@@ -73,9 +74,9 @@ setMessage("User Already exists or invalid")
               <form id="signup"> 
                 <input className="signup" type="text" placeholder="Enter Name" required onChange={(e)=> setName(e.target.value)}></input>
                 <input className="signup" type="text" placeholder="Enter Email" required onChange={(e)=> setEmail(e.target.value)}></input>
-                <input className="signup" type="password" placeholder="Enter Password" required onChange={(e)=> setPassword(e.target.value)}></input>
-                <button className="loginBtn" onClick={signupForm}>Login</button>
-                <button className="signupBtn" onClick={handleSignup}>Sign Up</button>
+                <input className="signup" type="password" placeholder="Enter Password" required onChange={(e)=> setPassword(e.target.value)}></input><br/>
+                <button className="button1" onClick={signupForm}>Login</button>
+                <button className="button1" onClick={handleSignup}>Sign Up</button>
                 </form>
           </div>
       )

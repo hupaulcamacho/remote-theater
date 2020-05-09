@@ -41,7 +41,7 @@ CREATE TABLE showrooms
 
 CREATE TABLE comments
 (
-    id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY ,
     body VARCHAR,
     users_id INT REFERENCES users(id) on delete cascade on update cascade,
     video_id INT REFERENCES videos(id) on delete cascade on update cascade,
@@ -51,8 +51,7 @@ CREATE TABLE comments
 CREATE TABLE preferences
 (
     id SERIAL PRIMARY KEY,
-    age VARCHAR(2),
-    users_id INT REFERENCES users(id),
+    user_id INT REFERENCES users(id),
     genre_id INT REFERENCES genres(id) on delete cascade on update cascade
 );
 
@@ -115,27 +114,32 @@ VALUES
     (1, '12:00:00 AM'),
     (1, '2:00:00 AM'),
     (1, '4:00:00 AM'),
-    (1, '7:00:00 PM'),
-    (1, '9:00:00 PM'),
+    (1, '6:00:00 PM'),
+    (1, '8:00:00 PM'),
+    (1, '10:00:00 PM'),
 
     (2, '10:00:00 AM'),
     (2, '12:00:00 PM'),
     (2, '2:00:00 PM'),
     (2, '5:00:00 PM'),
     (2, '8:00:00 PM'),
+    (2, '11:00:00 PM'),
 
+    (3, '12:00:00 AM'),
     (3, '3:00:00 AM'),
     (3, '9:00:00 AM'),
     (3, '2:00:00 PM'),
     (3, '5:00:00 PM'),
     (3, '9:00:00 PM'),
 
+    (4, '1:00:00 AM'),
     (4, '4:00:00 AM'),
     (4, '9:00:00 AM'),
     (4, '2:00:00 PM'),
     (4, '7:00:00 PM'),
     (4, '11:00:00 PM'),
 
+    (5, '1:00:00 AM'),
     (5, '4:00:00 AM'),
     (5, '9:00:00 AM'),
     (5, '2:00:00 PM'),
@@ -147,9 +151,11 @@ VALUES
     (6, '1:00:00 PM'),
     (6, '5:00:00 PM'),
     (6, '7:00:00 PM'),
+    (6, '9:00:00 PM'),
 
     (7, '4:00:00 AM'),
     (7, '9:00:00 AM'),
+    (7, '11:00:00 AM'),
     (7, '2:00:00 PM'),
     (7, '7:00:00 PM'),
     (7, '12:00:00 AM'),
@@ -159,20 +165,24 @@ VALUES
     (8, '10:00:00 AM'),
     (8, '1:00:00 PM'),
     (8, '8:00:00 PM'),
+    (8, '10:00:00 PM'),
     
     (9, '2:00:00 AM'),
     (9, '9:00:00 AM'),
     (9, '1:00:00 PM'),
     (9, '5:00:00 PM'),
     (9, '9:00:00 PM'),
+    (9, '11:00:00 PM'),
 
     (10, '5:00:00 AM'),
     (10, '10:00:00 AM'),
+    (10, '12:00:00 PM'),
     (10, '3:00:00 PM'),
     (10, '7:00:00 PM'),
     (10, '10:00:00 PM'),
 
     (11, '12:00:00 AM'),
+    (11, '5:00:00 AM'),
     (11, '7:00:00 AM'),
     (11, '1:00:00 PM'),
     (11, '5:00:00 PM'),
@@ -181,6 +191,7 @@ VALUES
     (12, '8:00:00 AM'),
     (12, '10:00:00 AM'),
     (12, '1:00:00 PM'),
+    (12, '4:00:00 PM'),
     (12, '8:00:00 PM'),
     (12, '11:00:00 PM');
 
@@ -209,18 +220,18 @@ VALUES
     (1, 4, 4, 'Amazing');
 
 
-INSERT INTO preferences
-    (users_id, age, genre_id)
-VALUES
-    (1, 26, 3),
-    (3, 37, 2),
-    (5, 17, 2);
+-- INSERT INTO preferences
+--     (users_id, age, genre_id)
+-- VALUES
+--     (1, 26, 3),
+--     (3, 37, 2),
+--     (5, 17, 2);
 
-INSERT INTO viewer
-    (viewer_id, showroom_id)
-VALUES
-    (3, 2),
-    (2, 3),
-    (4, 1),
-    (5, 2),
-    (1, 4);
+-- INSERT INTO viewer
+--     (viewer_id, showroom_id)
+-- VALUES
+--     (3, 2),
+--     (2, 3),
+--     (4, 1),
+--     (5, 2),
+--     (1, 4);

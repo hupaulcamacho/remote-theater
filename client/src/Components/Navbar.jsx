@@ -21,10 +21,12 @@ const Nav = () => {
             <div className='nav-container'>
                 <nav>
                     <div className='links'>
-                        <Link to='/main'>Main</Link>{" "}
+                        <span className='title'>RemoteTheater</span>
+                        <Link className='nav-link' to='/main'>Main</Link>{" "}
                         {/* <Link to="/Showrooms">Showrooms</Link>{" "} */}
-                        <Link to="/About">About</Link>
-                        <LogoutButton />
+                        <Link className='nav-link' to='/account'>Account</Link>{" "}
+                        <Link className='nav-link' to="/About">About</Link>
+                        <LogoutButton className='nav-link' />
                     </div>
                 </nav>
             </div>

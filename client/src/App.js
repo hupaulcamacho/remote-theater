@@ -5,9 +5,18 @@ import './App.css';
 import AuthForm from './Components/AuthForm'
 import Main from './Components/Main';
 import VideoPage from './Components/VideoPage';
-
+import Account from './Components/Account'
 class App extends React.Component {
+  state = {
+    user: null
+  }
 
+  setUser = (user) => {
+    console.log("set user called")
+    this.setState({
+      user: user
+    });
+  }
   renderVideo = (routeprops) => {
     return <VideoPage routeprops={routeprops} />
   }
@@ -19,7 +28,7 @@ class App extends React.Component {
         
             <Switch>
               <Route exact path={"/"}>
-                <AuthForm />
+                <AuthForm setUser={this.setUser}/>
               </Route>
               <Route path={'/main'}> 
                 <Main /> 
@@ -28,6 +37,7 @@ class App extends React.Component {
               <Route path={'/video'}>
                 <VideoPage id ={2}/>
               </Route>
+              <Route path='/account' component={Account} />
             </Switch>
           </div>
         );

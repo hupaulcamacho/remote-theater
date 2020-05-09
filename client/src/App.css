@@ -7,24 +7,70 @@
 body {
     background-color: rgb(98, 69, 151);
 }
-.nav-container {
+.nav-container { 
+    display: flex;
     background-color: rgb(69, 49, 105);
     padding: 1.5em;
 }
 a {
     color: white;
-    padding-left: 1em;
-    padding-right: 1em;
+    /* padding-left: 1em;
+    padding-right: 1em; */
     text-decoration: none;
 }
 
-a:hover {
+.nav-link {
+    padding-left: 1em;
+    padding-right: 1em;
+    margin: 1em;
+    padding: 0.5em;
+    border-radius: 5px;
+    background-color: rgb(98, 69, 151);
+    /* padding: 1.5em; */
+}
+
+.nav-link:hover {
     background-color: rgb(135, 96, 207);
 }
 
 #logout {
-background-color: rgb(69, 49, 105);
-  border: none;
-  color: white;
-  font-size: 15px;
+    background-color: rgb(69, 49, 105);
+    border: 2px solid rgb(98, 69, 151);;
+    color: white;
+    font-size: 15px;
+}
+
+.button {
+    color: white;
+    padding: 1em;
+    border: 2px solid rgb(98, 69, 151);
+    border-radius: 5px;
+    background-color: rgb(69, 49, 105);
+    font-size: 1em;
+}
+
+.button:hover {
+    background-color: rgb(135, 96, 207);
+}
+
+.button1 {
+    color: white;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 2px solid rgb(98, 69, 151);
+    background-color: rgb(69, 49, 105);
+    font-size: 1em;
+    margin: 1em;
+}
+
+.button1:hover {
+    background-color: rgb(135, 96, 207);
+}
+
+.title {
+    padding: 1em;   
+    border-radius: 5px;
+    background-color: rgb(98, 69, 151);
+    font-weight: bold;
+    margin-right: 10em;
 }
