@@ -176,7 +176,7 @@ class Main extends Component {
         return (
             <div>
 
-                <h1>Welcome back {user?.name}</h1>
+                <h1>Welcome back, {user?.name}</h1>
                 <h2>Top Rated Movies</h2>
                 <div className="top-movies">
                     {topMovieComponents}

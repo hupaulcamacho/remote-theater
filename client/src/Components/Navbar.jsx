@@ -24,7 +24,7 @@ const Nav = () => {
                         <span className='title'>RemoteTheater</span>
                         <Link className='nav-link' to='/main'>Main</Link>{" "}
                         {/* <Link to="/Showrooms">Showrooms</Link>{" "} */}
-                        <Link className='nav-link' to='/account'>Account</Link>{" "}
+                        <Link className='nav-link' to='/account'>My Account</Link>{" "}
                         <Link className='nav-link' to="/About">About</Link>
                         <LogoutButton className='nav-link' />
                     </div>
