@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const cors = require('cors');
 var session = require('express-session');
 var passport = require('./auth/passport');
 
@@ -13,8 +13,13 @@ var viewerRouter = require('./routes/Viewer');
 var authRouter = require('./routes/auth');
 let genresRouter =require('./routes/genres');
 let videosRouter = require('./routes/videos');
+<<<<<<< HEAD
+let showtimeRouter = require('./routes/showtimes');
+let tokenGenerator = require('./routes/tokenGenerator');
+=======
 let showtimeRouter = require('./routes/showtimes')
 let preferenceRouter  =  require('./routes/preferences')
+>>>>>>> master
 var app = express();
 
 app.use(cors())
@@ -41,7 +46,11 @@ app.use('/api/comments', commentsRouter);
 app.use('/api/genres', genresRouter);
 app.use('/api/videos', videosRouter);
 app.use('/api/showtimes', showtimeRouter);
+<<<<<<< HEAD
+app.use('/api/getToken', tokenGenerator);
+=======
 app.use('/api/preferences', preferenceRouter);
+>>>>>>> master
 
 app.use('/auth', authRouter);
 app.use('/', indexRouter);
