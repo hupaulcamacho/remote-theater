@@ -57,7 +57,7 @@ function App() {
             </Route>
 
             <Route path={'/video'}>
-              <VideoPage id ={2}/>
+              <VideoPage id ={2} user= {name || 'Chuck'}/>
             </Route>
           </Switch>
         </div>

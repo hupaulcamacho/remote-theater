@@ -29,7 +29,7 @@ class VideoPage extends React.Component {
 					</Youtube>
 				</div>
 				<div className ='chatBox'>
-					<ChatBox />
+					<ChatBox user = {this.props.user}/>
 				</div>
 				<div className='nextShow'>
 				</div>
