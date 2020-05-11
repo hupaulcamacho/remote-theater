@@ -61,6 +61,10 @@ function App() {
               <Main 
               isloggedIn={isloggedIn} /> 
             </Route>
+
+            <Route path={'/video'}>
+              <VideoPage id ={2} user= {name || 'Chuck'}/>
+            </Route>
             <Route path='/showroom/:id' render={renderVideo()} />
             <Route path='/account' component={Account} />
           </Switch>

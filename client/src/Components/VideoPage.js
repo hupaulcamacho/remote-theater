@@ -31,9 +31,9 @@ class VideoPage extends React.Component {
 						videoId={params.id}
 					/>
 				</div>
-				{/* <div className ='chatBox'>
-					<ChatBox />
-				</div> */}
+				<div className ='chatBox'>
+					<ChatBox user = {this.props.user}/>
+				</div>
 				<div className='nextShow'>
 				</div>
 			</div>);
