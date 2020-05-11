@@ -1,0 +1,30 @@
+.preferences {
+    margin: auto;
+    border: 2px solid rgb(135, 96, 207);
+    border-radius: 10px;
+    width: 80%;
+}
+
+.genre-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin: auto;
+    margin-bottom: 1em;
+    border: 2px solid rgb(135, 96, 207);
+    border-radius: 10px;
+    width: 80%;
+}
+
+.genre:hover {
+    background-color: rgb(135, 96, 207);
+    border-radius: 5px;
+}
+
+.genre {
+    padding: 0.5em;
+}
+
+.popup-content {
+    background-color: rgb(69, 49, 105)!important;
+    width: 80% !important;
+}

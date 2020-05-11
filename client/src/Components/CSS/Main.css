@@ -2,16 +2,18 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     margin: auto;
+    background-color: rgb(69, 49, 105);
     border: 2px solid rgb(135, 96, 207);
     border-radius: 10px;
     width: 80%;
 }
 
 .movie {
-    margin: 1em;
+    margin: .5em;
     padding: .5em;
     border-radius: 10px;
-    background-color: rgb(69, 49, 105);
+    border: 2px solid rgb(87, 60, 136);
+    /* background-color: rgb(69, 49, 105); */
 }
 .movie:hover {
     background-color: rgb(135, 96, 207);
@@ -24,3 +26,8 @@ img {
     height: 20vh;
     border-radius: 10px
 }
+
+/* .text {
+    background-color: rgb(135, 96, 207);
+    border-radius: 5px;
+} */
