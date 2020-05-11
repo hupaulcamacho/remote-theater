@@ -1,15 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../database/db');
+const videos = require('../database/queries/video')
 
 
 router.get('/', async  (req, res) => {
 	try{
-		let videoQuery = 'SELECT * FROM videos';
-		let allVideos = await db.any(videoQuery);
+		let videoQuery = await videos.getAllVideos
 		res.status(200).json({
 			status: 'success',
-			payload: allVideos
+			payload: videoQuery
 		});
 	}
 	catch(err){
@@ -18,9 +17,9 @@ router.get('/', async  (req, res) => {
 });
 
 router.get('/id/:id', async (req, res) => {
+	const id = req.params.id
 	try{
-		let videoQuery = 'SELECT * FROM videos WHERE id = $1';
-		let video = await db.any(videoQuery, [req.params.id]);
+		let video = await videos.getAllVideosByid(id)
 		res.status(200).json({
 			status: 'success',
 			payload: video
@@ -32,12 +31,12 @@ router.get('/id/:id', async (req, res) => {
 });
 
 router.get('/title/:title', async (req, res) => {
+	const title = req.params.title
 	try {
-		let videoQuery = 'SELECT * FROM videos WHERE title = $1';
-		let video = await db.any((videoQuery), [req.params.title]);
+		let videoTitle = await videos.getAllVideoByTitle(title);
 		res.status(200).json({
 			status: 'success',
-			payload: video
+			payload: videoTitle
 		});
 	}
 	catch(err){
@@ -48,13 +47,12 @@ router.get('/title/:title', async (req, res) => {
 
 
 router.get('/genre/:genre', async (req, res) => {
+	const genre = req.params.genre
 	try {
-		let videoQuery = 'SELECT * FROM videos JOIN genres ON genres.id = videos.genre_id WHERE name = $1';
-
-		let video = await db.any((videoQuery), [req.params.genre]);
+		let videoByGenre = await videos.getVideoByGenre(genre)
 		res.status(200).json({
 			status: 'success',
-			payload: video
+			payload: videoByGenre
 		});
 	}
 	catch(err){
@@ -63,11 +61,9 @@ router.get('/genre/:genre', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+	const {title, genre_id, description, video_url, rating} = req.body
 	try{
-
-		let postQuery = 'INSERT INTO videos(title, genre_id, description, video_url, rating) '
-			+ 'VALUES ($1, $2, $3, $4, $5)';
-		let createNewVideo = await db.any((postQuery), [req.body.title, req.body.genre_id, req.body.description, req.body.video_url, -1]);
+		createNewVideo = await videos.postNewVideo(title, genre_id, description, video_url, rating)
 		res.status(204).end();
 	}
 	catch(err){
@@ -92,9 +88,9 @@ router.get('/ratings/:howMany/:highest', async (req, res) => {
 });
 
 router.delete('/deleteVideo', async (req, res) => {
+	const {id }= req.body
 	try{
-		let deleteQuery = 'DELETE FROM videos WHERE id = $1';
-		let deleteVideo = await db.none((deleteQuery), [req.body.id]);
+		videoDelete = await videos.deleteVideo(id)
 		res.status(204).end();
 	}
 	catch(err){
@@ -106,9 +102,7 @@ router.delete('/deleteVideo', async (req, res) => {
 router.get('/genre/id/:id', async (req, res) => {
 	let genreId = req.params.id
 	try {
-		let videoQuery = 'SELECT * FROM videos WHERE genre_id = $1';
-
-		let videos = await db.any(videoQuery, [genreId]);
+	const videos = await videos.getAllVideoByGenre(genreId)
 		res.status(200).json({
 			status: 'success',
 			message: 'retrieved videos',
