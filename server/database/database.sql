@@ -204,20 +204,20 @@ VALUES
     ( 'Chuck Okonkwo', 'cokonkwo@pursuit.org', 'passWord'),
     ( 'Jane Smith', 'jsmith@pursuit.org', 'passWord');
 
-INSERT INTO showrooms
-    ( title, video_id)
-VALUES
-    ( 'Survive The Night', 2),
-    ( 'The Invisible Man', 1),
-    ( 'Whats The Worst That Could Happen?', 3),
-    ( 'Mulan', 4);
+-- INSERT INTO showrooms
+--     ( title, video_id)
+-- VALUES
+--     ( 'Survive The Night', 2),
+--     ( 'The Invisible Man', 1),
+--     ( 'Whats The Worst That Could Happen?', 3),
+--     ( 'Mulan', 4);
 
-INSERT INTO comments
-    (users_id, video_id, showroom_id, body)
-VALUES
-    (3, 1, 2, 'Great watch'),
-    (2, 3, 3, 'Wasn''t interesting'),
-    (1, 4, 4, 'Amazing');
+-- INSERT INTO comments
+--     (users_id, video_id, showroom_id, body)
+-- VALUES
+--     (3, 1, 2, 'Great watch'),
+--     (2, 3, 3, 'Wasn''t interesting'),
+--     (1, 4, 4, 'Amazing');
 
 
 -- INSERT INTO preferences

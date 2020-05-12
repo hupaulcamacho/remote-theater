@@ -10,7 +10,7 @@ class VideoPage extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-
+			user: this.props.user
 		}
 	}
 
@@ -19,24 +19,42 @@ class VideoPage extends React.Component {
 		this.setState({...response.data.payload[0]});
 	}
 
+	_onReady(event) {
+		// access to player in all event handlers via event.target
+		event.target.playVideo();
+	}
+
+	loadOptions = () => {
+        const opts = {
+            // height: '768',
+            // width: '1152',
+            playerVars: {
+			autoplay: 1,
+			controls: 0 
+          }
+        }
+        return opts
+    }
+
 	render(){
 		const { routeprops: { match:{ params } } } = this.props;
-		console.log(params.id)
-		
+		// console.log(params.id)
+		const { user } = this.state
 		return (
 			<div className ='video-container'>
-				{/* <h1>{this.state.title}</h1> */}
-				<div className='videoScreen'>
-					<Youtube
-						videoId={params.id}
-					/>
-				</div>
-				<div className ='chatBox'>
-					<ChatBox user = {this.props.user}/>
-				</div>
-				<div className='nextShow'>
-				</div>
-			</div>);
+				{/* <h1>{params.title}</h1><br/> */}
+				<Youtube
+					videoId={params.id}
+					onReady={this._onReady}
+					opts={this.loadOptions()}
+				/>
+	
+				<ChatBox 
+					user={user} 
+					title={params.title}
+				/>
+			</div>
+		);
 	}
 }
 

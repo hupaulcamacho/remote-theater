@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const videos = require('../database/queries/video')
-
+const db = require('../database/db.js')
 
 router.get('/', async  (req, res) => {
 	try{
-		let videoQuery = await videos.getAllVideos
+		let videoQuery = await videos.getAllVideos()
 		res.status(200).json({
 			status: 'success',
 			payload: videoQuery
@@ -98,11 +98,12 @@ router.delete('/deleteVideo', async (req, res) => {
 	};
 })
 
-// Get all videos by genre
+// Get all videos by genre id
 router.get('/genre/id/:id', async (req, res) => {
 	let genreId = req.params.id
 	try {
-	const videos = await videos.getAllVideoByGenre(genreId)
+		let videoQuery = 'SELECT * FROM videos WHERE genre_id = $1';
+		const videos = await db.any(videoQuery, [genreId]);
 		res.status(200).json({
 			status: 'success',
 			message: 'retrieved videos',
@@ -117,10 +118,5 @@ router.get('/genre/id/:id', async (req, res) => {
 		})
 	}
 });
-
-
-
-
-
 
 module.exports = router;

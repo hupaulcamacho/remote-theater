@@ -4,30 +4,32 @@ import axios from 'axios';
 import Popup from "reactjs-popup";
 
 class Account extends Component {
-    state = {
-       user: null,
-       userPreferences: null,
-       genres: null
+    constructor(props) {
+        super(props)
+        this.state = {
+            user: props.user,
+            userPreferences: null,
+            genres: null
+        }
     }
 
     componentDidMount = async () => {
-        await this.loadUserInfo()
         await this.getAllGenres()
         await this.getUserPreferences()
     }
 
-    loadUserInfo = async () => {
-        let userId = sessionStorage.getItem('currentUserid');
-        const URL = `http://localhost:3001/api/users/${userId}`
-        let user = await axios.get(URL);
-        console.log(user.data.payload)
-        this.setState({
-            user: user.data.payload[0]
-        })
-    }
+    // loadUserInfo = async () => {
+    //     let { user } = this.state
+    //     const URL = `http://localhost:3001/api/users/${user.id}`
+    //     let user = await axios.get(URL);
+    //     console.log(user.data.payload)
+    //     this.setState({
+    //         user: user.data.payload[0]
+    //     })
+    // }
 
     getAllGenres = async () => {
-        const URL = `http://localhost:3001/api/genres`
+        const URL = `/api/genres`
         let genres = await axios.get(URL);
         this.setState({
             genres: genres.data.payload
@@ -35,8 +37,8 @@ class Account extends Component {
     }
 
     getUserPreferences = async () => {
-        let userId = sessionStorage.getItem('currentUserid');
-        const URL = `http://localhost:3001/api/preferences/id/${userId}`
+        const { user } = this.state
+        const URL = `/api/preferences/id/${user.id}`
         let preferences = await axios.get(URL);
         console.log(preferences.data.payload)
         this.setState({
@@ -45,14 +47,13 @@ class Account extends Component {
     }
 
     addToPreferences = async (e) => {
-        let genreId = e.target.id
+        const { user } = this.state
+        const genreId = e.target.id
         console.log(genreId)
-        let userId = sessionStorage.getItem('currentUserid');
-        const URL = `http://localhost:3001/api/preferences/add/${userId}/${genreId}`
-
+        
+        const URL = `/api/preferences/add/${user.id}/${genreId}`
         axios.post(URL)
-
-        this.getUserPreferences()
+        await this.getUserPreferences()
     }
 
     deleteFromPreferences = (e) => {
