@@ -3,6 +3,7 @@ const router = express.Router();
 const videos = require('../database/queries/video')
 const db = require('../database/db.js')
 
+
 router.get('/', async  (req, res) => {
 	try{
 		let videoQuery = await videos.getAllVideos()
