@@ -14,6 +14,7 @@ class Main extends Component {
             movies: [],
             topMovies: [] 
         }
+
     }
 
     componentDidMount = async () => {
@@ -24,7 +25,19 @@ class Main extends Component {
         
     }
 
-    
+
+    loadUserInfo = async () => {
+        let userId = sessionStorage.getItem('currentUserid');
+        console.log("HERE", userId)
+        const URL = `http://localhost:3001/api/users/${userId}`
+        let user = await axios.get(URL);
+        console.log(user.data.payload)
+        let preferences = await this.getUserPreferences()
+        this.setState({
+            user: user.data.payload[0],
+            preferences: preferences
+        })
+    }
 
     getUserPreferences = async () => {
         let { user } = this.state

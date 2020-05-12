@@ -20,10 +20,10 @@ const AuthForm = ({isloggedIn, isSignUpForm, setMessage, setLoggedIn, password, 
         }
     }
 
-    const signupForm = e =>{
-        e.preventDefault();
-        setSignUpForm(!isSignUpForm)
-    }
+    // const signupForm = e =>{
+    //     e.preventDefault();
+    //     setSignUpForm(!isSignUpForm)
+    // }
 
     if(isloggedIn){
         return  <Redirect from="/" to= "/main" />
