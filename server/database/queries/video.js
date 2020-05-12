@@ -61,21 +61,15 @@ deleteVideo = async (id) => {
     }
     }
 
-getAllVideoByGenre = async (genreId) => {
-    try{
-    
+getAllVideoByGenreId = async (genreId) => {
         let videoQuery = 'SELECT * FROM videos WHERE genre_id = $1';
-
         let videos = await db.any(videoQuery, [genreId]);
         return videos
-    }catch(err){
-        console.log("err", err)
-    }
     }
 
     module.exports = {
         getAllVideos,
-        getAllVideoByGenre,
+        getAllVideoByGenreId,
         getAllVideoByTitle,
         getAllVideosByid,
         getVideoByGenre,

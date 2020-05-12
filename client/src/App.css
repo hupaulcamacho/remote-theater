@@ -26,7 +26,7 @@ a {
     padding: 0.5em;
     border-radius: 5px;
     background-color: rgb(98, 69, 151);
-    /* padding: 1.5em; */
+    margin: 1.5em;
 }
 
 .nav-link:hover {
@@ -55,12 +55,12 @@ a {
 
 .button1 {
     color: white;
-    padding: 0.5em;
+    /* padding: 0.5em; */
     border-radius: 5px;
     border: 2px solid rgb(98, 69, 151);
     background-color: rgb(69, 49, 105);
     font-size: 1em;
-    margin: 1em;
+    /* margin: 1em; */
 }
 
 .button1:hover {
@@ -72,5 +72,6 @@ a {
     border-radius: 5px;
     background-color: rgb(98, 69, 151);
     font-weight: bold;
-    margin-right: 23em;
+    /* margin-right: 20em; */
 }
+

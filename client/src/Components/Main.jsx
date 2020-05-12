@@ -6,21 +6,25 @@ import moment from'moment'
 import './CSS/Main.css'
 
 class Main extends Component {
-    constructor(props){
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            user: props.currentUserid,
+            user: props.user,
             preferences: null,
             movies: [],
-            topMovies: []
-    }
+            topMovies: [] 
+        }
+
     }
 
     componentDidMount = async () => {
+        // await this.loadUserInfo()
         await this.getTopRatedMovies()
-        await this.loadUserInfo()
-        this.getPreferenceMovies()
+        await this.getUserPreferences()
+        await this.getPreferenceMovies()
+        
     }
+
 
     loadUserInfo = async () => {
         let userId = sessionStorage.getItem('currentUserid');
@@ -36,101 +40,111 @@ class Main extends Component {
     }
 
     getUserPreferences = async () => {
-        let userId = sessionStorage.getItem('currentUserid');
-        const URL = `http://localhost:3001/api/preferences/id/${userId}`
-        let preferences = await axios.get(URL);
-        console.log(preferences.data.payload)
-        return preferences.data.payload
+        let { user } = this.state
+        const URL = `/api/preferences/id/${user.id}`
+        let preferences;
+        try {
+            preferences = await axios.get(URL);
+            console.log(preferences.data.payload)
+            
+        } catch(err) {
+            console.log('There was an error...')
+        }
+        this.setState({
+            preferences: preferences.data.payload
+        })
     }
 
     getPreferenceMovies = async () => {
         console.log('start function')
-        const preferences = this.state.preferences;
+        let { preferences } = this.state;
         const preferencedVideos = []
 
-        for(let i = 0; i < preferences?.length; i++) {
-            const URL = `http://localhost:3001/api/videos/genre/id/${preferences[i].genre_id}`
-            let videos = await axios.get(URL)
-            // console.log(videos.data.payload)
-            videos.data.payload.forEach(async video => {
-                let showtimes = await this.getShowTimes2(video.id)
-                preferencedVideos.push({ video: video, showtimes: showtimes })
-            })
+        try {
+            
+            for (let i = 0; i < preferences?.length; i++) {
+                // console.log(preferences[i].genre_id)
+                const URL = `/api/videos/genre/id/${preferences[i].genre_id}`
+                let videos = await axios.get(URL)
+                console.log(videos.data.payload)
+                videos.data.payload.forEach(async video => {
+                    let showtimes = await this.getShowTimes(video.id)
+                    preferencedVideos.push({ video: video, showtimes: showtimes })
+                })
+            }
+
+            
+        } catch (err) {
+            console.log('There was an error...')
         }
-        console.log(preferencedVideos)
+        
         this.setState({
             movies: preferencedVideos
         })
+        // console.log(preferencedVideos)  
     }
 
     getTopRatedMovies = async () => {
         const topVideos = []
-        const URL = `http://localhost:3001/api/videos/ratings/${4}/${85}`
-        let videos = await axios.get(URL)
-        videos.data.payload.forEach(async video => {
-            let showtimes = await this.getShowTimes2(video.id)
-            topVideos.push({ video: video, showtimes: showtimes })
-        })
-        // console.log(videos.data.payload)
+        try {
+            
+            const URL = `/api/videos/ratings/${4}/${85}`
+            let videos = await axios.get(URL)
+
+            for (let i = 0; i < videos.data.payload.length; i++) {
+                let showtimes = await this.getShowTimes(videos.data.payload[i].id)
+                console.log(showtimes)
+                topVideos.push({ video: videos.data.payload[i], showtimes: showtimes })
+            }
+            console.log(topVideos)
+
+        } catch (err) {
+            console.log('There was an error...')
+        }
+        
         this.setState({
             topMovies: topVideos
         })
     }
 
-    getShowTimes = async () => {
-        const movies = this.state.movies
-        const showtimes = {}
-        for (let i = 0; i < movies.length; i++) {
-            const URL = `http://localhost:3001/api/showtimes/id/${movies[i].id}`
-            let times = await axios.get(URL);
-            showtimes[`${movies[i].id}`] = times.data.payload
+    getShowTimes = async (id) => {
+        let times;
+        try {
+            const URL = `/api/showtimes/id/${id}`
+            times = await axios.get(URL);
+            // console.log(times.data.payload)
+        } catch (err) {
+            console.log('There was an error...')
         }
-        this.setState({
-            showtimes: showtimes
-        })
-        // console.log(showtimes)
-    }
-
-    getShowTimes2 = async (id) => {
-        const URL = `http://localhost:3001/api/showtimes/id/${id}`
-        let times = await axios.get(URL);
         return times.data.payload
     }
 
     getTimeDifference = (arr) => {
+        console.log(arr)
         const format = 'h:mm:ss A '
-        let nextTime = null;
+        // let nextTime = null;
         const currentTime = moment()
         let timeDiff = {}
         let timeDiffEx = {}
         for (let i = 0; i < arr?.length; i++) {
             let showtime = moment(arr[i].time, format);
+            console.log(showtime)
             let difference = showtime.diff(currentTime, "hours");
+            console.log(difference, "difference")
             if (difference > 0) {
                 timeDiff[i] = difference
                 timeDiffEx[i] = { difference: difference, showtime: showtime.format(format) };
             }
-            
-            // console.log(difference)
-            // if (nextTime === null) {
-            //     nextTime = showtime
-            // } 
-            // if (difference < nextTime.diff(currentTime, "hours")) {
-                
-            //     nextTime = showtime
-            // }
-            // console.log(nextTime.format(format), 'next showtime')
-            
         }
-
+        
+        console.log(timeDiff)
         let arr2 = Object.values(timeDiff);
         let min = Math.min(...arr2,);
-
-        console.log( `Min value: ${min}` );
+        console.log(arr2)
         let time = Object.keys(timeDiffEx).find(key => timeDiffEx[key].difference === min)
         console.log(time, 'found')
-        console.log(timeDiff) 
-        console.log(timeDiffEx[time])
+        // console.log(timeDiff) 
+        // console.log(timeDiffEx[time])
         let nextshowtime = moment(timeDiffEx[time]?.showtime, format);
         const next = moment().to(nextshowtime)
         return next
@@ -152,7 +166,7 @@ class Main extends Component {
             let movie = movies[int]
             if(alreadySeen[int] === undefined) {
                 movieComponents.push(
-                    <Link to={`/showroom/${movie?.video.video_url}`}>
+                    <Link to={`/showroom/${movie?.video.video_url}/${movie?.video.title}`}>
                         <div className="movie">
                             <p className="text">{movie?.video.title}</p>
                             <img src={movie?.video.img_url} />
@@ -168,7 +182,7 @@ class Main extends Component {
         topMovies.forEach(movie => {
             // console.log(movie)
             topMovieComponents.push(
-                <Link to={`/showroom/${movie?.video.video_url}`}>
+                <Link to={`/showroom/${movie?.video.video_url}/${movie?.video.title}`}>
                     <div className="movie">
                         <p className="text">{movie?.video.title}</p>
                         <img src={movie?.video.img_url} />

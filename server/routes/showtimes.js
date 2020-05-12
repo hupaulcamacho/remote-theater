@@ -6,7 +6,7 @@ const showtime = require('../database/queries/showtime')
 // get showtimes for a video
 
 router.get('/id/:id', async  (req, res) => {
-    const {videoID} = req.params.id
+    const videoID = req.params.id
 	try {
 		let allShowtimes = await showtime.showtimesByVideoid(videoID)
 		res.status(200).json({

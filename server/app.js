@@ -34,8 +34,8 @@ app.use(passport.session())
 
 
 
-app.use('/comments', commentsRouter);
-app.use('/video', viewerRouter);
+// app.use('/comments', commentsRouter);
+// app.use('/video', viewerRouter);
 
 app.use('/api/users', usersRouter);
 app.use('/api/comments', commentsRouter);
@@ -45,7 +45,7 @@ app.use('/api/showtimes', showtimeRouter);
 app.use('/api/getToken', tokenGenerator);
 app.use('/api/preferences', preferenceRouter);
 
-app.use('/auth', authRouter);
+app.use('/api/auth', authRouter);
 app.use('/', indexRouter);
 
 module.exports = app;
