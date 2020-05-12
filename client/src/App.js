@@ -18,7 +18,7 @@ function App() {
   const [ signup, setSignUpForm ] = useState(false)
 
   const renderVideo = (routeprops) => {
-    return <VideoPage routeprops={routeprops} />
+    return <VideoPage routeprops={routeprops}  />
   }
 
   return(

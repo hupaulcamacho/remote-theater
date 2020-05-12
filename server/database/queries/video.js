@@ -79,7 +79,6 @@ getAllVideoByGenre = async (genreId) => {
         getAllVideoByTitle,
         getAllVideosByid,
         getVideoByGenre,
-        getVideoByRating,
         deleteVideo,
         postNewVideo
     }

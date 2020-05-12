@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const videos = require('../database/queries/video')
+const videos = require('../database/queries/video');
+const db = require('../database/db');
 
 
 router.get('/', async  (req, res) => {
