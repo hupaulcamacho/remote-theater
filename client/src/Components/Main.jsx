@@ -6,11 +6,14 @@ import moment from'moment'
 import './CSS/Main.css'
 
 class Main extends Component {
-    state = {
-        user: null,
-        preferences: null,
-        movies: [],
-        topMovies: []
+    constructor(props){
+        super()
+        this.state = {
+            user: props.currentUserid,
+            preferences: null,
+            movies: [],
+            topMovies: []
+    }
     }
 
     componentDidMount = async () => {
@@ -21,7 +24,7 @@ class Main extends Component {
 
     loadUserInfo = async () => {
         let userId = sessionStorage.getItem('currentUserid');
-        console.log(userId)
+        console.log("HERE", userId)
         const URL = `http://localhost:3001/api/users/${userId}`
         let user = await axios.get(URL);
         console.log(user.data.payload)
