@@ -7,6 +7,7 @@ import VideoPage from './Components/VideoPage';
 import Main from './Components/Main';
 import Signup from './Components/Signup';
 import Account from './Components/Account';
+import About from './Components/About';
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
             </Route>
             <Route path='/showroom/:id' render={renderVideo()} />
             <Route path='/account' component={Account} />
+            <Route path='/about' component={About} />
           </Switch>
         </div>
       );

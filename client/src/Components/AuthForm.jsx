@@ -20,10 +20,10 @@ const AuthForm = ({isloggedIn, isSignUpForm, setMessage, setLoggedIn, password, 
         }
     }
 
-    const signupForm = e =>{
-        e.preventDefault();
-        setSignUpForm(!isSignUpForm)
-    }
+    // const signupForm = e =>{
+    //     e.preventDefault();
+    //     setSignUpForm(!isSignUpForm)
+    // }
 
     if(isloggedIn){
         return  <Redirect from="/" to= "/main" />
@@ -38,7 +38,7 @@ const AuthForm = ({isloggedIn, isSignUpForm, setMessage, setLoggedIn, password, 
                 <input className="login" type="password" placeholder="Enter Password" required onChange={(e) => setPassword(e.target.value)}></input>                     <br />
                 <button className="button1" >Login</button>
                 <Link to={"/signup"}>
-                <button className="signupBtn">Sign Up</button>
+                <button className="button1">Sign Up</button>
                 </Link>
             </form>
         </div>
