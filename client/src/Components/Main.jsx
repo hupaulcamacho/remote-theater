@@ -9,10 +9,11 @@ class Main extends Component {
     constructor(props){
         super()
         this.state = {
-            user: props.currentUserid,
+            user: '',
             preferences: null,
             movies: [],
             topMovies: []
+            
     }
     }
 
@@ -28,6 +29,7 @@ class Main extends Component {
         const URL = `http://localhost:3001/api/users/${userId}`
         let user = await axios.get(URL);
         console.log(user.data.payload)
+        this.props.setLoggedIn(true);
         let preferences = await this.getUserPreferences()
         this.setState({
             user: user.data.payload[0],
@@ -181,7 +183,7 @@ class Main extends Component {
         return (
             <div>
 
-                <h1>Welcome back, {user?.name}</h1>
+                <h1>Welcome back, {user.name}</h1>
                 <h2>Top Rated Movies</h2>
                 <div className="top-movies">
                     {topMovieComponents}

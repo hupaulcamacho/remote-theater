@@ -60,7 +60,8 @@ function App() {
 
             <Route path={'/main'}> 
               <Main 
-              isloggedIn={isloggedIn} /> 
+              setLoggedIn = {setLoggedIn}
+              /> 
             </Route>
 
             <Route path={'/video'}>
