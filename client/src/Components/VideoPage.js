@@ -3,25 +3,54 @@ import './CSS/VideoPage.css';
 import axios from 'axios';
 import Youtube from 'react-youtube';
 import ChatBox from './ChatBox';
+import moment from'moment';
+
 const API_KEY = 'http://localhost:3001';
 
 
 class VideoPage extends React.Component {
-	constructor(props){
-		super(props);
+	constructor(props, routeprops){
+		super(props, routeprops);
 		this.state = {
-			user: this.props.user
+			user: this.props.user,
+			time: null
 		}
 	}
 
-	componentDidMount = async () => {
-		let response = await axios.get(`${API_KEY}/videos/id/${this.props.id}`);
-		this.setState({...response.data.payload[0]});
+	componentDidMount = () => {
+		// let response = await axios.get(`${API_KEY}/videos/id/${this.props.id}`);
+		// this.setState({...response.data.payload[0]});
+
+		this.getTimeStamp()
 	}
 
-	_onReady(event) {
+	setTime = () => {
+		const { routeprops: { match:{ params } } } = this.props;
+		
+		const time = params.time
+		
+		return time
+	}
+
+	getTimeStamp = () => {
+		const format = 'h:mm:ss A '
+		let time = this.setTime()
+		let showtime = moment(time, format)
+		// console.log(time)
+		let now = moment().format(format)
+		console.log(now)
+		let duration = moment.duration(moment().diff(showtime))
+		console.log(duration._data)
+		return duration.as('seconds')
+	}
+
+
+	_onReady = (event) => {
+		let timestamp = this.getTimeStamp()
+		console.log(timestamp, "timestamp")
 		// access to player in all event handlers via event.target
 		event.target.playVideo();
+		event.target.seekTo(timestamp);
 	}
 
 	loadOptions = () => {
@@ -30,7 +59,9 @@ class VideoPage extends React.Component {
             // width: '1152',
             playerVars: {
 			autoplay: 1,
-			controls: 0 
+			controls: 0,
+			disablekb: 1,
+			showinfo: 0
           }
         }
         return opts
@@ -38,7 +69,7 @@ class VideoPage extends React.Component {
 
 	render(){
 		const { routeprops: { match:{ params } } } = this.props;
-		// console.log(params.id)
+		
 		const { user } = this.state
 		return (
 			<div className ='video-container'>

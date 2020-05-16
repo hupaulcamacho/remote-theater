@@ -4,7 +4,7 @@ import { Route, Switch} from 'react-router-dom';
 import './App.css';
 import AuthForm from './Components/AuthForm';
 import VideoPage from './Components/VideoPage';
-import Main from './Components/Main';
+// import Main from './Components/Main';
 import Signup from './Components/Signup';
 import Account from './Components/Account';
 
@@ -57,10 +57,10 @@ function App() {
               />
             </Route>
 
-            <Route path={'/main'}> 
+            {/* <Route path={'/main'}> 
               <Main 
               isloggedIn={isloggedIn} /> 
-            </Route>
+            </Route> */}
 
             <Route path={'/video'}>
               <VideoPage id ={2} user= {name || 'Chuck'}/>

@@ -34,7 +34,7 @@ const LoginForm = ({
           placeholder="••••••••"
           onChange={handleChange}
         /><br/>
-        <input className='button1' type="submit" value="log-in" />
+        <input className='button1' type="submit" value="Log In" />
       </form>
     </div>
   )

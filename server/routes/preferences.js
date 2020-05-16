@@ -42,4 +42,21 @@ router.post('/add/:user_id/:genre_id', async (req, res) => {
 	}
 });
 
+router.delete('/delete/:user_id/:genre_id', async (req, res) => {
+	try {
+		let deletequery = 'DELETE FROM preferences WHERE user_id = $1 AND genre_id = $2';
+		await db.none(deletequery, [req.params.user_id, req.params.genre_id]);
+
+		res.status(200).json({
+            status: 'success',
+            message: 'Preference deleted.'
+        });
+	} catch(err) {
+		res.status(500).json({
+			msg: err,
+			err: true
+		})
+	}
+})
+
 module.exports = router;    

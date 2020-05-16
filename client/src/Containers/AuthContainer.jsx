@@ -73,7 +73,7 @@ class AuthContainer extends Component {
             <div className='main'>  
                 {
                     isUserLoggedIn
-                    ? <Redirect to="/main" />
+                    ? <Redirect to="/home" />
                     : (
                         <Switch>
                             <Route path="/login" render={this.renderLogin} />
@@ -81,8 +81,8 @@ class AuthContainer extends Component {
                         </Switch> 
                     )
                 }
-                <Link to='/home'>
-                    <button className='submit-button'>Back to Home</button>
+                <Link to='/mainpage'>
+                    <button className='button1'>Back to Home</button>
                 </Link>
             </div>
         )

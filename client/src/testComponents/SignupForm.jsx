@@ -42,7 +42,7 @@ const SignupForm = ({
           placeholder="password"
           onChange={handleChange}
         /><br/>
-        <input className='button1' type="submit" value="Signup" />
+        <input className='button1' type="submit" value="Sign Up" />
       </form>
     </div>
   )

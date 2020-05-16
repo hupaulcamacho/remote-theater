@@ -9,10 +9,10 @@ const NavBar = ({ logoutUser, isUserLoggedIn, user }) => {
                 <nav className='main-nav'>
                     <div className='links'>
                         <span className='title'>RemoteTheater</span>
-                        <Link className='nav-link' to='/main'>Main</Link>{" "}
+                        <Link className='nav-link' to='/home'>Home</Link>{" "}
                         <Link className='nav-link' to='/account'>My Account</Link>{" "}
                         <Link className='nav-link' to="/About">About</Link>
-                        <button className='button1' onClick={logoutUser}>Log Out</button>
+                        <Link className='nav-link' onClick={logoutUser}>Log Out</Link>
                     </div>
                 </nav>
             </div>
@@ -24,8 +24,10 @@ const NavBar = ({ logoutUser, isUserLoggedIn, user }) => {
         <div className='nav-container'>
             <nav className='main-nav'>
                 <div className='links'>
-                <span className='title'>RemoteTheater</span>
-                    <Link className='nav-link' to='/home'>Home</Link>{" "}
+                    <Link to='/mainpage'>
+                        <span className='title'>RemoteTheater</span>
+                    </Link>
+                    
                     <Link className='nav-link' to='/login'>Log-In</Link>{" "}
                     <Link className='nav-link' to='/signup'>Sign-Up</Link>{" "}
                     <Link className='nav-link' to='/about'>About</Link>  

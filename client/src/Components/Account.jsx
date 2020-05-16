@@ -53,11 +53,17 @@ class Account extends Component {
         
         const URL = `/api/preferences/add/${user.id}/${genreId}`
         axios.post(URL)
-        await this.getUserPreferences()
+
+        this.getUserPreferences()
     }
 
-    deleteFromPreferences = (e) => {
+    deletePreference = (e) => {
+        const { user } = this.state
+        const genreId = e.target.id
+        const URL = `/api/preferences/delete/${user.id}/${genreId}`
+        axios.delete(URL)
 
+        this.getUserPreferences()
     }
 
     render() {
@@ -74,7 +80,7 @@ class Account extends Component {
         for (let i = 0; i < userPreferences?.length; i ++) {
             console.log(userPreferences[i].name)
             userPreferenceComponents.push(
-                <p className='genre' id={userPreferences[i].id}>{userPreferences[i].name}</p>
+                <p onClick={this.deletePreference}className='genre' id={userPreferences[i].id}>{userPreferences[i].name}</p>
             )
         }
         return (
