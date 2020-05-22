@@ -32,7 +32,7 @@ class Main extends Component {
         this.setState({
             user: user.data.payload[0]
         })
-        await this.getUserPreferences()
+        // await this.getUserPreferences()
     }
 
     getUserPreferences = async () => {
