@@ -14,29 +14,25 @@ class Main extends Component {
             movies: [],
             topMovies: [] 
         }
-
     }
 
     componentDidMount = async () => {
-        // await this.loadUserInfo()
-        await this.getTopRatedMovies()
+        await this.loadUserInfo()
         await this.getUserPreferences()
-        await this.getPreferenceMovies()
-        
+        await this.getTopRatedMovies()
+        await this.getPreferenceMovies()   
     }
 
-
     loadUserInfo = async () => {
-        let userId = sessionStorage.getItem('currentUserid');
-        console.log("HERE", userId)
+        let userId = await sessionStorage.getItem('currentUserid')
         const URL = `http://localhost:3001/api/users/${userId}`
         let user = await axios.get(URL);
-        console.log(user.data.payload)
-        let preferences = await this.getUserPreferences()
+        console.log("state", user.data.payload)
+        // this.props.setLoggedIn(true)
         this.setState({
-            user: user.data.payload[0],
-            preferences: preferences
+            user: user.data.payload[0]
         })
+        await this.getUserPreferences()
     }
 
     getUserPreferences = async () => {
@@ -46,9 +42,8 @@ class Main extends Component {
         try {
             preferences = await axios.get(URL);
             console.log(preferences.data.payload)
-            
         } catch(err) {
-            console.log('There was an error...')
+            console.log('There was an error...', err)
         }
         this.setState({
             preferences: preferences.data.payload
@@ -61,7 +56,6 @@ class Main extends Component {
         const preferencedVideos = []
 
         try {
-            
             for (let i = 0; i < preferences?.length; i++) {
                 // console.log(preferences[i].genre_id)
                 const URL = `/api/videos/genre/id/${preferences[i].genre_id}`
