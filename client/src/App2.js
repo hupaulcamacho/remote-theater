@@ -13,6 +13,7 @@ import Main from './Components/Main';
 import Signup from './Components/Signup';
 import Account from './Components/Account';
 import Home from './testComponents/Home'
+import About from './Components/About'
 
 class App extends React.Component {
   state = {
@@ -94,6 +95,7 @@ class App extends React.Component {
             <Route path='/login' render={this.renderAuthContainer} />
             <Route path='/signup' render={this.renderAuthContainer} />
             <Route path='/home' component={Home} />
+            <Route path='/about' component={About} />
         </Switch>
       </div>
     );
