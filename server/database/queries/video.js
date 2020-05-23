@@ -67,6 +67,12 @@ getAllVideoByGenreId = async (genreId) => {
         return videos
     }
 
+    getVideoByRatings = async(ratings) => {
+        let ratingsQuery2 = `SELECT * FROM videos ORDER BY rating DESC LIMIT $1`
+        let vidRating = await db.any(ratingsQuery2, [ratings]);
+        return vidRating
+    }
+
     module.exports = {
         getAllVideos,
         getAllVideoByGenreId,
@@ -74,5 +80,6 @@ getAllVideoByGenreId = async (genreId) => {
         getAllVideosByid,
         getVideoByGenre,
         deleteVideo,
-        postNewVideo
+        postNewVideo, 
+        getVideoByRatings
     }
