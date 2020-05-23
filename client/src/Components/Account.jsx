@@ -31,7 +31,7 @@ class Account extends Component {
         const { user } = this.state
         const URL = `/api/preferences/id/${user.id}`
         let preferences = await axios.get(URL);
-        console.log(preferences.data.payload)
+        console.log("here", preferences.data.payload)
         this.setState({
             userPreferences: preferences.data.payload
         })
@@ -69,7 +69,7 @@ class Account extends Component {
         const userPreferenceComponents = [];
         const genreComponents = [];
         for (let i = 0; i < genres?.length; i ++) {
-            console.log(genres[i].name)
+            // console.log(genres[i].name)
             genreComponents.push(
                 <p onClick={this.addToPreferences} className='genre' id={genres[i].id}>{genres[i].name}</p>
             )
