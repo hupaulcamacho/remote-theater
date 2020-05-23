@@ -44,8 +44,6 @@ router.get('/title/:title', async (req, res) => {
 	}
 });
 
-
-
 router.get('/genre/:genre', async (req, res) => {
 	const genre = req.params.genre
 	try {
@@ -71,11 +69,11 @@ router.post('/', async (req, res) => {
 	}
 });
 
-router.get('/ratings/:howMany/:highest', async (req, res) => {
-	const {ratings} = req.body
+router.get('/ratings/:howMany/:minRating', async (req, res) => {
 	try{
 		let howMany = parseInt(req.params.howMany);
-		let getTopVideos = await videos.getVideoByRatings(ratings, [howMany]);
+		let rating = parseInt(req.params.minRating)
+		let getTopVideos = await videos.getVideoByRatings(howMany, rating);
 		res.status(200).json({
 			status: 'success',
 			payload: getTopVideos
