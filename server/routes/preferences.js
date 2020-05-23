@@ -1,17 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../database/db');
+const preferences = require('../database/queries/preferences')
+const db = require('../database/db.js')
 
 router.get('/id/:user_id', async (req, res) => {
+	const id = req.body.user_id
 	try {
-		let preferenceQuery = 'SELECT * FROM preferences INNER JOIN genres ON preferences.genre_id = genres.id WHERE user_id = $1';
-		let preferences = await db.any(preferenceQuery, [req.params.user_id]);
+		let preference = await preferences.getPreferenceByGenreId(id)
 		res.status(200).json({
 			status: 'success',
-			payload: preferences
+			payload: preference
 		});
 	}
-	catch(err) {
+	catch(err){
 		res.status(500).json({
             payload: null,
             msg: err,
