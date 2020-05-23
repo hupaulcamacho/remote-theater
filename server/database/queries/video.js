@@ -61,16 +61,25 @@ deleteVideo = async (id) => {
     }
     }
 
-getAllVideoByGenreId = async (genreId) => {
+getAllVideoByGenreId = async (genre_id) => {
+        try{
         let videoQuery = 'SELECT * FROM videos WHERE genre_id = $1';
-        let videos = await db.any(videoQuery, [genreId]);
+        let videos = await db.any(videoQuery, [genre_id]);
         return videos
+        }catch(err){
+console.log("err", err)
+        }
     }
 
     getVideoByRatings = async(howMany, rating) => {
-        let ratingsQuery2 = `SELECT * FROM videos WHERE rating >= $2 ORDER BY rating DESC LIMIT $1`
-        let vidRating = await db.any(ratingsQuery2,[howMany, rating]);
-        return vidRating
+        try{
+            let ratingsQuery2 = `SELECT * FROM videos WHERE rating >= $2 ORDER BY rating DESC LIMIT $1`
+            let vidRating = await db.any(ratingsQuery2,[howMany, rating]);
+            return vidRating
+        }catch(err){
+            consolr.log("err", err)
+        }
+        
     }
 
     module.exports = {

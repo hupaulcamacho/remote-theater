@@ -97,14 +97,13 @@ router.delete('/deleteVideo', async (req, res) => {
 
 // Get all videos by genre id
 router.get('/genre/id/:id', async (req, res) => {
-	let {genreId} = req.params.id
+	let id = req.params.id
 	try {
-		let videoQuery = await videos.getAllVideoGenreId(genreId)
-		const videos = await db.any(videoQuery, [genreId]);
+		let videoQuery = await videos.getAllVideoByGenreId(id)
 		res.status(200).json({
 			status: 'success',
 			message: 'retrieved videos',
-			payload: videos
+			payload: videoQuery
 		});
 	}
 	catch(err){
