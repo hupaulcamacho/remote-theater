@@ -67,9 +67,9 @@ getAllVideoByGenreId = async (genreId) => {
         return videos
     }
 
-    getVideoByRatings = async(ratings) => {
-        let ratingsQuery2 = `SELECT * FROM videos ORDER BY rating DESC LIMIT $1`
-        let vidRating = await db.any(ratingsQuery2, [ratings]);
+    getVideoByRatings = async(howMany, rating) => {
+        let ratingsQuery2 = `SELECT * FROM videos WHERE rating >= $2 ORDER BY rating DESC LIMIT $1`
+        let vidRating = await db.any(ratingsQuery2,[howMany, rating]);
         return vidRating
     }
 
