@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import './CSS/Account.css';
 import axios from 'axios';
 import Popup from "reactjs-popup";
-
 class Account extends Component {
     constructor(props) {
         super(props)
         this.state = {
             user: props.user,
             userPreferences: null,
-            genres: null
+            genres: null,
+            message: '', 
+            setMessage:''
         }
     }
 
@@ -17,16 +18,6 @@ class Account extends Component {
         await this.getAllGenres()
         await this.getUserPreferences()
     }
-
-    // loadUserInfo = async () => {
-    //     let { user } = this.state
-    //     const URL = `http://localhost:3001/api/users/${user.id}`
-    //     let user = await axios.get(URL);
-    //     console.log(user.data.payload)
-    //     this.setState({
-    //         user: user.data.payload[0]
-    //     })
-    // }
 
     getAllGenres = async () => {
         const URL = `/api/genres`
@@ -52,15 +43,28 @@ class Account extends Component {
         console.log(genreId)
         
         const URL = `/api/preferences/add/${user.id}/${genreId}`
-        axios.post(URL)
-        await this.getUserPreferences()
+        await axios.post(URL)
+        this.getUserPreferences()
+        this.setState({
+            setMessage: 'added preference!'
+
+        })
     }
 
-    deleteFromPreferences = (e) => {
+    deletePreference = async (e) => {
+        const { user } = this.state
+        const genreId = e.target.id
+        const URL = `/api/preferences/delete/${user.id}/${genreId}`
+        await axios.delete(URL)
+        await this.getUserPreferences()
+        this.setState({
+            setMessage: 'removed preference!'
 
+        })
     }
 
     render() {
+        console.log(this.state)
         const { user, genres, userPreferences } = this.state
         const userPreferenceComponents = [];
         const genreComponents = [];
@@ -70,11 +74,10 @@ class Account extends Component {
                 <p onClick={this.addToPreferences} className='genre' id={genres[i].id}>{genres[i].name}</p>
             )
         }
-
         for (let i = 0; i < userPreferences?.length; i ++) {
             console.log(userPreferences[i].name)
             userPreferenceComponents.push(
-                <p className='genre' id={userPreferences[i].id}>{userPreferences[i].name}</p>
+                <p onClick={this.deletePreference}className='genre2' id={userPreferences[i].id}>{userPreferences[i].name}</p>
             )
         }
         return (
@@ -87,7 +90,6 @@ class Account extends Component {
                     <div className='genre-container'>
                         {userPreferenceComponents}
                     </div>
-
                     <Popup trigger={<button className="button"> Change Preferences </button>} modal closeOnDocumentClick>
                         <h2>Change Preferences</h2>
                         <div className='genre-container'>
@@ -99,5 +101,4 @@ class Account extends Component {
         )
     }
 }
-
 export default Account;
