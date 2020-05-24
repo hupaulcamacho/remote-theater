@@ -9,11 +9,12 @@ const AuthForm = ({isloggedIn, isSignUpForm, setMessage, setLoggedIn, password, 
     const handleLogin = async (e) => {
         e.preventDefault()
         try {     
-           let res =  await axios.post(`http://localhost:3001/auth/login`, {email:email, password:password})
+           let res =  await axios.post(`http://localhost:3001/api/auth/login`, {email:email, password:password})
             let { payload } = res.data;
             setLoggedIn(true)
-            sessionStorage.currentUserid = payload.id;
-
+            // sessionStorage.setItem = ('currentUserid', payload.id)
+            sessionStorage.currentUserid = payload.id
+            console.log(sessionStorage)
         } catch (err) {
             console.log(err)
             setMessage("username and password invaild")
