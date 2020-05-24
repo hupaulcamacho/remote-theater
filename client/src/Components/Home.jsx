@@ -19,12 +19,23 @@ class Home extends Component {
     }
 
     componentDidMount = async () => {
-        // await this.loadUserInfo()
+        await this.loadUserInfo()
         await this.getUserPreferences()
         await this.getTopRatedMovies()
-        await this.getPreferenceMovies()
+        await this.getPreferenceMovies()   
     }
 
+    loadUserInfo = async () => {
+        let userId = await sessionStorage.getItem('currentUserid')
+        const URL = `http://localhost:3001/api/users/${userId}`
+        let user = await axios.get(URL);
+        console.log("state", user.data.payload)
+        // this.props.setLoggedIn(true)
+        this.setState({
+            user: user.data.payload[0]
+        })
+        // await this.getUserPreferences()
+    }
 
     getUserPreferences = async () => {
         let { user } = this.state
@@ -35,7 +46,7 @@ class Home extends Component {
             // console.log(preferences.data.payload)
             
         } catch(err) {
-            console.log('There was an error...')
+            console.log('There was an error...', err)
         }
         this.setState({
             preferences: preferences.data.payload
@@ -48,7 +59,6 @@ class Home extends Component {
         const preferencedVideos = []
 
         try {
-            
             for (let i = 0; i < preferences?.length; i++) {
                 // console.log(preferences[i].genre_id)
                 const URL = `/api/videos/genre/id/${preferences[i].genre_id}`

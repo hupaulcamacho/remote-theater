@@ -7,6 +7,7 @@ import VideoPage from './Components/VideoPage';
 // import Main from './Components/Main';
 import Signup from './Components/Signup';
 import Account from './Components/Account';
+import About from './Components/About';
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
   const [ signup, setSignUpForm ] = useState(false)
 
   const renderVideo = (routeprops) => {
-    return <VideoPage routeprops={routeprops} />
+    return <VideoPage routeprops={routeprops}  />
   }
 
   return(
@@ -59,14 +60,19 @@ function App() {
 
             {/* <Route path={'/main'}> 
               <Main 
-              isloggedIn={isloggedIn} /> 
-            </Route> */}
+              isloggedIn={isloggedIn} 
+              setLoggedIn={setLoggedIn} /> 
+            </Route>
 
             <Route path={'/video'}>
               <VideoPage id ={2} user= {name || 'Chuck'}/>
             </Route>
             <Route path='/showroom/:id' render={renderVideo()} />
-            <Route path='/account' component={Account} />
+            <Route path='/account' component={Account} 
+            setMessage = {setMessage}
+            message = {message}
+            />
+            <Route path='/about' component={About} />
           </Switch>
         </div>
       );

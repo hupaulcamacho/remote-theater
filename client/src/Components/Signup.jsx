@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
+import './CSS/Signup.css'
 import axios from "axios"
 import './CSS/AuthForm.css'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 
 
@@ -41,7 +42,11 @@ const Signup = ({isloggedIn, setMessage, setLoggedIn, password, setPassword, ema
             <input className="signup" type="text" placeholder="Enter Name" required onChange={(e)=> setName(e.target.value)}></input>
             <input className="signup" type="text" placeholder="Enter Email" required onChange={(e)=> setEmail(e.target.value)}></input>
             <input className="signup" type="password" placeholder="Enter Password" required onChange={(e)=> setPassword(e.target.value)}></input>
-            <button className="signupBtn" onClick={handleSignup}>Sign Up</button>
+            <br/>
+            <button className="button1" onClick={handleSignup}>Sign Up</button>
+            <Link to={"/"}>
+                <button className="button1">Login</button>
+                </Link>
             </form>
       </div>
     )
