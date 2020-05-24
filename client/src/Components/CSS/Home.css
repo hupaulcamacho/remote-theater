@@ -8,6 +8,10 @@
     width: 80%;
 }
 
+.prefmessage {
+    grid-column: 1 / 5;
+}
+
 .movie {
     margin: .5em;
     padding: .5em;
@@ -17,6 +21,14 @@
 }
 .movie:hover {
     background-color: rgb(135, 96, 207);
+    cursor: pointer;
+}
+
+.movie2{
+    margin: .5em;
+    padding: .5em;
+    border-radius: 10px;
+    border: 2px solid rgb(87, 60, 136);
 }
 
 .movie:active {

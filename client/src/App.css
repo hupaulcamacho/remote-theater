@@ -55,16 +55,17 @@ a {
 
 .button1 {
     color: white;
-    /* padding: 0.5em; */
+    padding: 0.5em;
     border-radius: 5px;
     border: 2px solid rgb(98, 69, 151);
     background-color: rgb(69, 49, 105);
     font-size: 1em;
-    /* margin: 1em; */
+    margin: 1em;
 }
 
 .button1:hover {
     background-color: rgb(135, 96, 207);
+    cursor: pointer;
 }
 
 .title {
@@ -75,3 +76,21 @@ a {
     /* margin-right: 20em; */
 }
 
+form {
+    margin: auto;
+    border-radius: 10px;
+    background-color: rgb(69, 49, 105);
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    /* height: 12vh; */
+    /* width: 71%; */
+    margin-left:20%;
+    margin-right:20%;
+
+}
+
+input {
+    border-radius: 5px;
+}

@@ -14,7 +14,7 @@ const LoginForm = ({
 
   return (
     <div className='form-container'>
-      <h2> Log-In </h2>
+      <h1> Log-In </h1>
       <form onSubmit={handleSubmit}>
         <i class="fas fa-user"></i>{"  "}
         <input
@@ -34,7 +34,7 @@ const LoginForm = ({
           placeholder="••••••••"
           onChange={handleChange}
         /><br/>
-        <input className='button1' type="submit" value="log-in" />
+        <input className='button1' type="submit" value="Log In" />
       </form>
     </div>
   )

@@ -9,7 +9,7 @@ const PrivateRoute = (props) => {
     if (isUserLoggedIn) {
         return  <Route {...otherPros} component={Component}/>
     }
-    return <Redirect to='/home' />
+    return <Redirect to='/mainpage' />
 }
 
 export default PrivateRoute

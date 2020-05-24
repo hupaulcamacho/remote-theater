@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Redirect, Link} from 'react-router-dom'
 
-class Home extends Component {
+class MainPage extends Component {
     render() {
         return (
         <div className= "login">
@@ -19,4 +19,4 @@ class Home extends Component {
     }
 }
 
-export default Home
+export default MainPage

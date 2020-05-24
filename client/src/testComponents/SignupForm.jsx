@@ -16,7 +16,7 @@ const SignupForm = ({
 
   return (
     <div className='form-container'>
-      <h2> Sign-Up </h2>
+      <h1> Sign-Up </h1>
       <form onSubmit={handleSubmit}>
         <input
           className='signup-input'
@@ -42,7 +42,7 @@ const SignupForm = ({
           placeholder="password"
           onChange={handleChange}
         /><br/>
-        <input className='button1' type="submit" value="Signup" />
+        <input className='button1' type="submit" value="Sign Up" />
       </form>
     </div>
   )

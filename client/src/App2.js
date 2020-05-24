@@ -9,9 +9,9 @@ import AuthContainer from './Containers/AuthContainer';
 
 import Navbar from './testComponents/Nav';
 import VideoPage from './Components/VideoPage';
-import Main from './Components/Main';
 import Signup from './Components/Signup';
 import Account from './Components/Account';
+import MainPage from './testComponents/MainPage'
 import Home from './testComponents/Home'
 import About from './Components/About'
 
@@ -53,8 +53,8 @@ class App extends React.Component {
     return <AuthContainer isUserLoggedIn={isUserLoggedIn} setUser={this.setUser} />
   }
 
-  renderMain = (routeprops) => {
-    return <Main routeprops={routeprops} user={this.state.user} />
+  renderHome = (routeprops) => {
+    return <Home routeprops={routeprops} user={this.state.user} />
   }
 
   renderVideo = (routeprops) => {
@@ -89,12 +89,13 @@ class App extends React.Component {
         />
 
         <Switch>
-            <PrivateRoute path='/main' render={this.renderMain} isUserLoggedIn={this.state.isUserLoggedIn} />
-            <PrivateRoute path='/showroom/:id/:title' render={this.renderVideo} isUserLoggedIn={this.state.isUserLoggedIn}/>
+            <Route path='/mainpage' component={MainPage} />
+            <PrivateRoute path='/home' render={this.renderHome} isUserLoggedIn={this.state.isUserLoggedIn} />
+            <PrivateRoute path='/showroom/:id/:title/:time' render={this.renderVideo} isUserLoggedIn={this.state.isUserLoggedIn}/>
             <PrivateRoute path='/account' render={this.renderAccount} isUserLoggedIn={this.state.isUserLoggedIn} />
             <Route path='/login' render={this.renderAuthContainer} />
             <Route path='/signup' render={this.renderAuthContainer} />
-            <Route path='/home' component={Home} />
+            {/* <Route path='/home' component={Home} /> */}
             <Route path='/about' component={About} />
         </Switch>
       </div>
