@@ -126,7 +126,7 @@ class Home extends Component {
         
         // console.log(timeDiff)
         let arr2 = Object.values(timeDiff);
-        let min = Math.max(...arr2,);
+        let min = Math.min(...arr2,);
         // console.log(arr2)
         let time = Object.keys(timeDiffEx).find(key => timeDiffEx[key].difference === min)
         // console.log(time, 'found')
@@ -161,6 +161,7 @@ class Home extends Component {
                             <img src={movie?.video.img_url} />
                             <p>Rating: {movie?.video.rating}</p>
                             <p className="text">Opens at {this.getTimeDifference(movie?.showtimes)}</p>
+                            {/* <p className="text">Opens at 7:00 PM</p> */}
                         </div>
                     } 
                     modal closeOnDocumentClick>
@@ -190,6 +191,7 @@ class Home extends Component {
                             <img src={movie?.video.img_url} />
                             <p>Rating: {movie?.video.rating}</p>
                             <p className="text">Opens at {this.getTimeDifference(movie?.showtimes)}</p>
+                            {/* <p className="text">Opens at 7:00 PM</p> */}
                         </div>
                     } 
                     modal closeOnDocumentClick>
@@ -217,7 +219,7 @@ class Home extends Component {
                 <h2>Based on Your Preferences</h2>
                 <div className="preferenced-movies">
                     {(movies[0] === undefined ? 
-                    <p className="prefmessage">Please Select some preferences in the account tab...</p>
+                    <p className="prefmessage">Select some preferences...</p>
                     :
                     movieComponents
                     )} 

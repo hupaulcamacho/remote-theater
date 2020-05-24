@@ -24,6 +24,18 @@
     padding: 0.5em;
 }
 
+.genre:hover {
+    cursor: copy;
+}
+
+.genre2 {
+    padding: 0.5em;
+}
+
+.genre2:hover {
+    cursor: not-allowed;
+}
+
 .popup-content {
     background-color: rgb(69, 49, 105)!important;
     width: 80% !important;

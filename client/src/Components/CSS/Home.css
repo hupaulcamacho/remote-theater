@@ -21,6 +21,7 @@
 }
 .movie:hover {
     background-color: rgb(135, 96, 207);
+    cursor: pointer;
 }
 
 .movie2{

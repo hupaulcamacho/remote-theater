@@ -16,7 +16,7 @@ const SignupForm = ({
 
   return (
     <div className='form-container'>
-      <h2> Sign-Up </h2>
+      <h1> Sign-Up </h1>
       <form onSubmit={handleSubmit}>
         <input
           className='signup-input'

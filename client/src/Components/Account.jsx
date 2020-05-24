@@ -18,16 +18,6 @@ class Account extends Component {
         await this.getUserPreferences()
     }
 
-    // loadUserInfo = async () => {
-    //     let { user } = this.state
-    //     const URL = `http://localhost:3001/api/users/${user.id}`
-    //     let user = await axios.get(URL);
-    //     console.log(user.data.payload)
-    //     this.setState({
-    //         user: user.data.payload[0]
-    //     })
-    // }
-
     getAllGenres = async () => {
         const URL = `/api/genres`
         let genres = await axios.get(URL);
@@ -52,18 +42,18 @@ class Account extends Component {
         console.log(genreId)
         
         const URL = `/api/preferences/add/${user.id}/${genreId}`
-        axios.post(URL)
+        await axios.post(URL)
 
         this.getUserPreferences()
     }
 
-    deletePreference = (e) => {
+    deletePreference = async (e) => {
         const { user } = this.state
         const genreId = e.target.id
         const URL = `/api/preferences/delete/${user.id}/${genreId}`
-        axios.delete(URL)
+        await axios.delete(URL)
 
-        this.getUserPreferences()
+        await this.getUserPreferences()
     }
 
     render() {
@@ -80,7 +70,7 @@ class Account extends Component {
         for (let i = 0; i < userPreferences?.length; i ++) {
             console.log(userPreferences[i].name)
             userPreferenceComponents.push(
-                <p onClick={this.deletePreference}className='genre' id={userPreferences[i].id}>{userPreferences[i].name}</p>
+                <p onClick={this.deletePreference}className='genre2' id={userPreferences[i].id}>{userPreferences[i].name}</p>
             )
         }
         return (
