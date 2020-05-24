@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const videos = require('../database/queries/video')
-const db = require('../database/db.js')
 
 
 router.get('/', async  (req, res) => {
@@ -45,8 +44,6 @@ router.get('/title/:title', async (req, res) => {
 	}
 });
 
-
-
 router.get('/genre/:genre', async (req, res) => {
 	const genre = req.params.genre
 	try {
@@ -72,12 +69,11 @@ router.post('/', async (req, res) => {
 	}
 });
 
-router.get('/ratings/:howMany/:highest', async (req, res) => {
+router.get('/ratings/:howMany/:minRating', async (req, res) => {
 	try{
-		let ratingsQuery2 = `SELECT * FROM videos WHERE rating > ${req.params.highest} ORDER BY rating DESC LIMIT $1`
-		// let ratingsQuery = (req.params.highest === 'highest') ? 'SELECT * FROM videos ORDER BY rating DESC LIMIT $1' : 'SELECT * FROM videos ORDER BY rating ASC LIMIT $1';
 		let howMany = parseInt(req.params.howMany);
-		let getTopVideos = await db.any(ratingsQuery2, [howMany]);
+		let rating = parseInt(req.params.minRating)
+		let getTopVideos = await videos.getVideoByRatings(howMany, rating);
 		res.status(200).json({
 			status: 'success',
 			payload: getTopVideos
@@ -101,14 +97,13 @@ router.delete('/deleteVideo', async (req, res) => {
 
 // Get all videos by genre id
 router.get('/genre/id/:id', async (req, res) => {
-	let genreId = req.params.id
+	let id = req.params.id
 	try {
-		let videoQuery = 'SELECT * FROM videos WHERE genre_id = $1';
-		const videos = await db.any(videoQuery, [genreId]);
+		let videoQuery = await videos.getAllVideoByGenreId(id)
 		res.status(200).json({
 			status: 'success',
 			message: 'retrieved videos',
-			payload: videos
+			payload: videoQuery
 		});
 	}
 	catch(err){

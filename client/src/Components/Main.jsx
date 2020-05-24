@@ -87,7 +87,6 @@ class Main extends Component {
     getTopRatedMovies = async () => {
         const topVideos = []
         try {
-            
             const URL = `/api/videos/ratings/${4}/${85}`
             let videos = await axios.get(URL)
 
