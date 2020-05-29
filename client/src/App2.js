@@ -7,12 +7,12 @@ import './App.css';
 import PrivateRoute from './Components/PrivateRoute';
 import AuthContainer from './Containers/AuthContainer';
 
+import Home from './Components/Home'
 import Navbar from './testComponents/Nav';
 import VideoPage from './Components/VideoPage';
-import Signup from './Components/Signup';
 import Account from './Components/Account';
 import MainPage from './testComponents/MainPage'
-import Home from './testComponents/Home'
+// import Home from './testComponents/Home'
 import About from './Components/About'
 
 class App extends React.Component {

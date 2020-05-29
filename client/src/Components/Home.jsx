@@ -26,13 +26,13 @@ class Home extends Component {
     }
 
     loadUserInfo = async () => {
-        let userId = await sessionStorage.getItem('currentUserid')
-        const URL = `http://localhost:3001/api/users/${userId}`
-        let user = await axios.get(URL);
-        console.log("state", user.data.payload)
+        let {user} = this.state
+        const URL = `http://localhost:3001/api/users/${user.id}`
+        let loadUser = await axios.get(URL);
+        console.log("state", loadUser.data.payload)
         // this.props.setLoggedIn(true)
         this.setState({
-            user: user.data.payload[0]
+            user: loadUser.data.payload[0]
         })
         // await this.getUserPreferences()
     }
