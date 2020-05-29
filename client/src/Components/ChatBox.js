@@ -38,7 +38,7 @@ class ChatBox extends React.Component {
     const movietitle = title.split(":").join("")
     const movietitle2 = movietitle.split(" ").join("")
     console.log(movietitle2)
-    const chatClient = new StreamChat('v4uankwegvgc');
+    const chatClient = new StreamChat('ewnpysxxpud8');
     let response = await axios.post(`/api/getToken`, user);
     let token = response.data.token;
     let chatUser = response.data.user
