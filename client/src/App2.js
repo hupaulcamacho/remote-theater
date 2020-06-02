@@ -8,7 +8,7 @@ import PrivateRoute from './Components/PrivateRoute';
 import AuthContainer from './Containers/AuthContainer';
 
 import Home from './Components/Home'
-import Navbar from './testComponents/Nav';
+import Navbar from './Components/Burger-Nav/Nav';
 import VideoPage from './Components/VideoPage';
 import Account from './Components/Account';
 import MainPage from './testComponents/MainPage'
