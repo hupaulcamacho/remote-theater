@@ -5,6 +5,7 @@ import { MessageInputSmall, Thread } from 'stream-chat-react';
 import { StreamChat } from 'stream-chat';
 import 'stream-chat-react/dist/css/index.css';
 import axios from 'axios';
+
 const API_KEY = 'http://localhost:3001/api';
 
   // let chatClient = new StreamChat('dmhrpz4thf5x');
@@ -38,7 +39,7 @@ class ChatBox extends React.Component {
     const movietitle = title.split(":").join("")
     const movietitle2 = movietitle.split(" ").join("")
     console.log(movietitle2)
-    const chatClient = new StreamChat('v4uankwegvgc');
+    const chatClient = new StreamChat('ewnpysxxpud8');
     let response = await axios.post(`/api/getToken`, user);
     let token = response.data.token;
     let chatUser = response.data.user
