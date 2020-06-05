@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import { Switch, Route, Redirect, Link } from 'react-router-dom'
-
+import '../Components/CSS/AuthForm.css'
 import LoginForm from '../testComponents/LoginForm';
 import SignupForm from '../testComponents/SignupForm';
 
