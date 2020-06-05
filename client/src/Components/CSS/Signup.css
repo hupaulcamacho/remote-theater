@@ -4,15 +4,7 @@ body {
     height: 100%;
     color: white;
 }
-form {
- margin-top: 20vh;
- border-radius: 5px;
- background-color: #f2f2f2;
- padding: 5%;
- /* height: 12vh; */
- width: 71%;
- margin-left:10%;
-}
+
 input {
     width: 80%;
     padding: 12px 20px;
@@ -33,6 +25,6 @@ input {
   
 
 #rt{
-font-variant: small-caps;
-font-size: 5vw;
+  font-variant: normal;
+  font-size: 5vw;
 }
