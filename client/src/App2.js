@@ -13,8 +13,7 @@ import Home from './Components/Home'
 import Navbar from './Components/Burger-Nav/Nav';
 import VideoPage from './Components/VideoPage';
 import Account from './Components/Account';
-import Home from './Components/Home'
-import MainPage from './testComponents/Mainpage'
+import MainPage from './testComponents/MainPage'
 import About from './Components/About'
 
 class App extends React.Component {
