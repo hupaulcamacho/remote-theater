@@ -43,13 +43,14 @@ router.post('/add/:user_id/:genre_id', async (req, res) => {
 });
 
 router.delete('/delete/:user_id/:genre_id', async (req, res) => {
+	let user_id = req.params.user_id
+	let genre_id = req.params.user_id
 	try {
-		let deletequery = 'DELETE FROM preferences WHERE user_id = $1 AND genre_id = $2';
-		await db.none(deletequery, [req.params.user_id, req.params.genre_id]);
-
+		let preference = await preferences.deletePreference(user_id, genre_id)
 		res.status(200).json({
             status: 'success',
-            message: 'Preference deleted.'
+			message: 'Preference deleted.',
+			payload: preference
         });
 	} catch(err) {
 		res.status(500).json({

@@ -4,14 +4,14 @@
     height: 100%;
     color: white;
 }
+
 body {
     background-color: rgb(98, 69, 151);
+
 }
-.nav-container { 
-    display: flex;
-    background-color: rgb(69, 49, 105);
-    padding: 1.5em;
-}
+
+
+
 a {
     color: white;
     /* padding-left: 1em;
@@ -32,9 +32,11 @@ a {
     background-color: rgb(135, 96, 207);
 }
 
+
 #logout {
     background-color: rgb(69, 49, 105);
-    border: 2px solid rgb(98, 69, 151);;
+    border: 2px solid rgb(98, 69, 151);
+    ;
     color: white;
     font-size: 15px;
 }
@@ -67,26 +69,23 @@ a {
     cursor: pointer;
 }
 
-.title {
-    padding: 1em;   
-    border-radius: 5px;
-    background-color: rgb(98, 69, 151);
-    font-weight: bold;
-    /* margin-right: 20em; */
-}
+
 
 form {
     margin: auto;
     border-radius: 10px;
-    background-color: rgb(69, 49, 105);
+    /* background-color: rgb(69, 49, 105);
+     */
+    background-color: white;
+    ;
     padding-top: 5%;
     padding-bottom: 5%;
     padding-left: 10%;
     padding-right: 10%;
     /* height: 12vh; */
     /* width: 71%; */
-    margin-left:20%;
-    margin-right:20%;
+    margin-left: 20%;
+    margin-right: 20%;
 
 }
 
@@ -94,9 +93,18 @@ input {
     border-radius: 5px;
 }
 
+
 .popup-content {
     background-color: rgb(69, 49, 105)!important;
     width: 50% !important;
     border: none !important;
     border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+
+    .nav-container {
+        width: auto;
+    }
+
 }

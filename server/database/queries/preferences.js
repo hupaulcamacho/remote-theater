@@ -29,7 +29,19 @@ try{
 }
 }
 
+const deletePreference = async (user_id, genre_id) => {
+try{
+    let deletequery = 'DELETE FROM preferences WHERE user_id = $1 AND genre_id = $2';
+    let deletePref = await db.none(deletequery, [user_id, genre_id]);
+    console.log(deletePref)
+    return deletePref
+}catch(err){
+    console.log(err)
+}
+}
+
 module.exports = {
 getPreferenceByUserId,
-addNewPreference
+addNewPreference,
+deletePreference
 }

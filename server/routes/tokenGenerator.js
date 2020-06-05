@@ -2,7 +2,7 @@ const { StreamChat } = require('stream-chat');
 const express = require('express');
 const router = express.Router();
 
-const client = new StreamChat('', 'duwrgkezpn93tyzsq2uv5vj88uz6cu63dy675rxk4tb8pnvv7x7nhnv8ryvfq8mg');
+const client = new StreamChat('', 'esc44v2uhamvhde5gk4b2nqywj6fxaqekfym93pskenzwhx6hngqav7s6hwmende');
 
 router.post('/', async (req, res) => {
   
