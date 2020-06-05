@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Redirect, Link} from 'react-router-dom'
 import '../Components/CSS/Mainpage.css'
 
-class MainPage extends Component {
+class Mainpage extends Component {
     render() {
         return (
         <div className= "login">
@@ -25,7 +25,5 @@ class MainPage extends Component {
         // </div>
         )
     }
- }
-  
- export default MainPage
- 
+
+export default Mainpage

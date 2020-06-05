@@ -8,6 +8,13 @@
     width: 80%;
 }
 
+h2 {
+    background-color: rgb(69, 49, 105);
+    padding: 1em;
+    padding-left: 5em;
+    text-align: left;
+}
+
 .prefmessage {
     grid-column: 1 / 5;
 }
@@ -17,7 +24,7 @@
     padding: .5em;
     border-radius: 10px;
     border: 2px solid rgb(87, 60, 136);
-    /* background-color: rgb(69, 49, 105); */
+    background-color: rgb(87, 60, 136);
 }
 .movie:hover {
     background-color: rgb(135, 96, 207);
@@ -25,10 +32,19 @@
 }
 
 .movie2{
+    display: grid;
+    grid-template-columns: 30% 1fr;
     margin: .5em;
     padding: .5em;
     border-radius: 10px;
     border: 2px solid rgb(87, 60, 136);
+}
+
+.movie-link {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 50%;
 }
 
 .movie:active {
@@ -39,6 +55,22 @@ img {
     border-radius: 10px
 }
 
+.info1, .info2 {
+    padding: 1em;
+}
+
+.description {
+    text-align: left
+}
+
+.info1 {
+    border-radius: 10px;
+    background-color: rgb(87, 60, 136);
+}
+
+/* .mod-img {
+    height: 100%;
+} */
 /* .text {
     background-color: rgb(135, 96, 207);
     border-radius: 5px;

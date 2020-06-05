@@ -19,6 +19,18 @@ a {
     text-decoration: none;
 }
 
+.nav-link, .movie-link {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding: 0.5em;
+    border-radius: 5px;
+    background-color: rgb(98, 69, 151);
+    margin: 1.5em;
+}
+
+.nav-link:hover, .movie-link:hover {
+    background-color: rgb(135, 96, 207);
+}
 
 
 #logout {
@@ -79,6 +91,14 @@ form {
 
 input {
     border-radius: 5px;
+}
+
+
+.popup-content {
+    background-color: rgb(69, 49, 105)!important;
+    width: 50% !important;
+    border: none !important;
+    border-radius: 10px;
 }
 
 @media screen and (max-width: 768px) {

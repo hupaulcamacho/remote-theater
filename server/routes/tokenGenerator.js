@@ -4,13 +4,11 @@ const router = express.Router();
 
 const client = new StreamChat('', 'esc44v2uhamvhde5gk4b2nqywj6fxaqekfym93pskenzwhx6hngqav7s6hwmende');
 
-
-
 router.post('/', async (req, res) => {
   
   let user = req.body
   console.log(user)
-  try{
+  try {
     let newToken = await client.createToken(user.name);
     console.log(newToken)
     res.status(200).json({

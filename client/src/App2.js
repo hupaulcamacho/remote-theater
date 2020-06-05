@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './App.css';
 
@@ -11,8 +13,8 @@ import Home from './Components/Home'
 import Navbar from './Components/Burger-Nav/Nav';
 import VideoPage from './Components/VideoPage';
 import Account from './Components/Account';
-import MainPage from './testComponents/MainPage'
-// import Home from './testComponents/Home'
+import Home from './Components/Home'
+import MainPage from './testComponents/Mainpage'
 import About from './Components/About'
 
 class App extends React.Component {
@@ -98,6 +100,7 @@ class App extends React.Component {
             {/* <Route path='/home' component={Home} /> */}
             <Route path='/about' component={About} />
         </Switch>
+        <ToastContainer />
       </div>
     );
   }

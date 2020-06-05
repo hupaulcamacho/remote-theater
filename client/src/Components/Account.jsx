@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './CSS/Account.css';
 import axios from 'axios';
 import Popup from "reactjs-popup";
+import { ToastContainer, toast } from 'react-toastify';
+
 class Account extends Component {
     constructor(props) {
         super(props)
@@ -18,6 +20,13 @@ class Account extends Component {
         await this.getAllGenres()
         await this.getUserPreferences()
     }
+
+    notify = (e) => {
+        console.log(e.target.innerText)
+        let genre = e.target.innerText
+        toast.success(`${genre} was added to preferences.`)
+    }
+    
 
     getAllGenres = async () => {
         const URL = `/api/genres`
@@ -43,13 +52,16 @@ class Account extends Component {
         const { user} = this.state
         const genreId = e.target.id
         console.log(genreId)
+        let genre = e.target.innerText
         
         const URL = `/api/preferences/add/${user.id}/${genreId}`
         await axios.post(URL)
 
-this.setState({
-    setMessage: "added preference!"
-})
+        // this.setState({
+        //     setMessage: "added preference!"
+        // })
+
+        toast.success(`${genre} was added to preferences.`)
         this.getUserPreferences()
     }
 
@@ -57,10 +69,12 @@ this.setState({
         const { user} = this.state
         const genreId = e.target.id
         const URL = `/api/preferences/delete/${user.id}/${genreId}`
+        let genre = e.target.innerText
         await axios.delete(URL)
-this.setState({
-    setMessage: "deleted preference!"
-})
+        // this.setState({
+        //     setMessage: "deleted preference!"
+        // })
+        toast.error(`${genre} was removed from preferences.`)
         await this.getUserPreferences()
     }
 
@@ -71,13 +85,13 @@ this.setState({
         for (let i = 0; i < genres?.length; i ++) {
             // console.log(genres[i].name)
             genreComponents.push(
-                <p onClick={this.addToPreferences} className='genre' id={genres[i].id} message={setMessage}>{genres[i].name}</p>
+                <p onClick={this.addToPreferences} className='genre' id={genres[i].id} name={genres[i].name}>{genres[i].name}</p>
             )
         }
         for (let i = 0; i < userPreferences?.length; i ++) {
             console.log(userPreferences[i].name)
             userPreferenceComponents.push(
-                <p onClick={this.deletePreference}className='genre2' id={userPreferences[i].id} message={setMessage}>{userPreferences[i].name}</p>
+                <p onClick={this.deletePreference}className='genre2' id={userPreferences[i].id}>{userPreferences[i].name}</p>
                 )
 
         }
@@ -101,6 +115,7 @@ this.setState({
                         </div>
                     </Popup>
                 </div>
+                
             </div>
         )
     }
