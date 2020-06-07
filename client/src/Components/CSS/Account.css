@@ -6,13 +6,21 @@
 }
 
 .genre-container {
+    color: black;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     margin: auto;
     margin-bottom: 1em;
-    border: 2px solid rgb(135, 96, 207);
+    /* border: 2px solid rgb(135, 96, 207); */
     border-radius: 10px;
     width: 80%;
+    margin-top: 1em;
+}
+
+.updatePreferences{
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 4;
 }
 
 .genre:hover {
@@ -36,3 +44,7 @@
     cursor: not-allowed;
 }
 
+.gPreferences{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
