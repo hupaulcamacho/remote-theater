@@ -12,7 +12,7 @@ class Account extends Component {
             userPreferences: null,
             genres: null,
             message: '', 
-            checkBox: false
+            checkBox: false,
         }
     }
 
@@ -37,7 +37,6 @@ class Account extends Component {
     }
 
     getUserPreferences = async () => {
-        // let userId = await sessionStorage.getItem('currentUserid')
         const { user } = this.state
         console.log(this.state)
         const URL = `/api/preferences/id/${user.id}`
@@ -52,7 +51,7 @@ class Account extends Component {
         const { user } = this.state
         const genreId = e.target.id
         console.log(genreId)
-        let genre = e.target.innerText
+        // let genre = e.target.innerText
         
         const URL = `/api/preferences/add/${user.id}/${genreId}`
         await axios.post(URL)
@@ -66,7 +65,7 @@ class Account extends Component {
         const genreId = e.target.id
 
         const URL = `/api/preferences/delete/${user.id}/${genreId}`
-        let genre = e.target.innerText
+        // let genre = e.target.innerText
         await axios.delete(URL)
 
         // toast.error(`${genre} was removed from preferences.`)
@@ -77,12 +76,22 @@ class Account extends Component {
 clickPreference = async (e) => {
     const { checkBox } = this.state
     console.log("here")
-    if(checkBox.checked){
+    if(!checkBox.checked){
         this.setState({ checkBox: true})
         console.log('checked')
         this.addToPreferences()
+    }else{
+        this.setState({checkBox:false})
+        console.log('unchecked')
+        this.deletePreference()
     }
 }
+
+handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log("submitted")
+}
+
     render() {
         const { user, genres, userPreferences } = this.state
         const userPreferenceComponents = [];
@@ -102,9 +111,9 @@ clickPreference = async (e) => {
         }
 
         let genreOptions = genreComponents.map(el => ( 
-            <div>
+            <div className="gPreferences">
             <label> {el.props.name} </label>
-            <input name="checkBox" type="checkbox" onClick={this.clickPreference()} />
+            <input name="checkBox" type="checkbox" onClick={this.clickPreference} id={el.props.id} />
             </div>
             
         ))
@@ -117,16 +126,22 @@ clickPreference = async (e) => {
                     <p>email: {user?.email}</p>
                     <h2>My Preferences</h2>
                     <div className='genre-container'>
-                        {userPreferenceComponents}
+
+                        {/* {userPreferenceComponents} */}
+                        <form className="updatePreferences" onSubmit={this.handleSubmit}>
+                        {genreOptions}
+                        <button className="button">Submit</button>
+                        </form>
 
                     </div>
-                    <Popup trigger={<button className="button"> Change Preferences </button>} modal closeOnDocumentClick>
+
+                    {/* <Popup trigger={<button className="button"> Change Preferences </button>} modal closeOnDocumentClick>
                         <h2>Change Preferences</h2>
-                        <div className='genre-container'>
+                        <div className='genre-container'> */}
                             {/* {genreComponents} */}
-                           {genreOptions}
-                        </div>
-                    </Popup>
+                        {/* </div>
+                    </Popup> */}
+
                 </div>  
             </div>
         )
