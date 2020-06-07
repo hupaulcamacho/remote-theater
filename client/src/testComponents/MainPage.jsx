@@ -25,5 +25,6 @@ class Mainpage extends Component {
         // </div>
         )
     }
+}
 
 export default Mainpage
