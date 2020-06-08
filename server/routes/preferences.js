@@ -44,7 +44,7 @@ router.post('/add/:user_id/:genre_id', async (req, res) => {
 
 router.delete('/delete/:user_id/:genre_id', async (req, res) => {
 	let user_id = req.params.user_id
-	let genre_id = req.params.user_id
+	let genre_id = req.params.genre_id
 	try {
 		let preference = await preferences.deletePreference(user_id, genre_id)
 		res.status(200).json({
