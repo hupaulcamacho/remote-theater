@@ -11,8 +11,6 @@ class Account extends Component {
             user: props.user,
             userPreferences: [],
             genres: [],
-            message: '', 
-            checkBox: false,
             userPrefObject: {}
         }
     }
@@ -98,14 +96,8 @@ clickPreference = (e) => {
     })
 }
 
-handleSubmit = (e) => {
-    e.preventDefault()
-   console.log('submit')
-
-}
-
     render() {
-        const { user, genres, userPreferences, userPrefObject } = this.state
+        const { user, genres, userPrefObject } = this.state
       
 
         let genreOptions = genres.map(genre => ( 
