@@ -9,10 +9,11 @@ class Account extends Component {
         super(props)
         this.state = {
             user: props.user,
-            userPreferences: null,
-            genres: null,
+            userPreferences: [],
+            genres: [],
             message: '', 
             checkBox: false,
+            userPrefObject: {}
         }
     }
 
@@ -21,11 +22,11 @@ class Account extends Component {
         await this.getUserPreferences()
     }
 
-    // notify = (e) => {
-    //     console.log(e.target.innerText)
-    //     let genre = e.target.innerText
-    //     toast.success(`${genre} was added to preferences.`)
-    // }
+    notify = (e) => {
+        console.log(e.target.innerText)
+        let genre = e.target.innerText
+        toast.success(`${genre} was added to preferences.`)
+    }
     
 
     getAllGenres = async () => {
@@ -40,80 +41,77 @@ class Account extends Component {
         const { user } = this.state
         console.log(this.state)
         const URL = `/api/preferences/id/${user.id}`
-        let preferences = await axios.get(URL);
-        console.log("here", preferences.data.payload)
+        let response = await axios.get(URL);
+        console.log("here", response.data.payload)
+       let  userPrefObject = {}
+       let preferences = response.data.payload
+       for(let genre of preferences){
+        userPrefObject[genre.name] = true
+       }
         this.setState({
-            userPreferences: preferences.data.payload
+           userPreferences: preferences,
+           userPrefObject: userPrefObject
         })
     }
 
-    addToPreferences = async (e) => {
+    addToPreferences = async (genreId, genreName ) => {
         const { user } = this.state
-        const genreId = e.target.id
-        console.log(genreId)
         // let genre = e.target.innerText
         
         const URL = `/api/preferences/add/${user.id}/${genreId}`
         await axios.post(URL)
 
-        // toast.success(`${genre} was added to preferences.`)
-        // this.getUserPreferences()
+        toast.success(`${genreName} was added to preferences.`)
+        this.getUserPreferences()
     }
 
-    deletePreference = async (e) => {
+    deletePreference = async (genreId, genreName) => {
         const { user } = this.state
-        const genreId = e.target.id
-
         const URL = `/api/preferences/delete/${user.id}/${genreId}`
         // let genre = e.target.innerText
         await axios.delete(URL)
 
-        // toast.error(`${genre} was removed from preferences.`)
-        // await this.getUserPreferences()
+        toast.error(`${genreName} was removed from preferences.`)
+        await this.getUserPreferences()
     }
 
 
-clickPreference = async (e) => {
-    const { checkBox } = this.state
+clickPreference = (e) => {
+    const { userPrefObject } = this.state
+    let genreName = e.target.name
+    let genreId = e.target.id
+    let objCopy = {...userPrefObject}
+    let checked = objCopy[genreName]
     console.log("here")
-    if(!checkBox.checked){
-        this.setState({ checkBox: true})
+   
+    if(!checked){
+        objCopy[genreName] = true
         console.log('checked')
-        this.addToPreferences()
+        this.addToPreferences(genreId, genreName)
     }else{
-        this.setState({checkBox:false})
+        objCopy[genreName] = false
         console.log('unchecked')
-        this.deletePreference()
+        this.deletePreference(genreId, genreName)
     }
+    this.setState({
+        userPrefObject: objCopy
+    })
 }
 
-handleSubmit = async (e) => {
+handleSubmit = (e) => {
     e.preventDefault()
-    console.log("submitted")
+   console.log('submit')
+
 }
 
     render() {
-        const { user, genres, userPreferences } = this.state
-        const userPreferenceComponents = [];
-        const genreComponents = [];
+        const { user, genres, userPreferences, userPrefObject } = this.state
+      
 
-        for (let i = 0; i < genres?.length; i ++) {
-            genreComponents.push(
-                <p onClick={this.addToPreferences} className='genre' id={genres[i].id} name={genres[i].name}>{genres[i].name}</p>
-            )
-        }
-
-        for (let i = 0; i < userPreferences?.length; i ++) {
-            console.log(userPreferences[i].name)
-            userPreferenceComponents.push(
-                <p onClick={this.deletePreference}className='genre2' id={userPreferences[i].id}>{userPreferences[i].name}</p>
-                )
-        }
-
-        let genreOptions = genreComponents.map(el => ( 
+        let genreOptions = genres.map(genre => ( 
             <div className="gPreferences">
-            <label> {el.props.name} </label>
-            <input name="checkBox" type="checkbox" onClick={this.clickPreference} id={el.props.id} />
+            <label> {genre.name} </label>
+            <input name={genre.name} type="checkbox"  id={genre.id} checked={userPrefObject[genre.name]} onChange={this.clickPreference} />
             </div>
             
         ))
@@ -128,9 +126,9 @@ handleSubmit = async (e) => {
                     <div className='genre-container'>
 
                         {/* {userPreferenceComponents} */}
-                        <form className="updatePreferences" onSubmit={this.handleSubmit}>
+                        <form className="updatePreferences">
                         {genreOptions}
-                        <button className="button">Submit</button>
+                        
                         </form>
 
                     </div>
