@@ -208,11 +208,18 @@ class Home extends Component {
                                 this.getElapsedTime(this.getTimeDifference(movie ?.showtimes)) < 0 ?
                                 <Link onClick={e => this._closed(e)} className='movie-link'>Closed</Link>
                                 :
-                                <Link
-                                    className='movie-link'
-                                    to={`/showroom/${movie ?.video.video_url}/${movie ?.video.title}/${this.getTimeDifference(movie ?.showtimes)}`}>
-                                    Enter Theater
-                                </Link>  
+                                <div>
+                                    <Link
+                                        className='movie-link'
+                                        to={`/showroom/${movie ?.video.video_url}/${movie ?.video.title}/${this.getTimeDifference(movie ?.showtimes)}`}>
+                                        Enter Theater
+                                    </Link>
+                                    <Link
+                                        className='movie-link'
+                                        to={`/privateroom/${movie ?.video.video_url}/${movie ?.video.title}/${this.getTimeDifference(movie ?.showtimes)}`}>
+                                        Enter Private Room
+                                    </Link>
+                                </div>
                             )}
                             </div>
                             
@@ -254,11 +261,18 @@ class Home extends Component {
                                 this.getElapsedTime(this.getTimeDifference(movie ?.showtimes)) < 0 ?
                                 <Link onClick={e => this._closed(e)} className='movie-link'>Closed</Link>
                                 :
-                                <Link
-                                    className='movie-link'
-                                    to={`/showroom/${movie ?.video.video_url}/${movie ?.video.title}/${this.getTimeDifference(movie ?.showtimes)}`}>
-                                    Enter Theater
-                                </Link>  
+                                <div >
+                                    <Link
+                                        className='movie-link'
+                                        to={`/showroom/${movie ?.video.video_url}/${movie ?.video.title}/${this.getTimeDifference(movie ?.showtimes)}`}>
+                                        Enter Theater
+                                    </Link>
+                                    <Link
+                                        className='movie-link'
+                                        to={`/privateroom/${movie ?.video.video_url}/${movie ?.video.title}_${Math.floor(Math.random() * 999) +  1} /${this.getTimeDifference(movie ?.showtimes)}/private`}>
+                                        Enter Private Room
+                                    </Link>  
+                                </div>
                             )}
                             
                         </div>
