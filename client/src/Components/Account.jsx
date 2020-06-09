@@ -3,7 +3,6 @@ import './CSS/Account.css';
 import axios from 'axios';
 import Popup from "reactjs-popup";
 import { ToastContainer, toast } from 'react-toastify';
-
 class Account extends Component {
     constructor(props) {
         super(props)
@@ -14,19 +13,15 @@ class Account extends Component {
             userPrefObject: {}
         }
     }
-
     componentDidMount = async () => {
         await this.getAllGenres()
         await this.getUserPreferences()
     }
-
     notify = (e) => {
         console.log(e.target.innerText)
         let genre = e.target.innerText
         toast.success(`${genre} was added to preferences.`)
     }
-    
-
     getAllGenres = async () => {
         const URL = `/api/genres`
         let genres = await axios.get(URL);
@@ -34,7 +29,6 @@ class Account extends Component {
             genres: genres.data.payload
         });
     }
-
     getUserPreferences = async () => {
         const { user } = this.state
         console.log(this.state)
@@ -51,33 +45,20 @@ class Account extends Component {
            userPrefObject: userPrefObject
         })
     }
-
     addToPreferences = async (genreId, genreName ) => {
         const { user } = this.state
-        // let genre = e.target.innerText
-        
         const URL = `/api/preferences/add/${user.id}/${genreId}`
         await axios.post(URL)
-        // this.setState({
-        //     setMessage: "added preference!"
-        // })
-
-        toast.success(`${genre} was added to preferences.`)
+        toast.success(`${genreName} was added to preferences.`)
         await this.getUserPreferences()
     }
-
-    deletePreference = async (e) => {
+    deletePreference = async (genreId, genreName) => {
         const { user } = this.state
-        const genreId = e.target.id
         const URL = `/api/preferences/delete/${user.id}/${genreId}`
-        // let genre = e.target.innerText
         await axios.delete(URL)
-
         toast.error(`${genreName} was removed from preferences.`)
         await this.getUserPreferences()
     }
-
-
 clickPreference = (e) => {
     const { userPrefObject } = this.state
     let genreName = e.target.name
@@ -85,7 +66,6 @@ clickPreference = (e) => {
     let objCopy = {...userPrefObject}
     let checked = objCopy[genreName]
     console.log("here")
-   
     if(!checked){
         objCopy[genreName] = true
         console.log('checked')
@@ -99,18 +79,14 @@ clickPreference = (e) => {
         userPrefObject: objCopy
     })
 }
-
     render() {
         const { user, genres, userPrefObject } = this.state
-     
         let genreOptions = genres.map(genre => ( 
             <div className="gPreferences">
             <label> {genre.name} </label>
             <input name={genre.name} type="checkbox"  id={genre.id} checked={userPrefObject[genre.name]} onChange={this.clickPreference} />
             </div>
-            
         ))
-
         return (
             <div>
                 <h1>Account</h1>
@@ -119,22 +95,11 @@ clickPreference = (e) => {
                     <p>email: {user?.email}</p>
                     <h2>My Preferences</h2>
                     <div className='genre-container'>
-
                         {/* {userPreferenceComponents} */}
                         <form className="updatePreferences">
                         {genreOptions}
-                        
                         </form>
-
                     </div>
-
-                    {/* <Popup trigger={<button className="button"> Change Preferences </button>} modal closeOnDocumentClick>
-                        <h2>Change Preferences</h2>
-                        <div className='genre-container'> */}
-                            {/* {genreComponents} */}
-                        {/* </div>
-                    </Popup> */}
-
                 </div>  
             </div>
         )
