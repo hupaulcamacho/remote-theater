@@ -113,7 +113,6 @@ h2 {
 .movie-link {
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
     height: 50%;
 }
 
@@ -143,6 +142,11 @@ h2 {
 
 .mod-img {
     height: 100%;
+}
+
+.link-container {
+    display: flex;
+    justify-content: space-around;
 }
 
 /* .text {
