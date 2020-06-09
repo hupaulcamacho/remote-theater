@@ -22,6 +22,7 @@ class Account extends Component {
         let genre = e.target.innerText
         toast.success(`${genre} was added to preferences.`)
     }
+
     getAllGenres = async () => {
         const URL = `/api/genres`
         let genres = await axios.get(URL);
@@ -31,20 +32,19 @@ class Account extends Component {
     }
     getUserPreferences = async () => {
         const { user } = this.state
-        console.log(this.state)
         const URL = `/api/preferences/id/${user.id}`
         let response = await axios.get(URL);
-        console.log("here", response.data.payload)
-       let  userPrefObject = {}
-       let preferences = response.data.payload
-       for(let genre of preferences){
-        userPrefObject[genre.name] = true
-       }
+        let userPrefObject = {}
+        let preferences = response.data.payload
+        for (let genre of preferences) {
+            userPrefObject[genre.name] = true
+        }
         this.setState({
-           userPreferences: preferences,
-           userPrefObject: userPrefObject
+            userPreferences: preferences,
+            userPrefObject: userPrefObject
         })
     }
+
     addToPreferences = async (genreId, genreName ) => {
         const { user } = this.state
         const URL = `/api/preferences/add/${user.id}/${genreId}`
@@ -52,6 +52,7 @@ class Account extends Component {
         toast.success(`${genreName} was added to preferences.`)
         await this.getUserPreferences()
     }
+
     deletePreference = async (genreId, genreName) => {
         const { user } = this.state
         const URL = `/api/preferences/delete/${user.id}/${genreId}`
@@ -59,32 +60,38 @@ class Account extends Component {
         toast.error(`${genreName} was removed from preferences.`)
         await this.getUserPreferences()
     }
-clickPreference = (e) => {
-    const { userPrefObject } = this.state
-    let genreName = e.target.name
-    let genreId = e.target.id
-    let objCopy = {...userPrefObject}
-    let checked = objCopy[genreName]
-    console.log("here")
-    if(!checked){
-        objCopy[genreName] = true
-        console.log('checked')
-        this.addToPreferences(genreId, genreName)
-    }else{
-        objCopy[genreName] = false
-        console.log('unchecked')
-        this.deletePreference(genreId, genreName)
+
+
+
+    clickPreference = (e) => {
+        const { userPrefObject } = this.state
+        let genreName = e.target.name
+        let genreId = e.target.id
+        let objCopy = { ...userPrefObject }
+        let checked = objCopy[genreName]
+        console.log("here")
+
+        if (!checked) {
+            objCopy[genreName] = true
+            console.log('checked')
+            this.addToPreferences(genreId, genreName)
+        } else {
+            objCopy[genreName] = false
+            console.log('unchecked')
+            this.deletePreference(genreId, genreName)
+        }
+        this.setState({
+            userPrefObject: objCopy
+        })
     }
-    this.setState({
-        userPrefObject: objCopy
-    })
-}
+
     render() {
         const { user, genres, userPrefObject } = this.state
-        let genreOptions = genres.map(genre => ( 
+
+        let genreOptions = genres.map(genre => (
             <div className="gPreferences">
-            <label> {genre.name} </label>
-            <input name={genre.name} type="checkbox"  id={genre.id} checked={userPrefObject[genre.name]} onChange={this.clickPreference} />
+                <label> {genre.name} </label>
+                <input name={genre.name} type="checkbox" id={genre.id} checked={userPrefObject[genre.name]} onChange={this.clickPreference} />
             </div>
         ))
         return (
@@ -95,12 +102,20 @@ clickPreference = (e) => {
                     <p>email: {user?.email}</p>
                     <h2>My Preferences</h2>
                     <div className='genre-container'>
-                        {/* {userPreferenceComponents} */}
+
                         <form className="updatePreferences">
-                        {genreOptions}
+                            {genreOptions}
                         </form>
                     </div>
-                </div>  
+
+                    {/* <Popup trigger={<button className="button"> Change Preferences </button>} modal closeOnDocumentClick>
+                        <h2>Change Preferences</h2>
+                        <div className='genre-container'> */}
+                    {/* {genreComponents} */}
+                    {/* </div>
+                    </Popup> */}
+
+                </div>
             </div>
         )
     }
