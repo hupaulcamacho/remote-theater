@@ -9,10 +9,9 @@ class Account extends Component {
         super(props)
         this.state = {
             user: props.user,
-            userPreferences: null,
-            genres: null,
-            message: '', 
-            setMessage:''
+            userPreferences: [],
+            genres: [],
+            userPrefObject: {}
         }
     }
 
@@ -37,26 +36,28 @@ class Account extends Component {
     }
 
     getUserPreferences = async () => {
-        // let userId = await sessionStorage.getItem('currentUserid')
         const { user } = this.state
         console.log(this.state)
         const URL = `/api/preferences/id/${user.id}`
-        let preferences = await axios.get(URL);
-        console.log("here", preferences.data.payload)
+        let response = await axios.get(URL);
+        console.log("here", response.data.payload)
+       let  userPrefObject = {}
+       let preferences = response.data.payload
+       for(let genre of preferences){
+        userPrefObject[genre.name] = true
+       }
         this.setState({
-            userPreferences: preferences.data.payload
+           userPreferences: preferences,
+           userPrefObject: userPrefObject
         })
     }
 
-    addToPreferences = async (e) => {
-        const { user} = this.state
-        const genreId = e.target.id
-        console.log(genreId)
-        let genre = e.target.innerText
+    addToPreferences = async (genreId, genreName ) => {
+        const { user } = this.state
+        // let genre = e.target.innerText
         
         const URL = `/api/preferences/add/${user.id}/${genreId}`
         await axios.post(URL)
-
         // this.setState({
         //     setMessage: "added preference!"
         // })
@@ -69,32 +70,47 @@ class Account extends Component {
         const { user } = this.state
         const genreId = e.target.id
         const URL = `/api/preferences/delete/${user.id}/${genreId}`
-        let genre = e.target.innerText
+        // let genre = e.target.innerText
         await axios.delete(URL)
-        // this.setState({
-        //     setMessage: "deleted preference!"
-        // })
-        toast.error(`${genre} was removed from preferences.`)
+
+        toast.error(`${genreName} was removed from preferences.`)
         await this.getUserPreferences()
     }
 
-    render() {
-        const { user, genres, userPreferences, setMessage } = this.state
-        const userPreferenceComponents = [];
-        const genreComponents = [];
-        for (let i = 0; i < genres?.length; i ++) {
-            // console.log(genres[i].name)
-            genreComponents.push(
-                <p onClick={this.addToPreferences} className='genre' id={genres[i].id} name={genres[i].name}>{genres[i].name}</p>
-            )
-        }
-        for (let i = 0; i < userPreferences?.length; i ++) {
-            console.log(userPreferences[i].name)
-            userPreferenceComponents.push(
-                <p onClick={this.deletePreference} className='genre2' id={userPreferences[i].genre_id}>{userPreferences[i].name}</p>
-                )
 
-        }
+clickPreference = (e) => {
+    const { userPrefObject } = this.state
+    let genreName = e.target.name
+    let genreId = e.target.id
+    let objCopy = {...userPrefObject}
+    let checked = objCopy[genreName]
+    console.log("here")
+   
+    if(!checked){
+        objCopy[genreName] = true
+        console.log('checked')
+        this.addToPreferences(genreId, genreName)
+    }else{
+        objCopy[genreName] = false
+        console.log('unchecked')
+        this.deletePreference(genreId, genreName)
+    }
+    this.setState({
+        userPrefObject: objCopy
+    })
+}
+
+    render() {
+        const { user, genres, userPrefObject } = this.state
+     
+        let genreOptions = genres.map(genre => ( 
+            <div className="gPreferences">
+            <label> {genre.name} </label>
+            <input name={genre.name} type="checkbox"  id={genre.id} checked={userPrefObject[genre.name]} onChange={this.clickPreference} />
+            </div>
+            
+        ))
+
         return (
             <div>
                 <h1>Account</h1>
@@ -103,19 +119,23 @@ class Account extends Component {
                     <p>email: {user?.email}</p>
                     <h2>My Preferences</h2>
                     <div className='genre-container'>
-                        {userPreferenceComponents}
-                        <p className="message">{setMessage}</p>
+
+                        {/* {userPreferenceComponents} */}
+                        <form className="updatePreferences">
+                        {genreOptions}
+                        
+                        </form>
 
                     </div>
-                    <Popup trigger={<button className="button"> Change Preferences </button>} modal closeOnDocumentClick>
+
+                    {/* <Popup trigger={<button className="button"> Change Preferences </button>} modal closeOnDocumentClick>
                         <h2>Change Preferences</h2>
-                        <div className='genre-container'>
-                            {genreComponents}
-                        <p className="message">{setMessage}</p>
-                        </div>
-                    </Popup>
-                </div>
-                
+                        <div className='genre-container'> */}
+                            {/* {genreComponents} */}
+                        {/* </div>
+                    </Popup> */}
+
+                </div>  
             </div>
         )
     }
