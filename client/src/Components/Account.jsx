@@ -62,11 +62,11 @@ class Account extends Component {
         // })
 
         toast.success(`${genre} was added to preferences.`)
-        this.getUserPreferences()
+        await this.getUserPreferences()
     }
 
     deletePreference = async (e) => {
-        const { user} = this.state
+        const { user } = this.state
         const genreId = e.target.id
         const URL = `/api/preferences/delete/${user.id}/${genreId}`
         let genre = e.target.innerText
@@ -91,7 +91,7 @@ class Account extends Component {
         for (let i = 0; i < userPreferences?.length; i ++) {
             console.log(userPreferences[i].name)
             userPreferenceComponents.push(
-                <p onClick={this.deletePreference}className='genre2' id={userPreferences[i].id}>{userPreferences[i].name}</p>
+                <p onClick={this.deletePreference} className='genre2' id={userPreferences[i].genre_id}>{userPreferences[i].name}</p>
                 )
 
         }

@@ -2,33 +2,98 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     margin: auto;
-    background-color: rgb(69, 49, 105);
-    border: 2px solid rgb(135, 96, 207);
+    /* background-color: #2b1a68;
+    border: 2px solid #6443da; */
+    width:80%;
     border-radius: 10px;
-    width: 80%;
+}
+
+.username {
+    color: white;
+    font-weight: bold;
+    /* padding-right: 2em; */
+}
+
+/* p {
+    padding-top: 1em;
+
+} */
+
+.text {
+    font-weight: bold;
+    font-size: 1vw;
 }
 
 h2 {
-    background-color: rgb(69, 49, 105);
+    background-color: #472da6;
     padding: 1em;
     padding-left: 5em;
     text-align: left;
 }
 
+.popup-content {
+    background-color: #2b1a68!important;
+    width: 50% !important;
+    border: none !important;
+    border-radius: 10px;
+}
+
+
 .prefmessage {
     grid-column: 1 / 5;
+}
+
+.movie-img {
+    border-radius: 10px;
+    border: 2px solid #6443da;
+    width: 70%;
+}
+
+.now-live {
+    border-radius: 10px;
+    padding: 0.5em;
+    background-color: red;
+    width: 50%;
+    margin: auto;
 }
 
 .movie {
     margin: .5em;
     padding: .5em;
     border-radius: 10px;
-    border: 2px solid rgb(87, 60, 136);
-    background-color: rgb(87, 60, 136);
+    border: 2px solid #6443da;
+    background-color: #2b1a68;
+    width: auto;
 }
+.mv-title {
+    font-weight: bold;
+    font-size: 1.5em;
+    border-bottom: 2px solid #472da6;
+}
+
+
 .movie:hover {
-    background-color: rgb(135, 96, 207);
+    background-color: #6443da;
     cursor: pointer;
+}
+
+.movie-link:hover {
+    background-color: 
+}
+/* .text {
+    font-size: 1vw;
+} */
+.preference {
+    grid-column: 1 / 5; 
+    width: 100%;
+    margin: auto;
+}
+.movie-link {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding: 0.5em;
+    border-radius: 5px;
+    background-color: #472da6;
 }
 
 .movie2{
@@ -37,7 +102,7 @@ h2 {
     margin: .5em;
     padding: .5em;
     border-radius: 10px;
-    border: 2px solid rgb(87, 60, 136);
+    border: 2px solid #6443da;
 }
 
 .movie-link {
@@ -48,12 +113,13 @@ h2 {
 }
 
 .movie:active {
-    background-color: rgb(162, 115, 250);
+    background-color: #744ffa;;
 }
-img {
+
+/* img {
     height: 20vh;
     border-radius: 10px
-}
+} */
 
 .info1, .info2 {
     padding: 1em;
@@ -65,12 +131,12 @@ img {
 
 .info1 {
     border-radius: 10px;
-    background-color: rgb(87, 60, 136);
+    background-color: #472da6;
 }
 
-/* .mod-img {
+.mod-img {
     height: 100%;
-} */
+}
 /* .text {
     background-color: rgb(135, 96, 207);
     border-radius: 5px;
