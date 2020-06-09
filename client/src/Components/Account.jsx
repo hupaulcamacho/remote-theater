@@ -25,7 +25,7 @@ class Account extends Component {
         let genre = e.target.innerText
         toast.success(`${genre} was added to preferences.`)
     }
-    
+
 
     getAllGenres = async () => {
         const URL = `/api/genres`
@@ -37,40 +37,32 @@ class Account extends Component {
 
     getUserPreferences = async () => {
         const { user } = this.state
-        console.log(this.state)
         const URL = `/api/preferences/id/${user.id}`
         let response = await axios.get(URL);
-        console.log("here", response.data.payload)
-       let  userPrefObject = {}
-       let preferences = response.data.payload
-       for(let genre of preferences){
-        userPrefObject[genre.name] = true
-       }
+        let userPrefObject = {}
+        let preferences = response.data.payload
+        for (let genre of preferences) {
+            userPrefObject[genre.name] = true
+        }
         this.setState({
-           userPreferences: preferences,
-           userPrefObject: userPrefObject
+            userPreferences: preferences,
+            userPrefObject: userPrefObject
         })
     }
 
-    addToPreferences = async (genreId, genreName ) => {
+    addToPreferences = async (genreId, genreName) => {
         const { user } = this.state
-        // let genre = e.target.innerText
-        
+
         const URL = `/api/preferences/add/${user.id}/${genreId}`
         await axios.post(URL)
-        // this.setState({
-        //     setMessage: "added preference!"
-        // })
 
-        toast.success(`${genre} was added to preferences.`)
+        toast.success(`${genreName} was added to preferences.`)
         await this.getUserPreferences()
     }
 
-    deletePreference = async (e) => {
+    deletePreference = async (genreId, genreName) => {
         const { user } = this.state
-        const genreId = e.target.id
         const URL = `/api/preferences/delete/${user.id}/${genreId}`
-        // let genre = e.target.innerText
         await axios.delete(URL)
 
         toast.error(`${genreName} was removed from preferences.`)
@@ -78,37 +70,37 @@ class Account extends Component {
     }
 
 
-clickPreference = (e) => {
-    const { userPrefObject } = this.state
-    let genreName = e.target.name
-    let genreId = e.target.id
-    let objCopy = {...userPrefObject}
-    let checked = objCopy[genreName]
-    console.log("here")
-   
-    if(!checked){
-        objCopy[genreName] = true
-        console.log('checked')
-        this.addToPreferences(genreId, genreName)
-    }else{
-        objCopy[genreName] = false
-        console.log('unchecked')
-        this.deletePreference(genreId, genreName)
+    clickPreference = (e) => {
+        const { userPrefObject } = this.state
+        let genreName = e.target.name
+        let genreId = e.target.id
+        let objCopy = { ...userPrefObject }
+        let checked = objCopy[genreName]
+        console.log("here")
+
+        if (!checked) {
+            objCopy[genreName] = true
+            console.log('checked')
+            this.addToPreferences(genreId, genreName)
+        } else {
+            objCopy[genreName] = false
+            console.log('unchecked')
+            this.deletePreference(genreId, genreName)
+        }
+        this.setState({
+            userPrefObject: objCopy
+        })
     }
-    this.setState({
-        userPrefObject: objCopy
-    })
-}
 
     render() {
         const { user, genres, userPrefObject } = this.state
-     
-        let genreOptions = genres.map(genre => ( 
+
+        let genreOptions = genres.map(genre => (
             <div className="gPreferences">
-            <label> {genre.name} </label>
-            <input name={genre.name} type="checkbox"  id={genre.id} checked={userPrefObject[genre.name]} onChange={this.clickPreference} />
+                <label> {genre.name} </label>
+                <input name={genre.name} type="checkbox" id={genre.id} checked={userPrefObject[genre.name]} onChange={this.clickPreference} />
             </div>
-            
+
         ))
 
         return (
@@ -120,10 +112,9 @@ clickPreference = (e) => {
                     <h2>My Preferences</h2>
                     <div className='genre-container'>
 
-                        {/* {userPreferenceComponents} */}
                         <form className="updatePreferences">
-                        {genreOptions}
-                        
+                            {genreOptions}
+
                         </form>
 
                     </div>
@@ -131,11 +122,11 @@ clickPreference = (e) => {
                     {/* <Popup trigger={<button className="button"> Change Preferences </button>} modal closeOnDocumentClick>
                         <h2>Change Preferences</h2>
                         <div className='genre-container'> */}
-                            {/* {genreComponents} */}
-                        {/* </div>
+                    {/* {genreComponents} */}
+                    {/* </div>
                     </Popup> */}
 
-                </div>  
+                </div>
             </div>
         )
     }

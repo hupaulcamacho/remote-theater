@@ -10,7 +10,7 @@ flex-flow: row nowrap;
 
 
 .nav-link{
-    // padding: 0.5em;
+    padding: 0.5em;
     margin-right: 1em;
 }
 
@@ -24,7 +24,12 @@ right: 0;
 height: 100vh;
 width: 300px;
 padding-top: 3.5rem;
+z-index: 99;
 
+.nav-link{
+    padding: 1.5em;
+}
+}
 `;
 
 const RightNav = ({ logoutUser, isUserLoggedIn, open, user }) => {
@@ -38,7 +43,8 @@ const RightNav = ({ logoutUser, isUserLoggedIn, open, user }) => {
                 </Link>
                 </div>
                 <Ul open={open}>
-                    <p className='username'>{user.name}</p>
+                    {/* <p className='username'>{user.name}</p>  */}
+                    
                     {/* <Link className='nav-link' to='/home'>Home</Link>{" "} */}
                     <Link className='nav-link' to='/account'>My Account</Link>{" "}
                     <Link className='nav-link' to="/About">About</Link>
