@@ -1,16 +1,16 @@
-.photo-container{
+/* .photo-container{
 
-}
-.imgs{
+} */
+/* .imgs{
     width: 80%;
     height: 36vh;
- }
+ } */
   
- @media screen and (max-width: 890px) {
+ /* @media screen and (max-width: 890px) {
  .imgs{
     height: 35vh;
-    /* width: fit-content; */
+    width: fit-content; 
     border-radius: 10px;
  }
- }
+ } */
  

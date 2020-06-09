@@ -1,5 +1,5 @@
-import React, { useState, useEffect }from 'react'
-import {useLocation} from 'react-router'
+import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router'
 import styled from 'styled-components'
 import RightNav from './RightNav';
 
@@ -41,30 +41,31 @@ div{
     }
 }
 `;
-const Burger = ({isUserLoggedIn, logoutUser}) => {
+const Burger = ({ isUserLoggedIn, logoutUser, user }) => {
     const [open, setOpen] = useState(false)
     let location = useLocation()
 
-  useEffect(
-    () => {
-      setOpen(false)
-    },
-    [location]
-  )
+    useEffect(
+        () => {
+            setOpen(false)
+        },
+        [location]
+    )
 
     return (
         <>
-        <StyledBurger open={open} onClick={() => setOpen(!open)}>
-            <div />
-            <div />
-            <div />
-        </StyledBurger>
-        <RightNav 
-        open={open} 
-        isUserLoggedIn={isUserLoggedIn}
-        logoutUser={logoutUser}
-        />
-</>
+            <StyledBurger open={open} onClick={() => setOpen(!open)}>
+                <div />
+                <div />
+                <div />
+            </StyledBurger>
+            <RightNav
+                user={user}
+                open={open}
+                isUserLoggedIn={isUserLoggedIn}
+                logoutUser={logoutUser}
+            />
+        </>
     )
 }
 

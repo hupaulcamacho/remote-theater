@@ -10,15 +10,19 @@ border-bottom: 2px solid #ccc;
 padding: 0 2px;
 display: flex;
 justify-content: space-between;
+background-color: #2b1a68;
 
 `
 
 const Navigation = ({ logoutUser, isUserLoggedIn, user }) => {
+    console.log(user)
     return (
         <Nav>
             <Burger 
-            isUserLoggedIn={isUserLoggedIn}
-            logoutUser={logoutUser}/>
+                user={user}
+                isUserLoggedIn={isUserLoggedIn}
+                logoutUser={logoutUser}
+            />
         </Nav>
 
 

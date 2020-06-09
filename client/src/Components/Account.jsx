@@ -58,13 +58,17 @@ class Account extends Component {
         
         const URL = `/api/preferences/add/${user.id}/${genreId}`
         await axios.post(URL)
+        // this.setState({
+        //     setMessage: "added preference!"
+        // })
 
-        toast.success(`${genreName} was added to preferences.`)
-        this.getUserPreferences()
+        toast.success(`${genre} was added to preferences.`)
+        await this.getUserPreferences()
     }
 
-    deletePreference = async (genreId, genreName) => {
+    deletePreference = async (e) => {
         const { user } = this.state
+        const genreId = e.target.id
         const URL = `/api/preferences/delete/${user.id}/${genreId}`
         // let genre = e.target.innerText
         await axios.delete(URL)
@@ -98,8 +102,7 @@ clickPreference = (e) => {
 
     render() {
         const { user, genres, userPrefObject } = this.state
-      
-
+     
         let genreOptions = genres.map(genre => ( 
             <div className="gPreferences">
             <label> {genre.name} </label>

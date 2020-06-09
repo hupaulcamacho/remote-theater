@@ -6,66 +6,71 @@
 }
 
 body {
-    background-color: rgb(98, 69, 151);
-
+    background-color: #120b2c;
 }
-
-
 
 a {
     color: white;
-    /* padding-left: 1em;
-    padding-right: 1em; */
+    /* padding-left: 1em; */
+    /* padding-right: 1em; */
     text-decoration: none;
 }
 
-.nav-link, .movie-link {
+
+
+.nav-link{
     padding-left: 1em;
     padding-right: 1em;
     padding: 0.5em;
+    margin: auto;
     border-radius: 5px;
-    background-color: rgb(98, 69, 151);
-    margin: 1.5em;
+    background-color: #472da6;
 }
 
-.nav-link:hover, .movie-link:hover {
-    background-color: rgb(135, 96, 207);
+.nav-link:hover{
+    background-color: #6443da;
 }
 
 
-#logout {
+
+/* #logout {
     background-color: rgb(69, 49, 105);
     border: 2px solid rgb(98, 69, 151);
-    ;
     color: white;
     font-size: 15px;
+} */
+
+.navbar {
+    width: 100%;
+    display: flex;
+    background-color: #6443da;
 }
 
 .button {
     color: white;
     padding: 1em;
-    border: 2px solid rgb(98, 69, 151);
+    border: 2px solid #6443da;
     border-radius: 5px;
-    background-color: rgb(69, 49, 105);
+    background-color: #472da6;
     font-size: 1em;
 }
 
 .button:hover {
-    background-color: rgb(135, 96, 207);
+    background-color: #6443da;
 }
 
 .button1 {
     color: white;
     padding: 0.5em;
     border-radius: 5px;
-    border: 2px solid rgb(98, 69, 151);
-    background-color: rgb(69, 49, 105);
+    border: 2px solid #6443da;
+    background-color: #472da6;
     font-size: 1em;
     margin: 1em;
 }
 
 .button1:hover {
-    background-color: rgb(135, 96, 207);
+    background-color: #6443da;
     cursor: pointer;
 }
 
@@ -74,10 +79,8 @@ a {
 form {
     margin: auto;
     border-radius: 10px;
-    /* background-color: rgb(69, 49, 105);
-     */
-    background-color: white;
-    ;
+    background-color: #472da6;
+    
     padding-top: 5%;
     padding-bottom: 5%;
     padding-left: 10%;
@@ -94,11 +97,14 @@ input {
 }
 
 
-.popup-content {
-    background-color: rgb(69, 49, 105)!important;
-    width: 50% !important;
-    border: none !important;
-    border-radius: 10px;
+
+.title {
+    font-feature-settings: "c2sc";
+    font-variant: small-caps;
+    font-size: 30px;
+    background-color: rgb(69, 49, 105);
+    padding: 0.5em;
+    margin-top: 2em;
 }
 
 @media screen and (max-width: 768px) {
@@ -107,4 +113,17 @@ input {
         width: auto;
     }
 
+}
+
+.logo {
+    /* margin: 2em; */
+}
+
+.login {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: auto;
+    margin-top: 7em;
+    
 }

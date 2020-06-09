@@ -1,24 +1,23 @@
-body {
+/* body {
 
         text-align: center;
         background-color: rgb(98, 69, 151);
         height: 100%;
         color: white;
+} */
+
+/* input {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #555;
+  outline: none;
 }
-
-    input {
-        width: 80%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        box-sizing: border-box;
-        border: 1px solid #555;
-        outline: none;
-      }
       
-      input:focus {
-        background-color: lightblue;
-      }
-
+input:focus {
+  background-color: lightblue;
+} */
 
 
 
@@ -51,7 +50,7 @@ button:hover {
 
 #rt {
   font-variant: small-caps;
-  font-size: 5vw;
+  font-size: 4vw;
 }
 
 @media screen and (max-width: 890px) {

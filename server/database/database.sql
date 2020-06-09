@@ -53,7 +53,7 @@ CREATE TABLE preferences
 (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
-    genre_id INT REFERENCES genres(id) on delete cascade on update cascade
+    genre_id INT REFERENCES genres(id)
 );
 
 CREATE TABLE viewer
@@ -155,8 +155,8 @@ VALUES
     (2, '5:00:00 AM'),
     (2, '8:00:00 AM'),
     (2, '10:00:00 AM'),
-    (2, '3:00:00 PM'),
-    (2, '5:00:00 PM'),
+    (2, '4:45:00 PM'),
+    (2, '7:00:00 PM'),
     (2, '9:00:00 PM'),
     (2, '11:00:00 PM'),
 
@@ -164,7 +164,7 @@ VALUES
     (3, '5:00:00 AM'),
     (3, '8:00:00 AM'),
     (3, '1:00:00 PM'),
-    (3, '4:00:00 PM'),
+    (3, '4:15:00 PM'),
     (3, '7:00:00 PM'),
     (3, '10:00:00 PM'),
 
@@ -270,7 +270,7 @@ VALUES
     (16, '5:00:00 AM'),
     (16, '8:00:00 AM'),
     (16, '1:00:00 PM'),
-    (16, '4:00:00 PM'),
+    (16, '4:50:00 PM'),
     (16, '7:00:00 PM'),
     (16, '10:00:00 PM'),
 
