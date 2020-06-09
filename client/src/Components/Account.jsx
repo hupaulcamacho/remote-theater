@@ -3,7 +3,6 @@ import './CSS/Account.css';
 import axios from 'axios';
 import Popup from "reactjs-popup";
 import { ToastContainer, toast } from 'react-toastify';
-
 class Account extends Component {
     constructor(props) {
         super(props)
@@ -14,18 +13,15 @@ class Account extends Component {
             userPrefObject: {}
         }
     }
-
     componentDidMount = async () => {
         await this.getAllGenres()
         await this.getUserPreferences()
     }
-
     notify = (e) => {
         console.log(e.target.innerText)
         let genre = e.target.innerText
         toast.success(`${genre} was added to preferences.`)
     }
-
 
     getAllGenres = async () => {
         const URL = `/api/genres`
@@ -34,7 +30,6 @@ class Account extends Component {
             genres: genres.data.payload
         });
     }
-
     getUserPreferences = async () => {
         const { user } = this.state
         const URL = `/api/preferences/id/${user.id}`
@@ -50,12 +45,10 @@ class Account extends Component {
         })
     }
 
-    addToPreferences = async (genreId, genreName) => {
+    addToPreferences = async (genreId, genreName ) => {
         const { user } = this.state
-
         const URL = `/api/preferences/add/${user.id}/${genreId}`
         await axios.post(URL)
-
         toast.success(`${genreName} was added to preferences.`)
         await this.getUserPreferences()
     }
@@ -64,10 +57,10 @@ class Account extends Component {
         const { user } = this.state
         const URL = `/api/preferences/delete/${user.id}/${genreId}`
         await axios.delete(URL)
-
         toast.error(`${genreName} was removed from preferences.`)
         await this.getUserPreferences()
     }
+
 
 
     clickPreference = (e) => {
@@ -100,9 +93,7 @@ class Account extends Component {
                 <label> {genre.name} </label>
                 <input name={genre.name} type="checkbox" id={genre.id} checked={userPrefObject[genre.name]} onChange={this.clickPreference} />
             </div>
-
         ))
-
         return (
             <div>
                 <h1>Account</h1>
@@ -114,9 +105,7 @@ class Account extends Component {
 
                         <form className="updatePreferences">
                             {genreOptions}
-
                         </form>
-
                     </div>
 
                     {/* <Popup trigger={<button className="button"> Change Preferences </button>} modal closeOnDocumentClick>

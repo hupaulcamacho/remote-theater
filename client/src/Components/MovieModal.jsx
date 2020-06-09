@@ -40,11 +40,18 @@ class MovieModal extends Component {
                         this.props.getElapsedTime(difference) < 0 ?
                             <Link onClick={e => this.props._closed(e)} className='movie-link'>Closed</Link>
                             :
-                            <Link
-                                className='movie-link'
-                                to={`/showroom/${movie.video.video_url}/${movie.video.title}/${difference}`}>
-                                Enter Theater
-                            </Link>
+                            <div className='link-container'>
+                                <Link
+                                    className='movie-link'
+                                    to={`/showroom/${movie.video.video_url}/${movie.video.title}/${difference}`}>
+                                    Enter Theater
+                                </Link>
+                                <Link
+                                    className='movie-link'
+                                    to={`/privateroom/${movie ?.video.video_url}/${movie ?.video.title}_${Math.floor(Math.random() * 999) +  1} /${difference}/private`}>
+                                    Enter Private Room
+                                </Link>
+                            </div>  
                     )}
                 </div>
             </div>
