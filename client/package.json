@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "cors": "^2.8.5",
     "moment": "^2.24.0",
+    "randomstring": "^1.1.5",
     "react": "^16.13.1",
     "react-activity-feed": "^0.10.2",
     "react-burger-menu": "^2.6.13",
