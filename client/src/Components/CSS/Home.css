@@ -129,7 +129,7 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: ;
+    /* justify-content: ; */
     height: 40%;
 }
 
