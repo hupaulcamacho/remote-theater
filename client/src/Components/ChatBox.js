@@ -1,27 +1,12 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { Chat, Channel, ChannelHeader, Window } from 'stream-chat-react';
+import { Chat, Channel, ChannelHeader, Window, MessageTeam } from 'stream-chat-react';
 import { MessageList, MessageInput, MessageLivestream } from 'stream-chat-react';
-import { MessageInputSmall, Thread } from 'stream-chat-react';
+import { MessageInputLarge, Thread } from 'stream-chat-react';
 import { StreamChat } from 'stream-chat';
 import 'stream-chat-react/dist/css/index.css';
 import axios from 'axios';
 
 const API_KEY = 'http://localhost:3001/api';
-
-  // let chatClient = new StreamChat('dmhrpz4thf5x');
-  // let userToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiaGlkZGVuLWhhemUtMiJ9.jCaIa992HDbyA4qTXd814_l2ErvhyV-dn-VdKloi3F4';
-  // chatClient.setUser(
-  //   {
-  //     id: 'hidden-haze-2',
-  //     name: 'Hidden haze',
-  //     image: 'https://getstream.io/random_svg/?id=hidden-haze-2&name=Hidden+haze'
-  //   },
-  //   userToken,
-  // );
-  //   let channel = chatClient.channel('livestream', 'spacex', {
-  //   image: 'https://goo.gl/Zefkbx',
-  //   name: 'SpaceX launch discussion',
-  // });
 
 class ChatBox extends React.Component {
   constructor(props){
@@ -35,47 +20,48 @@ class ChatBox extends React.Component {
   }
 
   componentDidMount = async () => {
+    
     const { user, title } = this.state
     const movietitle = title.split(":").join("")
     const movietitle2 = movietitle.split(" ").join("")
-    console.log(movietitle2)
     const chatClient = new StreamChat('ewnpysxxpud8');
     let response = await axios.post(`/api/getToken`, user);
     let token = response.data.token;
     let chatUser = response.data.user
-    console.log(response.data)
-    console.log(user);
-    console.log(token);
+   
     await chatClient.setUser(
       {
         id: chatUser.name,
         name: chatUser.name,
-        image: `https://getstream.io/random_svg/?id=${chatUser.name}&name=${chatUser.name}`
+        image: `https://getstream.io/random_svg/?name=${chatUser.name}`
       },
       token,
     );
-    let channel = chatClient.channel('livestream', movietitle2, {
+    let channel = chatClient.channel('livestream', movietitle2, { 
       image: 'https://goo.gl/Zefkbx',
       name: 'test',
     });
-
+    
+    await channel.delete();
+    
     this.setState({
       chatClient: chatClient,
       channel: channel
     })
+    
   }
 
   render(){
-    const { title } = this.state
+    const { title, channel, chatClient } = this.state
+    
     return(
     <div className="chat">
-        {/* <h5> Demo Users</h5> */}
-        <Chat client={this.state.chatClient} theme={'livestream dark'}>
-          <Channel channel={this.state.channel} Message={MessageLivestream}>
+        <Chat client={chatClient} theme={'livestream dark'}>
+          <Channel channel={channel} Message={MessageLivestream}>
             <Window hideOnThread>
               <ChannelHeader live title={title}/>
-              <MessageList />
-              <MessageInput Input={MessageInputSmall} focus />
+              <MessageList noGroupByUser={false} />
+              <MessageInput Input={MessageInputLarge} focus />
             </Window>
             <Thread />
           </Channel>

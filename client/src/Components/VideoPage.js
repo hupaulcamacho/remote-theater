@@ -18,17 +18,12 @@ class VideoPage extends React.Component {
 	}
 
 	componentDidMount = () => {
-		// let response = await axios.get(`${API_KEY}/videos/id/${this.props.id}`);
-		// this.setState({...response.data.payload[0]});
-
 		this.getTimeStamp()
 	}
 
 	setTime = () => {
 		const { routeprops: { match:{ params } } } = this.props;
-		
 		const time = params.time
-		
 		return time
 	}
 
@@ -36,19 +31,14 @@ class VideoPage extends React.Component {
 		const format = 'h:mm:ss A '
 		let time = this.setTime()
 		let showtime = moment(time, format)
-		// console.log(time)
 		let now = moment().format(format)
-		console.log(now)
 		let duration = moment.duration(moment().diff(showtime))
-		console.log(duration._data)
 		return duration.as('seconds')
 	}
-
 
 	_onReady = (event) => {
 		let timestamp = this.getTimeStamp()
 		console.log(timestamp, "timestamp")
-		// access to player in all event handlers via event.target
 		event.target.playVideo();
 		event.target.seekTo(timestamp);
 	}
@@ -61,7 +51,10 @@ class VideoPage extends React.Component {
 			autoplay: 1,
 			controls: 0,
 			disablekb: 1,
-			showinfo: 0
+			showinfo: 0,
+			fs: 0,
+			cc_load_policy: 1,
+			modestbranding: 1
           }
         }
         return opts

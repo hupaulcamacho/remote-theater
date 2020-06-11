@@ -8,10 +8,11 @@ const Ul = styled.nav`
 display: flex;
 flex-flow: row nowrap;
 
-
 .nav-link{
     padding: 0.5em;
+
     margin-right: 1em;
+
 }
 
 @media (max-width: 768px){
@@ -37,10 +38,10 @@ const RightNav = ({ logoutUser, isUserLoggedIn, open, user }) => {
     if (isUserLoggedIn) {
         return (
             <>
-               <div>
-                <Link to='/home'>
-                    <img className='logo' src={logo} height="50px"/>
-                </Link>
+                <div className='logo'>
+                    <Link to='/home'>
+                        <img  src={logo} height="50px"/>
+                    </Link>
                 </div>
                 <Ul open={open}>
                     {/* <p className='username'>{user.name}</p>  */}
@@ -57,10 +58,12 @@ const RightNav = ({ logoutUser, isUserLoggedIn, open, user }) => {
 
     return (
         <>
+            <div className='logo'>
+                <Link to='/'>
+                    <img className='logo' src={logo} height="50px"/>
+                </Link>
+            </div>
             
-            <Link to='/mainpage'>
-                <img className='logo' src={logo} height="50px"/>
-            </Link>
             
             <Ul open={open}>
                 <Link className='nav-link' to='/login'>Login</Link>{" "}

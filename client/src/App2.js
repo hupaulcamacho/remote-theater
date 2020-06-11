@@ -100,15 +100,14 @@ class App extends React.Component {
         />
 
         <Switch>
-            <Route path='/mainpage' component={MainPage} />
             <PrivateRoute path='/home' render={this.renderHome} isUserLoggedIn={this.state.isUserLoggedIn} />
             <Route path='/privateroom/:id/:title/:time/:privateKey' render={this.renderVideoForGuest} />
             <PrivateRoute path='/showroom/:id/:title/:time/' render={this.renderVideo} isUserLoggedIn={this.state.isUserLoggedIn}/>
             <PrivateRoute path='/account' render={this.renderAccount} isUserLoggedIn={this.state.isUserLoggedIn} />
             <Route path='/login' render={this.renderAuthContainer} />
             <Route path='/signup' render={this.renderAuthContainer} />
-            {/* <Route path='/home' component={Home} /> */}
             <Route path='/about' component={About} />
+            <Route path='/' component={MainPage} />
         </Switch>
         <ToastContainer />
       </div>

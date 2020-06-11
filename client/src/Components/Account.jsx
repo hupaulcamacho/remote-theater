@@ -17,7 +17,6 @@ class Account extends Component {
         await this.getAllGenres()
         await this.getUserPreferences()
     }
-
     notify = (e) => {
         console.log(e.target.innerText)
         let genre = e.target.innerText
@@ -47,7 +46,6 @@ class Account extends Component {
             userPrefObject: userPrefObject
         })
     }
-
     addToPreferences = async (genreId, genreName ) => {
         const { user } = this.state
         const URL = `/api/preferences/add/${user.id}/${genreId}`
@@ -63,6 +61,7 @@ class Account extends Component {
         toast.error(`${genreName} was removed from preferences.`)
         await this.getUserPreferences()
     }
+
 
 
     clickPreference = (e) => {
@@ -103,20 +102,13 @@ class Account extends Component {
                     <p>email: {user?.email}</p>
                     <h2>My Preferences</h2>
                     <div className='genre-container'>
-
+                        {/* {userPreferenceComponents} */}
                         <form className="updatePreferences">
-                            {genreOptions}
+                        {genreOptions}
                         </form>
                     </div>
+                </div>  
 
-                    {/* <Popup trigger={<button className="button"> Change Preferences </button>} modal closeOnDocumentClick>
-                        <h2>Change Preferences</h2>
-                        <div className='genre-container'> */}
-                    {/* {genreComponents} */}
-                    {/* </div>
-                    </Popup> */}
-
-                </div>
             </div>
         )
     }

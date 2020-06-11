@@ -1,8 +1,11 @@
 .App {
-    text-align: center;
+    /* text-align: center; */
     /* background-color: rgb(98, 69, 151); */
     height: 100%;
     color: white;
+}
+.main {
+     text-align: center;
 }
 
 body {
@@ -23,8 +26,18 @@ a {
     padding-right: 1em;
     padding: 0.5em;
     margin: auto;
+    margin-left: 1em;
     border-radius: 5px;
     background-color: #472da6;
+}
+
+.username {
+    padding: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin: auto;
+    color: white;
+    font-weight: bold;
 }
 
 .nav-link:hover{
@@ -116,7 +129,7 @@ input {
 }
 
 .logo {
-    /* margin: 2em; */
+    padding: 0.25em;
 }
 
 .login {
@@ -126,4 +139,27 @@ input {
     margin: auto;
     margin-top: 7em;
     
+}
+
+.messaging.str-chat .str-chat__list {
+    padding: 1em!important;
+}
+
+
+
+.str-chat__message-livestream {
+    padding: 0.5em!important;
+    margin: 0.5em!important;
+    background-color: #2b1a68!important;
+    border-radius: 5px;
+}
+.str-chat__message-livestream:hover {
+    padding: 0.5em!important;
+    margin: 0.5em!important;
+    border-radius: 5px;
+    background-color: #4b32a3!important;
+}
+
+.str-chat__container {
+    background-color: #120b2c!important
 }
