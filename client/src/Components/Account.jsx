@@ -17,6 +17,7 @@ class Account extends Component {
         await this.getAllGenres()
         await this.getUserPreferences()
     }
+
     notify = (e) => {
         console.log(e.target.innerText)
         let genre = e.target.innerText
@@ -35,7 +36,9 @@ class Account extends Component {
         const URL = `/api/preferences/id/${user.id}`
         let response = await axios.get(URL);
         let userPrefObject = {}
+
         let preferences = response.data.payload
+
         for (let genre of preferences) {
             userPrefObject[genre.name] = true
         }
@@ -62,14 +65,12 @@ class Account extends Component {
     }
 
 
-
     clickPreference = (e) => {
         const { userPrefObject } = this.state
         let genreName = e.target.name
         let genreId = e.target.id
         let objCopy = { ...userPrefObject }
         let checked = objCopy[genreName]
-        console.log("here")
 
         if (!checked) {
             objCopy[genreName] = true
