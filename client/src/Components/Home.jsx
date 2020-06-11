@@ -21,7 +21,6 @@ class Home extends Component {
     }
 
     componentDidMount = async () => {
-        // await this.loadUserInfo()
         await this.getUserPreferences()
         await this.getTopRatedMovies()
         await this.getPreferenceMovies()
@@ -31,26 +30,12 @@ class Home extends Component {
         e.preventDefault()
     }
 
-    loadUserInfo = async () => {
-        let { user } = this.state
-        const URL = `http://localhost:3001/api/users/${user.id}`
-        let loadUser = await axios.get(URL);
-        console.log("state", loadUser.data.payload)
-        // this.props.setLoggedIn(true)
-        this.setState({
-            user: loadUser.data.payload[0]
-        })
-        // await this.getUserPreferences()
-    }
-
     getUserPreferences = async () => {
         let { user } = this.state
         const URL = `/api/preferences/id/${user.id}`
         let preferences;
         try {
             preferences = await axios.get(URL);
-            // console.log(preferences.data.payload)
-
         } catch (err) {
             console.log('There was an error...', err)
         }
@@ -65,42 +50,33 @@ class Home extends Component {
         const preferencedVideos = []
 
         try {
-            for (let i = 0; i < preferences ?.length; i++) {
-                // console.log(preferences[i].genre_id)
+            for (let i = 0; i < preferences.length; i++) {
                 const URL = `/api/videos/genre/id/${preferences[i].genre_id}`
                 let videos = await axios.get(URL)
-                // console.log(videos.data.payload)
                 videos.data.payload.forEach(async video => {
                     let showtimes = await this.getShowTimes(video.id)
                     preferencedVideos.push({ video: video, showtimes: showtimes })
                 })
             }
-
-
         } catch (err) {
             console.log('There was an error...')
         }
-
         this.setState({
             movies: preferencedVideos
         })
-        // console.log(preferencedVideos)  
+
     }
 
     getTopRatedMovies = async () => {
         const topVideos = []
         try {
-
             const URL = `/api/videos/ratings/${4}/${50}`
             let videos = await axios.get(URL)
 
             for (let i = 0; i < videos.data.payload.length; i++) {
                 let showtimes = await this.getShowTimes(videos.data.payload[i].id)
-                // console.log(showtimes)
                 topVideos.push({ video: videos.data.payload[i], showtimes: showtimes })
             }
-            // console.log(topVideos)
-
         } catch (err) {
             console.log('There was an error...')
         }
@@ -115,7 +91,6 @@ class Home extends Component {
         try {
             const URL = `/api/showtimes/id/${id}`
             times = await axios.get(URL);
-            // console.log(times.data.payload)
         } catch (err) {
             console.log('There was an error...')
         }
@@ -135,13 +110,11 @@ class Home extends Component {
             timeDiff[i] = Math.abs(difference)
             timeDiffEx[i] = { difference: Math.abs(difference), showtime: showtime.format(format) };
         }
-        // console.log(timeDiff)
-        // console.log(timeDiffEx)
+
         let arr2 = Object.values(timeDiff);
         let min = Math.min(...arr2);
-        // console.log('min: ', min)
         let time = Object.keys(timeDiffEx).find(key => timeDiffEx[key].difference === min);
-        let nextshowtime = moment(timeDiffEx[time] ?.showtime, format);
+        let nextshowtime = moment(timeDiffEx[time].showtime, format);
         const next = moment(nextshowtime).format('h:mm A');
 
         return next
@@ -151,9 +124,8 @@ class Home extends Component {
         const format = 'h:mm:ss A'
         let now = moment()
         let start = moment(startTime, format)
-        // console.log('calculated')
-        return now.diff(start, "minutes")
 
+        return now.diff(start, "minutes")
     }
 
     getRandomInt = (max) => {
@@ -189,7 +161,6 @@ class Home extends Component {
             }
         }
         topMovies.forEach(movie => {
-            // console.log(movie)
             topMovieComponents.push(
                 <Popup
                     trigger={
@@ -206,7 +177,7 @@ class Home extends Component {
             )
         })
         return (
-            <div>
+            <div className='main'>
 
                 <h1>Welcome back, {user.name}</h1>
                 <Time />

@@ -29,6 +29,7 @@ class MovieModal extends Component {
                             </>
                             :
                             <>
+                                <p className="text">Started At {difference}</p>
                                 <p className="text">Time Elapsed: {this.props.getElapsedTime(difference)} mins</p>
                                 <p className="now-live">Live</p>
                             </>
