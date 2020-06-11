@@ -8,7 +8,7 @@ var passport = require('./auth/passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var commentsRouter = require('./routes/Comments');
+var commentsRouter = require('./routes/comments');
 var viewerRouter = require('./routes/Viewer');
 var authRouter = require('./routes/auth');
 let genresRouter =require('./routes/genres');
