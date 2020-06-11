@@ -62,6 +62,16 @@ class App extends React.Component {
     return <VideoPage routeprops={routeprops} user={this.state.user}/>
   }
 
+  renderVideoForGuest = (routeprops) => {
+    if(this.state.user){
+      return <VideoPage routeprops={routeprops} user={this.state.user} />
+    }
+    else{
+      let user = {name: `Guest_${Math.floor(Math.random() * 999) + 1}`};
+      return <VideoPage routeprops={routeprops} user={user} />
+    }
+  }
+
   renderAccount = (routeprops) => {
     return <Account routeprops={routeprops} user={this.state.user} />
   }
@@ -91,7 +101,8 @@ class App extends React.Component {
 
         <Switch>
             <PrivateRoute path='/home' render={this.renderHome} isUserLoggedIn={this.state.isUserLoggedIn} />
-            <PrivateRoute path='/showroom/:id/:title/:time' render={this.renderVideo} isUserLoggedIn={this.state.isUserLoggedIn}/>
+            <Route path='/privateroom/:id/:title/:time/:privateKey' render={this.renderVideoForGuest} />
+            <PrivateRoute path='/showroom/:id/:title/:time/' render={this.renderVideo} isUserLoggedIn={this.state.isUserLoggedIn}/>
             <PrivateRoute path='/account' render={this.renderAccount} isUserLoggedIn={this.state.isUserLoggedIn} />
             <Route path='/login' render={this.renderAuthContainer} />
             <Route path='/signup' render={this.renderAuthContainer} />
