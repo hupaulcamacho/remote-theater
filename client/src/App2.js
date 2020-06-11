@@ -66,7 +66,7 @@ class App extends React.Component {
     if(this.state.user){
       return <VideoPage routeprops={routeprops} user={this.state.user} />
     }
-    else{
+    else {
       let user = {name: `Guest_${Math.floor(Math.random() * 999) + 1}`};
       return <VideoPage routeprops={routeprops} user={user} />
     }

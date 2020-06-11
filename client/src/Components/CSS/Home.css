@@ -61,12 +61,12 @@ h2 {
     border: 2px solid #6443da;
     background-color: #2b1a68;
     width: auto;
-    height: 55vh;
+    /* height: 55vh; */
 }
 
 .mv-title {
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1.5vw;
     border-bottom: 2px solid #472da6;
 }
 

@@ -42,7 +42,7 @@ class ChatBox extends React.Component {
       name: 'test',
     });
     
-    await channel.delete();
+    // await channel.delete();
     
     this.setState({
       chatClient: chatClient,

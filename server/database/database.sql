@@ -1,9 +1,17 @@
-DROP DATABASE IF EXISTS remote;
+-- DROP DATABASE IF EXISTS remote;
 
-CREATE DATABASE remote;
+-- CREATE DATABASE remote;
 
-\c remote
+-- \c remote
 
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS genres;
+DROP TABLE IF EXISTS videos;
+DROP TABLE IF EXISTS showrooms;
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS preferences;
+DROP TABLE IF EXISTS viewer;
+DROP TABLE IF EXISTS showtimes;
 
 CREATE TABLE genres
 (
