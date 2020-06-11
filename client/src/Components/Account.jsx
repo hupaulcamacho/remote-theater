@@ -91,7 +91,7 @@ class Account extends Component {
 
         let genreOptions = genres.map(genre => (
             <div className="gPreferences">
-                <label> {genre.name} </label>
+                <label className='whitesmokeColor'> {genre.name} </label>
                 <input name={genre.name} type="checkbox" id={genre.id} checked={userPrefObject[genre.name]} onChange={this.clickPreference} />
             </div>
         ))
