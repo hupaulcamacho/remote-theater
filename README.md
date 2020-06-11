@@ -24,7 +24,11 @@ Our application allows users to watch different movies as if they were in a real
 
 
 *Future Implementations*
-Private showrooms for friends and family
+Private theater feature that allows users to share a link and host movies for small groups(in progress)
+A search feature where users can search for movies by name and genre
+A rating feature that influences recommended movie lists
+Add Shows and episodes so there’s more of a variety for users to watch
+
 
 
 *Wireframes*
