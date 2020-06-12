@@ -16,7 +16,7 @@ const LoginForm = ({
     <div className='form-container'>
       <h1> Log-In </h1>
       <form onSubmit={handleSubmit}>
-        <i class="fas fa-user"></i>{"  "}
+
         <input
           className='login-input'
           type="text"
@@ -25,7 +25,7 @@ const LoginForm = ({
           placeholder="email"
           onChange={handleChange}
         /><br/>
-        <i class="fas fa-lock"></i>{"  "}
+
         <input
           className='login-input'
           type="password"

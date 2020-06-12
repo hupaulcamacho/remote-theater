@@ -29,7 +29,7 @@ class MovieModal extends Component {
             <div className="movie2">
                 <div className="info1">
                     <h3 className="mv-title">{movie.video.title}</h3>
-                    <img className="movie-img" src={movie.video.img_url} />
+                    <img className="movie-img" src={movie.video.img_url} alt={movie.video.title}/>
                     <p>Runtime: {movie.video.runtime}</p>
                     {(
                         this.props.getElapsedTime(difference) < 0 ?

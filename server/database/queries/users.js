@@ -1,10 +1,16 @@
 const db = require('../db');
+const authHelpers = require("../../auth/helpers")
 
 const createNewUser = async (user) => {
-    const insertQuery = `INSERT INTO users (name, email, password) VALUES ($1, $2, $3)`;
+    const insertQuery = `INSERT INTO users (name, email, password) VALUES ($/username/, $/email/, $/password/) RETURNING *`;
 
-    await db.none(insertQuery, [user.name, user.email, user.password]);
-    return true
+    const newUser = await db.one(insertQuery, {
+        username: user.name, 
+        email: user.email, 
+        password: user.password});
+    delete newUser.password
+
+    return newUser
 };
 
 const getAllUsers = async () => {

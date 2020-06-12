@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Burger from './Burger'
 
 const Nav = styled.nav`
@@ -19,7 +19,7 @@ width: 103vw;
 `
 
 const Navigation = ({ logoutUser, isUserLoggedIn, user }) => {
-    console.log(user)
+    // console.log(user)
     return (
         <Nav>
             <Burger 

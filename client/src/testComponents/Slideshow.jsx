@@ -89,7 +89,7 @@ class Slideshow extends Component {
     };
 
     render() {
-        const { slide1, slide2, currentId } = this.state;
+        const { slide1, slide2 } = this.state;
         const { slides } = this.props;
         return (
             <div className={s.container}>

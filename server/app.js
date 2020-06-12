@@ -25,11 +25,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-    secret: "SECRET",
-    resave: false,
-    saveUninitialized:true
-}))
+app.use(
+    session({
+        secret: "SECRET",
+        resave: false,
+        saveUninitialized:true
+    })
+);
+
 app.use(passport.initialize())
 app.use(passport.session())
 

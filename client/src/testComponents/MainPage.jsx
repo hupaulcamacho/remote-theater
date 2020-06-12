@@ -29,7 +29,7 @@ class MainPage extends Component {
         <div className="login">
             
             <div className='main'>
-            <img className='logo' src={logo} height="350px"/> <br/>
+            <img className='logo' src={logo} height="350px" alt="logo" /> <br/>
             <h1 id="rt" >Remote Theater</h1>
             
                 <Link to='/login'>

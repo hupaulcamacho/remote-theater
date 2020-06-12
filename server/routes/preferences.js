@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const preferences = require('../database/queries/preferences')
 const db = require('../database/db.js')
+const {loginRequired} = require('../auth/helpers')
 
-router.get('/id/:user_id', async (req, res) => {
+router.get('/id/:user_id', loginRequired, async (req, res) => {
 	const id = req.params.user_id
 	try {
 		let preference = await preferences.getPreferenceByUserId(id)

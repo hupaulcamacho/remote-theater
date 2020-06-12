@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const userQueries =  require('../database/queries/users');
-const {loginRequired} = require('../auth/helpers')
+const { loginRequired } = require('../auth/helpers')
 
 
 // get all users
-router.get('/', async (req, res, next) => {
+router.get('/', /*loginRequired,*/ async (req, res, next) => {
   // console.log(req.session)
   try {
     let users = await userQueries.getAllUsers();
@@ -24,7 +24,7 @@ router.get('/', async (req, res, next) => {
 });
 
 // get user by id
-router.get('/:id', async (req, res, next) => {
+router.get('/:id',loginRequired, async (req, res, next) => {
   const id = req.params.id;
   try {
     let user = await userQueries.getUserById(id);
@@ -43,7 +43,7 @@ router.get('/:id', async (req, res, next) => {
 })
 
 // retrieve user by email
-router.get('/email/:email', loginRequired, async (req, res, next) => {
+router.get('/email/:email', /*loginRequired,*/  async (req, res, next) => {
   const email = req.params.email;
 
   try {

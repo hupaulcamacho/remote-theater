@@ -34,13 +34,13 @@ z-index: 99;
 `;
 
 const RightNav = ({ logoutUser, isUserLoggedIn, open, user }) => {
-    console.log(user)
+    // console.log(user)
     if (isUserLoggedIn) {
         return (
             <>
                 <div className='logo'>
                     <Link to='/home'>
-                        <img  src={logo} height="50px"/>
+                        <img src={logo} height="50px" alt='logo'/>
                     </Link>
                 </div>
                 <Ul open={open}>
@@ -60,7 +60,7 @@ const RightNav = ({ logoutUser, isUserLoggedIn, open, user }) => {
         <>
             <div className='logo'>
                 <Link to='/'>
-                    <img className='logo' src={logo} height="50px"/>
+                    <img className='logo' src={logo} height="50px" alt='logo'/>
                 </Link>
             </div>
             

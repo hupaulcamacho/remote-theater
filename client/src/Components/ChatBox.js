@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { Chat, Channel, ChannelHeader, Window, MessageTeam } from 'stream-chat-react';
+import React from 'react';
+import { Chat, Channel, ChannelHeader, Window } from 'stream-chat-react';
 import { MessageList, MessageInput, MessageLivestream } from 'stream-chat-react';
 import { MessageInputLarge, Thread } from 'stream-chat-react';
 import { StreamChat } from 'stream-chat';
 import 'stream-chat-react/dist/css/index.css';
 import axios from 'axios';
 
-const API_KEY = 'http://localhost:3001/api';
+// const API_KEY = 'http://localhost:3001/api';
 
 class ChatBox extends React.Component {
   constructor(props){
