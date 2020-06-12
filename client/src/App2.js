@@ -20,15 +20,18 @@ import About from './Components/About'
 class App extends React.Component {
   constructor(props) {
     super(props);
+    console.log(document.cookie)
+    const token = Auth.getToken()
+    console.log(token)
     this.state = {
-      user: null,
+      user: JSON.parse(token),
       userToken: null,
-      isUserLoggedIn: false,
+      isUserLoggedIn: token !== null,
     }
   }
   
-  componentDidMount() {
-    this.checkUserLoggedIn();
+  componentDidMount = async () => {
+    await this.checkUserLoggedIn();
   }
 
   setUser = (user) => {
@@ -68,7 +71,7 @@ class App extends React.Component {
     try {
       const user = await axios.get("/api/auth/isUserLoggedIn");
       console.log(user.data.user.name)
-      if(user.data.user.name === Auth.getToken()){
+      if(JSON.stringify(user.data.user) === Auth.getToken()) {
         
         this.setState({
           isUserLoggedIn: Auth.isUserAuthenticated(),

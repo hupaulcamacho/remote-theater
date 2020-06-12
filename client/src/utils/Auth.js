@@ -1,7 +1,7 @@
 const Auth = {
     authenticateUser: token => {
-        console.log("authenticating...")
-        localStorage.setItem("token", token);
+        console.log("authenticating...", token)
+        localStorage.setItem("token", JSON.stringify(token));
     },
     isUserAuthenticated: () => {
         console.log("checking authentication...")
