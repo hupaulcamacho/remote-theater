@@ -23,7 +23,7 @@ class App extends React.Component {
     const token = Auth.getToken()
     console.log(token)
     this.state = {
-      user: JSON.parse(token),
+      user: (token === null ? null : JSON.parse(token)),
       userToken: null,
       isUserLoggedIn: token !== null,
     }
@@ -60,9 +60,9 @@ class App extends React.Component {
             userToken: null
           })
         })
-        // .then (() => {
-        //   this.checkUserLoggedIn()
-        // })
+        .then (() => {
+          this.checkUserLoggedIn()
+        })
   }
 
   checkUserLoggedIn = async () => {
