@@ -64,7 +64,7 @@ class MovieModal extends Component {
                                 </div>
                                 <div className = 'copyPaste'>
                                     <textarea   ref={(textarea) => this.textArea = textarea}
-                                    value={`remotetheater.herokuapp.com/privateroom/${movie ?.video.video_url}/${movie ?.video.title}_${privateId} /${difference}/private`} className='greyLink'></textarea>
+                                    value={`https://remotetheater.herokuapp.com/privateroom/${movie ?.video.video_url}/${movie ?.video.title}_${privateId} /${difference}/private`} className='greyLink'></textarea>
                                     <Link className='movie-link' onClick={() => this.copyCodeToClipboard()}>
                                          Copy to Clipboard
                                     </Link>
