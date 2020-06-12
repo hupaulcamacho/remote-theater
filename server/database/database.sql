@@ -4,14 +4,18 @@
 
 -- \c remote
 
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS genres;
-DROP TABLE IF EXISTS videos;
-DROP TABLE IF EXISTS showrooms;
-DROP TABLE IF EXISTS comments;
-DROP TABLE IF EXISTS preferences;
-DROP TABLE IF EXISTS viewer;
-DROP TABLE IF EXISTS showtimes;
+DROP TABLE IF EXISTS users, genres, videos, preferences, showtimes;
+
+
+CREATE TABLE users
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR,
+    email VARCHAR NOT NULL UNIQUE,
+    -- number VARCHAR,
+    password VARCHAR NOT NULL
+    -- video_id INT REFERENCES videos(id) on delete cascade on update cascade
+);
 
 CREATE TABLE genres
 (
@@ -31,53 +35,49 @@ CREATE TABLE videos
     img_url VARCHAR
 );
 
-CREATE TABLE users
-(
-    id SERIAL PRIMARY KEY,
-    name VARCHAR,
-    email VARCHAR NOT NULL UNIQUE,
-    number VARCHAR,
-    password VARCHAR NOT NULL,
-    video_id INT REFERENCES videos(id) on delete cascade on update cascade
-);
-
-CREATE TABLE showrooms
-(
-    id SERIAL PRIMARY KEY, 
-    title VARCHAR,
-    video_id INT REFERENCES videos(id) on delete cascade on update cascade
-);
-
-CREATE TABLE comments
-(
-    id SERIAL PRIMARY KEY ,
-    body VARCHAR,
-    users_id INT REFERENCES users(id) on delete cascade on update cascade,
-    video_id INT REFERENCES videos(id) on delete cascade on update cascade,
-    showroom_id INT REFERENCES showrooms(id) on delete cascade on update cascade
-);
-
 CREATE TABLE preferences
 (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id),
-    genre_id INT REFERENCES genres(id)
-);
-
-CREATE TABLE viewer
-(
-    id SERIAL PRIMARY KEY,
-    viewer_id INT REFERENCES users(id),
-    video_id INT REFERENCES videos(id),
-    showroom_id INT REFERENCES showrooms(id) on delete cascade on update cascade
+    user_id INT REFERENCES users(id) on delete cascade on update cascade,
+    genre_id INT REFERENCES genres(id) on delete cascade on update cascade
 );
 
 CREATE TABLE showtimes
 (
     id SERIAL PRIMARY KEY,
-    video_id INT REFERENCES videos(id),
+    video_id INT REFERENCES videos(id) on delete cascade on update cascade,
     time VARCHAR
 );
+
+
+
+
+
+-- CREATE TABLE showrooms
+-- (
+--     id SERIAL PRIMARY KEY, 
+--     title VARCHAR,
+--     video_id INT REFERENCES videos(id) on delete cascade on update cascade
+-- );
+
+-- CREATE TABLE comments
+-- (
+--     id SERIAL PRIMARY KEY ,
+--     body VARCHAR,
+--     users_id INT REFERENCES users(id) on delete cascade on update cascade,
+--     video_id INT REFERENCES videos(id) on delete cascade on update cascade,
+--     showroom_id INT REFERENCES showrooms(id) on delete cascade on update cascade
+-- );
+
+
+-- CREATE TABLE viewer
+-- (
+--     id SERIAL PRIMARY KEY,
+--     viewer_id INT REFERENCES users(id), on delete cascade on update cascade,
+--     video_id INT REFERENCES videos(id), on delete cascade on update cascade,
+--     showroom_id INT REFERENCES showrooms(id) on delete cascade on update cascade
+-- );
+
 
 INSERT INTO genres
     (name)
@@ -330,14 +330,14 @@ VALUES
     (22, '7:00:00 PM'),
     (22, '10:00:00 PM');
 
-INSERT INTO users
-    (name, email, password)
-VALUES
-    ( 'Kadijah Wilson', 'kwilson@pursuit.org', 'passWord'),
-    ( 'Hupaul Camacho', 'hcamacho@pursuit.org', 'passWord'),
-    ( 'John Doe', 'jdoe@pursuit.org', 'passWord'),
-    ( 'Chuck Okonkwo', 'cokonkwo@pursuit.org', 'passWord'),
-    ( 'Jane Smith', 'jsmith@pursuit.org', 'passWord');
+-- INSERT INTO users
+--     (name, email, password)
+-- VALUES
+--     ( 'Kadijah Wilson', 'kwilson@pursuit.org', 'passWord'),
+--     ( 'Hupaul Camacho', 'hcamacho@pursuit.org', 'passWord'),
+--     ( 'John Doe', 'jdoe@pursuit.org', 'passWord'),
+--     ( 'Chuck Okonkwo', 'cokonkwo@pursuit.org', 'passWord'),
+--     ( 'Jane Smith', 'jsmith@pursuit.org', 'passWord');
 
 -- INSERT INTO showrooms
 --     ( title, video_id)

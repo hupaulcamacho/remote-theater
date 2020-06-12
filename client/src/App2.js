@@ -117,18 +117,18 @@ class App extends React.Component {
     return <Account routeprops={routeprops} user={this.state.user} />
   }
 
-  __redirect = (isUserLoggedIn) => {
-    let { location } = this.props
-    if (isUserLoggedIn) {
-      if(location.pathname === '/home') {
-        return <Redirect to='/home' />
-      } else if(location.pathname === '/account') {
-        return  <Redirect to='/account' />
-      } else if(location.pathname === '/') {
-        return  <Redirect to='/home' />
-      }
-    }
-  }
+  // __redirect = (isUserLoggedIn) => {
+  //   let { location } = this.props
+  //   if (isUserLoggedIn) {
+  //     if(location.pathname === '/home') {
+  //       return <Redirect to='/home' />
+  //     } else if(location.pathname === '/account') {
+  //       return  <Redirect to='/account' />
+  //     } else if(location.pathname === '/') {
+  //       return  <Redirect to='/home' />
+  //     }
+  //   }
+  // }
 
   render() {
     const { isUserLoggedIn } = this.state;
