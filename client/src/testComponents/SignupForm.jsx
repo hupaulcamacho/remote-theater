@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { ToastContainer, toast } from 'react-toastify'
 
 const SignupForm = ({
   name,
@@ -11,7 +11,12 @@ const SignupForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    signupUser()
+    if (name.includes(' ')) {
+      toast.error('Username cannot include any spaces!')
+    } else {
+      signupUser()
+    }
+    
   }
 
   return (
@@ -44,6 +49,7 @@ const SignupForm = ({
         /><br/>
         <input className='button1' type="submit" value="Sign Up" />
       </form>
+      <ToastContainer />
     </div>
   )
 }
