@@ -20,7 +20,6 @@ import About from './Components/About'
 class App extends React.Component {
   constructor(props) {
     super(props);
-    console.log(document.cookie)
     const token = Auth.getToken()
     console.log(token)
     this.state = {
@@ -31,12 +30,11 @@ class App extends React.Component {
   }
   
   componentDidMount = async () => {
-    await this.checkUserLoggedIn();
+    // await this.checkUserLoggedIn();
   }
 
   setUser = (user) => {
     console.log(user)
-    // localStorage.setItem("user", JSON.stringify(user))
     this.setState({
       user: user,
       isUserLoggedIn: true,
@@ -62,9 +60,9 @@ class App extends React.Component {
             userToken: null
           })
         })
-        .then (() => {
-          this.checkUserLoggedIn()
-        })
+        // .then (() => {
+        //   this.checkUserLoggedIn()
+        // })
   }
 
   checkUserLoggedIn = async () => {

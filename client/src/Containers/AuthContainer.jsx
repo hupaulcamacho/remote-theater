@@ -28,7 +28,7 @@ class AuthContainer extends Component {
             Auth.authenticateUser(name)
             await axios.post('/api/auth/signup', this.state)
             this.loginUser()
-            this.props.checkUserLoggedIn()
+            // this.props.checkUserLoggedIn()
 
             this.setState({
                 name: '',
@@ -47,7 +47,7 @@ class AuthContainer extends Component {
             let user = await axios.post('/api/auth/login', { email : email, password: password })
             console.log(user.data.payload)
             Auth.authenticateUser(user.data.payload)
-            this.props.checkUserLoggedIn()
+            // this.props.checkUserLoggedIn()
             // const user = data.payload
             this.props.setUser(user.data.payload)
             // console.log(data)
