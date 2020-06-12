@@ -152,12 +152,6 @@ class App extends React.Component {
             <Route path='/about' component={About} />
             <Route path='/' component={MainPage} />
         </Switch>
-        {isUserLoggedIn ? 
-          <Redirect to='/home' />
-          :
-          <Redirect to="/" />
-        }
-        {/* {this.__redirect(isUserLoggedIn)} */}
         <ToastContainer />
       </div>
     );
