@@ -27,7 +27,7 @@ class AuthContainer extends Component {
         try {
             Auth.authenticateUser(name)
             await axios.post('/api/auth/signup', this.state)
-            // this.loginUser()
+            this.loginUser()
             this.props.checkUserLoggedIn()
 
             this.setState({
