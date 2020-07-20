@@ -67,11 +67,8 @@ Our application allows users to watch movies as if they were in a real movie the
   | GET    | /api/viewer/:video_id | Get all viewers for specific video | users_id, video_id, showroom_id |
 
 
-*Future Implementations*
+## Future Implementations
 Private theater feature that allows users to share a link and host movies for small groups
 A search feature where users can search for movies by name and genre
 A rating feature that influences recommended movie lists
 Add Shows and episodes so there’s more of a variety for users to watch
-
-
-*Wireframes*
