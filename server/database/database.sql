@@ -1,10 +1,10 @@
--- DROP DATABASE IF EXISTS remote;
+DROP DATABASE IF EXISTS remote;
 
--- CREATE DATABASE remote;
+CREATE DATABASE remote;
 
--- \c remote
+\c remote
 
-DROP TABLE IF EXISTS users, genres, videos, preferences, showtimes;
+-- DROP TABLE IF EXISTS users, genres, videos, preferences, showtimes;
 
 
 CREATE TABLE users
