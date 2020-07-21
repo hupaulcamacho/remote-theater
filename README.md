@@ -1,5 +1,7 @@
 # Remote Theater
 
+![Alt Text](./website_screenshot.png)
+
 ### Live @ [remotetheater.herokuapp.com](https://remotetheater.herokuapp.com/)
 
 Built with React.js, Node.js with Express, and PostgreSQL.
