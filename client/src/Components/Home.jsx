@@ -45,7 +45,6 @@ class Home extends Component {
     }
 
     getPreferenceMovies = async () => {
-        console.log('start function')
         let { preferences } = this.state;
         const preferencedVideos = []
 

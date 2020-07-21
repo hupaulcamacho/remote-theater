@@ -1,11 +1,11 @@
 import React from 'react';
 import './CSS/VideoPage.css';
-import axios from 'axios';
+// import axios from 'axios';
 import Youtube from 'react-youtube';
 import ChatBox from './ChatBox';
 import moment from'moment';
 
-const API_KEY = 'http://localhost:3001';
+// const API_KEY = 'http://localhost:3001';
 
 
 class VideoPage extends React.Component {
@@ -31,7 +31,7 @@ class VideoPage extends React.Component {
 		const format = 'h:mm:ss A '
 		let time = this.setTime()
 		let showtime = moment(time, format)
-		let now = moment().format(format)
+		// let now = moment().format(format)
 		let duration = moment.duration(moment().diff(showtime))
 		return duration.as('seconds')
 	}

@@ -29,7 +29,7 @@ class MovieModal extends Component {
             <div className="movie2">
                 <div className="info1">
                     <h3 className="mv-title">{movie.video.title}</h3>
-                    <img className="movie-img" src={movie.video.img_url} />
+                    <img className="movie-img" src={movie.video.img_url} alt={movie.video.title}/>
                     <p>Runtime: {movie.video.runtime}</p>
                     {(
                         this.props.getElapsedTime(difference) < 0 ?
@@ -64,7 +64,7 @@ class MovieModal extends Component {
                                 </div>
                                 <div className = 'copyPaste'>
                                     <textarea   ref={(textarea) => this.textArea = textarea}
-                                    value={`localhost:3000/privateroom/${movie ?.video.video_url}/${movie ?.video.title}_${privateId} /${difference}/private`} className='greyLink'></textarea>
+                                    value={`https://remotetheater.herokuapp.com/privateroom/${movie ?.video.video_url}/${movie ?.video.title}_${privateId} /${difference}/private`} className='greyLink'></textarea>
                                     <Link className='movie-link' onClick={() => this.copyCodeToClipboard()}>
                                          Copy to Clipboard
                                     </Link>

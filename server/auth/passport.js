@@ -20,7 +20,7 @@ passport.use(new LocalStrategy({usernameField: 'email'}, async (email, password,
     done(null, user);
 
   } catch (err) {
-    done(err)
+    console.log(err)
   }
 }))
 

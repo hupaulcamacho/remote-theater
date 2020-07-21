@@ -44,7 +44,22 @@
     cursor: not-allowed;
 }
 
-.gPreferences{
+label {
+    color: white;
+}
+
+.genre-options {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.option {
+    margin: 2em;
+    padding: 2em;
+    border-radius: 10px;
+    background-color: #472da6 
+}
+
+.genre-check {
+    padding: 1em;
 }

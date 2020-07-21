@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './CSS/Account.css';
 import axios from 'axios';
-import Popup from "reactjs-popup";
-import { ToastContainer, toast } from 'react-toastify';
+
+import { toast } from 'react-toastify';
 class Account extends Component {
     constructor(props) {
         super(props)
@@ -89,23 +89,23 @@ class Account extends Component {
         const { user, genres, userPrefObject } = this.state
 
         let genreOptions = genres.map(genre => (
-            <div className="gPreferences">
-                <label className='whitesmokeColor'> {genre.name} </label>
-                <input name={genre.name} type="checkbox" id={genre.id} checked={userPrefObject[genre.name]} onChange={this.clickPreference} />
+            <div className='option'>
+                <input className='genre-check' name={genre.name} type="checkbox" id={genre.id} checked={userPrefObject[genre.name]} onChange={this.clickPreference} />
+                <label for={genre.id}> {genre.name} </label>
             </div>
         ))
         return (
-            <div>
+            <div className='main'>
                 <h1>Account</h1>
                 <div className='preferences'>
                     <p>username: {user?.name}</p>
                     <p>email: {user?.email}</p>
                     <h2>My Preferences</h2>
-                    <div className='genre-container'>
+                    <div className="genre-options">
                         {/* {userPreferenceComponents} */}
-                        <form className="updatePreferences">
+                        {/* <form className="updatePreferences"> */}
                         {genreOptions}
-                        </form>
+                        {/* </form> */}
                     </div>
                 </div>  
 

@@ -1,0 +1,25 @@
+{
+  "name": "remote-theater",
+  "version": "1.0.0",
+  "description": "Our application allows users to watch different movies as if they were in a real movie theater. Every movie will have a specific showtime for when users can watch, once in the showroom users are able to leave comments and ratings. As the movie plays users can use our live chat feature with other watchers. In the chat users are able to use emoji reactions and leave comments. Users are able to select preferences on the kind of movies they enjoy.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "cd server && npm start",
+    "heroku-prebuild": "cd server && npm install && cd ../client && npm install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hupaulcamacho/remote-theater.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hupaulcamacho/remote-theater/issues"
+  },
+  "homepage": "https://github.com/hupaulcamacho/remote-theater#readme"
+}

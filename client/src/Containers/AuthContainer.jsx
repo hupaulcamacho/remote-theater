@@ -4,6 +4,7 @@ import { Switch, Route, Redirect, Link } from 'react-router-dom'
 import '../Components/CSS/AuthForm.css'
 import LoginForm from '../testComponents/LoginForm';
 import SignupForm from '../testComponents/SignupForm';
+import Auth from '../utils/Auth'
 
 class AuthContainer extends Component {
     state = {
@@ -19,25 +20,42 @@ class AuthContainer extends Component {
     }
 
     signupUser = async () => {
+        const { name } = this.state
         // make network request to /auth/signup to register user
-        console.log('Signing up user ...')
-        console.log(this.state)
+        // console.log('Signing up user ...')
+        // console.log(this.state)
         try {
+            Auth.authenticateUser(name)
             await axios.post('/api/auth/signup', this.state)
             this.loginUser()
+            // this.props.checkUserLoggedIn()
+
+            this.setState({
+                name: '',
+                password: '',
+                email: ''
+            })
         } catch (err) {
             console.log(err)
         }
     }
 
     loginUser = async () => {
+        const { email, password } = this.state
         // make network request to /auth/signup to register user
         try {
-            const { data } = await axios.post('/api/auth/login', { email : this.state.email, password: this.state.password } )
-
-            const user = data.payload
-            this.props.setUser(user)
-            console.log(data)
+            let user = await axios.post('/api/auth/login', { email : email, password: password })
+            console.log(user.data.payload)
+            Auth.authenticateUser(user.data.payload)
+            // this.props.checkUserLoggedIn()
+            // const user = data.payload
+            this.props.setUser(user.data.payload)
+            // console.log(data)
+            this.setState({
+                name: '',
+                password: '',
+                email: ''
+            })
         } catch (err) {
             console.log(err)
         } 
@@ -72,8 +90,8 @@ class AuthContainer extends Component {
         return (
             <div className='main'>  
                 {
-                    isUserLoggedIn
-                    ? <Redirect to="/home" />
+                    isUserLoggedIn  ?
+                    <Redirect to="/home" />
                     : (
                         <Switch>
                             <Route path="/login" render={this.renderLogin} />
@@ -81,7 +99,7 @@ class AuthContainer extends Component {
                         </Switch> 
                     )
                 }
-                <Link to='/mainpage'>
+                <Link to='/'>
                     <button className='button1'>Back to Home</button>
                 </Link>
             </div>

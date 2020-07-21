@@ -8,7 +8,7 @@ var passport = require('./auth/passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var commentsRouter = require('./routes/Comments');
+var commentsRouter = require('./routes/comments');
 var viewerRouter = require('./routes/Viewer');
 var authRouter = require('./routes/auth');
 let genresRouter =require('./routes/genres');
@@ -23,12 +23,16 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, '../client/build')));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-    secret: "SECRET",
-    resave: false,
-    saveUninitialized:true
-}))
+app.use(
+    session({
+        secret: "SECRET",
+        resave: false,
+        saveUninitialized:true
+    })
+);
+
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -47,6 +51,10 @@ app.use('/api/preferences', preferenceRouter);
 
 app.use('/api/auth', authRouter);
 app.use('/', indexRouter);
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"))
+})
 
 module.exports = app;
 

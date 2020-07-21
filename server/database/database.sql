@@ -4,6 +4,18 @@ CREATE DATABASE remote;
 
 \c remote
 
+-- DROP TABLE IF EXISTS users, genres, videos, preferences, showtimes;
+
+
+CREATE TABLE users
+(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR,
+    email VARCHAR NOT NULL UNIQUE,
+    -- number VARCHAR,
+    password VARCHAR NOT NULL
+    -- video_id INT REFERENCES videos(id) on delete cascade on update cascade
+);
 
 CREATE TABLE genres
 (
@@ -23,53 +35,49 @@ CREATE TABLE videos
     img_url VARCHAR
 );
 
-CREATE TABLE users
-(
-    id SERIAL PRIMARY KEY,
-    name VARCHAR,
-    email VARCHAR NOT NULL UNIQUE,
-    number VARCHAR,
-    password VARCHAR NOT NULL,
-    video_id INT REFERENCES videos(id) on delete cascade on update cascade
-);
-
-CREATE TABLE showrooms
-(
-    id SERIAL PRIMARY KEY, 
-    title VARCHAR,
-    video_id INT REFERENCES videos(id) on delete cascade on update cascade
-);
-
-CREATE TABLE comments
-(
-    id SERIAL PRIMARY KEY ,
-    body VARCHAR,
-    users_id INT REFERENCES users(id) on delete cascade on update cascade,
-    video_id INT REFERENCES videos(id) on delete cascade on update cascade,
-    showroom_id INT REFERENCES showrooms(id) on delete cascade on update cascade
-);
-
 CREATE TABLE preferences
 (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id),
-    genre_id INT REFERENCES genres(id)
-);
-
-CREATE TABLE viewer
-(
-    id SERIAL PRIMARY KEY,
-    viewer_id INT REFERENCES users(id),
-    video_id INT REFERENCES videos(id),
-    showroom_id INT REFERENCES showrooms(id) on delete cascade on update cascade
+    user_id INT REFERENCES users(id) on delete cascade on update cascade,
+    genre_id INT REFERENCES genres(id) on delete cascade on update cascade
 );
 
 CREATE TABLE showtimes
 (
     id SERIAL PRIMARY KEY,
-    video_id INT REFERENCES videos(id),
+    video_id INT REFERENCES videos(id) on delete cascade on update cascade,
     time VARCHAR
 );
+
+
+
+
+
+-- CREATE TABLE showrooms
+-- (
+--     id SERIAL PRIMARY KEY, 
+--     title VARCHAR,
+--     video_id INT REFERENCES videos(id) on delete cascade on update cascade
+-- );
+
+-- CREATE TABLE comments
+-- (
+--     id SERIAL PRIMARY KEY ,
+--     body VARCHAR,
+--     users_id INT REFERENCES users(id) on delete cascade on update cascade,
+--     video_id INT REFERENCES videos(id) on delete cascade on update cascade,
+--     showroom_id INT REFERENCES showrooms(id) on delete cascade on update cascade
+-- );
+
+
+-- CREATE TABLE viewer
+-- (
+--     id SERIAL PRIMARY KEY,
+--     viewer_id INT REFERENCES users(id), on delete cascade on update cascade,
+--     video_id INT REFERENCES videos(id), on delete cascade on update cascade,
+--     showroom_id INT REFERENCES showrooms(id) on delete cascade on update cascade
+-- );
+
 
 INSERT INTO genres
     (name)
@@ -163,6 +171,7 @@ VALUES
     (3, '4:00:00 AM'),
     (3, '5:00:00 AM'),
     (3, '8:00:00 AM'),
+    (3, '11:30:00 AM'),
     (3, '1:00:00 PM'),
     (3, '4:15:00 PM'),
     (3, '7:00:00 PM'),
@@ -227,7 +236,7 @@ VALUES
     (11, '1:00:00 AM'),
     (11, '4:00:00 AM'),
     (11, '7:00:00 AM'),
-    (11, '10:00:00 AM'),
+    (11, '11:15:00 AM'),
     (11, '2:00:00 PM'),
     (11, '5:00:00 PM'),
     (11, '8:00:00 PM'),
@@ -269,6 +278,7 @@ VALUES
     (16, '4:00:00 AM'),
     (16, '5:00:00 AM'),
     (16, '8:00:00 AM'),
+    (16, '11:45:00 AM'),
     (16, '1:00:00 PM'),
     (16, '4:50:00 PM'),
     (16, '7:00:00 PM'),
@@ -292,8 +302,8 @@ VALUES
 
     (19, '2:00:00 AM'),
     (19, '5:00:00 AM'),
-    (19, '9:00:00 AM'),
-    (19, '12:00:00 PM'),
+    (19, '8:00:00 AM'),
+    (19, '12:30:00 PM'),
     (19, '3:00:00 PM'),
     (19, '6:00:00 PM'),
     (19, '9:00:00 PM'),
@@ -322,14 +332,14 @@ VALUES
     (22, '7:00:00 PM'),
     (22, '10:00:00 PM');
 
-INSERT INTO users
-    (name, email, password)
-VALUES
-    ( 'Kadijah Wilson', 'kwilson@pursuit.org', 'passWord'),
-    ( 'Hupaul Camacho', 'hcamacho@pursuit.org', 'passWord'),
-    ( 'John Doe', 'jdoe@pursuit.org', 'passWord'),
-    ( 'Chuck Okonkwo', 'cokonkwo@pursuit.org', 'passWord'),
-    ( 'Jane Smith', 'jsmith@pursuit.org', 'passWord');
+-- INSERT INTO users
+--     (name, email, password)
+-- VALUES
+--     ( 'Kadijah Wilson', 'kwilson@pursuit.org', 'passWord'),
+--     ( 'Hupaul Camacho', 'hcamacho@pursuit.org', 'passWord'),
+--     ( 'John Doe', 'jdoe@pursuit.org', 'passWord'),
+--     ( 'Chuck Okonkwo', 'cokonkwo@pursuit.org', 'passWord'),
+--     ( 'Jane Smith', 'jsmith@pursuit.org', 'passWord');
 
 -- INSERT INTO showrooms
 --     ( title, video_id)

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import moment from 'moment'
 
 class Movie extends Component {
     state = {
@@ -20,7 +19,7 @@ class Movie extends Component {
         return (
             <div className="movie">
 
-                <img className="movie-img" src={movie.video.img_url} />
+                <img className="movie-img" src={movie.video.img_url} alt={movie.video.title} />
                 <p className="mv-title">{movie.video.title}</p>
                 {(this.props.getElapsedTime(difference) < 0 ?
                     [<p className="text">Opens at {difference}</p>]
