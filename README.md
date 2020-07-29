@@ -74,3 +74,22 @@ Private theater feature that allows users to share a link and host movies for sm
 A search feature where users can search for movies by name and genre
 A rating feature that influences recommended movie lists
 Add Shows and episodes so there’s more of a variety for users to watch
+
+## Running The Remote Theater App Locally
+
+First install dependencies in the /client and /server directories with:
+
+### `npm install`
+
+To launch the client you can run:
+
+### `npm start`
+
+Launch the server before using the client with:
+
+### `nodemon start:dev`
+
+This script runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br />
