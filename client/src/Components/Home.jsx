@@ -5,7 +5,7 @@ import Popup from "reactjs-popup";
 import axios from 'axios'
 import moment from 'moment'
 import './CSS/Home.css'
-import Time from '../testComponents/Time'
+import Time from './Time'
 import Movie from './Movie'
 import MovieModal from './MovieModal'
 
@@ -13,7 +13,10 @@ class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            user: props.user,
+            // user: props.user,
+            user: {
+                name: 'Test User'
+            },
             preferences: null,
             movies: [],
             topMovies: []
@@ -21,9 +24,9 @@ class Home extends Component {
     }
 
     componentDidMount = async () => {
-        await this.getUserPreferences()
-        await this.getTopRatedMovies()
-        await this.getPreferenceMovies()
+        // await this.getUserPreferences()
+        // await this.getTopRatedMovies()
+        // await this.getPreferenceMovies()
     }
 
     _closed = (e) => {

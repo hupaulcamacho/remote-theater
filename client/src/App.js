@@ -11,10 +11,11 @@ import PrivateRoute from './Components/PrivateRoute';
 import AuthContainer from './Containers/AuthContainer';
 
 import Home from './Components/Home'
+import HomePage from './Components/HomePage'
 import Navbar from './Components/Burger-Nav/Nav';
 import VideoPage from './Components/VideoPage';
 import Account from './Components/Account';
-import MainPage from './testComponents/MainPage'
+import LandingPage from './Components/LandingPage'
 import About from './Components/About'
 
 class App extends React.Component {
@@ -144,14 +145,18 @@ class App extends React.Component {
         />
 
         <Switch>
-            <PrivateRoute path='/home' render={this.renderHome} isUserLoggedIn={isUserLoggedIn} />
+            {/* <PrivateRoute path='/home' render={this.renderHome} isUserLoggedIn={isUserLoggedIn} /> */}
+            {/* <Route path='/home' component={Home} /> */}
+            <Route path='/home' component={HomePage} />
             <Route path='/privateroom/:id/:title/:time/:privateKey' render={this.renderVideoForGuest} />
-            <PrivateRoute path='/showroom/:id/:title/:time/' render={this.renderVideo} isUserLoggedIn={isUserLoggedIn}/>
+            <Route path='/showroom/:id/:title/:time/' render={this.renderVideo} isUserLoggedIn={isUserLoggedIn}/>
+
+            {/* <PrivateRoute path='/showroom/:id/:title/:time/' render={this.renderVideo} isUserLoggedIn={isUserLoggedIn}/> */}
             <PrivateRoute path='/account' render={this.renderAccount} isUserLoggedIn={isUserLoggedIn} />
             <Route path='/login' render={this.renderAuthContainer} />
             <Route path='/signup' render={this.renderAuthContainer} />
             <Route path='/about' component={About} />
-            <Route path='/' component={MainPage} />
+            <Route path='/' component={LandingPage} />
         </Switch>
         <ToastContainer />
       </div>

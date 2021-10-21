@@ -6,7 +6,8 @@ class MovieModal extends Component {
     state = {
         difference: this.props.getTimeDifference(this.props.movie.showtimes),
         movie: this.props.movie,
-        privateId: randomString.generate(10)
+        privateId: randomString.generate(10),
+        title: this.props.title
     }
 
     componentDidMount = async () => {
@@ -24,13 +25,13 @@ class MovieModal extends Component {
     }
 
     render() {
-        const { difference, movie, privateId } = this.state
+        const { difference, movie, privateId, title } = this.state
         return (
             <div className="movie2">
                 <div className="info1">
-                    <h3 className="mv-title">{movie.video.title}</h3>
-                    <img className="movie-img" src={movie.video.img_url} alt={movie.video.title}/>
-                    <p>Runtime: {movie.video.runtime}</p>
+                    <h3 className="mv-title">{title}</h3>
+                    <img className="movie-img" src={movie.img_url} alt={title}/>
+                    <p>Runtime: {movie.runtime}</p>
                     {(
                         this.props.getElapsedTime(difference) < 0 ?
                             <>
@@ -44,7 +45,7 @@ class MovieModal extends Component {
                     )}
                 </div>
                 <div className="info2">
-                    <p className="description">{movie.video.description}</p>
+                    <p className="description">{movie.description}</p>
                     {(
                         this.props.getElapsedTime(difference) < 0 ?
                             <Link onClick={e => this.props._closed(e)} className='movie-link'>Closed</Link>
@@ -53,18 +54,18 @@ class MovieModal extends Component {
                                 <div className='link-container'>
                                     <Link
                                         className='movie-link'
-                                        to={`/showroom/${movie.video.video_url}/${movie.video.title}/${difference}`}>
+                                        to={`/showroom/${movie.video_url}/${title}/${difference}`}>
                                         Enter Theater
                                     </Link>
                                     <Link
                                         className='movie-link'
-                                        to={`/privateroom/${movie ?.video.video_url}/${movie ?.video.title}_${privateId} /${difference}/private`}>
+                                        to={`/privateroom/${movie.video_url}/${title}_${privateId} /${difference}/private`}>
                                         Enter Private Room
                                     </Link>
                                 </div>
                                 <div className = 'copyPaste'>
                                     <textarea   ref={(textarea) => this.textArea = textarea}
-                                    value={`https://remotetheater.herokuapp.com/privateroom/${movie ?.video.video_url}/${movie ?.video.title}_${privateId} /${difference}/private`} className='greyLink'></textarea>
+                                    value={`https://remotetheater.herokuapp.com/privateroom/${movie.video_url}/${movie[0]}_${privateId} /${difference}/private`} className='greyLink'></textarea>
                                     <Link className='movie-link' onClick={() => this.copyCodeToClipboard()}>
                                          Copy to Clipboard
                                     </Link>

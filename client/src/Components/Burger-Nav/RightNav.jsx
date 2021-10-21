@@ -42,6 +42,7 @@ const RightNav = ({ logoutUser, isUserLoggedIn, open, user }) => {
                     <Link to='/home'>
                         <img src={logo} height="50px" alt='logo'/>
                     </Link>
+                    
                 </div>
                 <Ul open={open}>
                     {/* <p className='username'>{user.name}</p>  */}
@@ -61,13 +62,15 @@ const RightNav = ({ logoutUser, isUserLoggedIn, open, user }) => {
             <div className='logo'>
                 <Link to='/'>
                     <img className='logo' src={logo} height="50px" alt='logo'/>
+                    DEMO MODE
                 </Link>
+                
             </div>
             
             
             <Ul open={open}>
-                <Link className='nav-link' to='/login'>Login</Link>{" "}
-                <Link className='nav-link' to='/signup'>Sign Up</Link>{" "}
+                {/* <Link className='nav-link' to='/login'>Login</Link>{" "}
+                <Link className='nav-link' to='/signup'>Sign Up</Link>{" "} */}
                 <Link className='nav-link' to='/about'>About</Link>
             </Ul>
        </>
