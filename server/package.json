@@ -21,7 +21,7 @@
     "passport-local": "^1.0.0",
     "pg-promise": "^10.4.4",
     "react-router-dom": "^5.1.2",
-    "stream-chat": "^1.8.0"
+    "stream-chat": "^8.2.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
